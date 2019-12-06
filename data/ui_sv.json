@@ -16,5 +16,11 @@
   "ingredients" : "Ingredienser",
   "ready" : "Klart",
   "order" : "Min burgare",
-  "language" : "English"
+  "language" : "English",
+  "bread":"Bröd",
+  "patty": "Puck",
+  "addOn":"Pålägg",
+  "sauce":"Sås",
+  "extras":"Tillbehör",
+  "beverage":"Dryck"
 }
