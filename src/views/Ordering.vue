@@ -3,10 +3,11 @@
     <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
 
     <div id="menyFlexBox">
-      <MenyButtons v-for="title in listMenuTitles"
-      :title="title"
+      <MenyButtons v-for="cat in listMenuTitles"
+      :title="cat.title"
       :ui-labels="uiLabels"
-      v-on:selected="changeCategory">
+      v-on:selected="changeCategory"
+      :category="cat.cat">
       </MenyButtons>
     </div>
 
@@ -15,6 +16,7 @@
     <Ingredient
       ref="ingredient"
       v-for="item in ingredients"
+      v-if="item.category===currentCategory"
       v-on:increment="addToOrder(item)"
       :item="item"
       :lang="lang"
@@ -68,7 +70,8 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
-      listMenuTitles: ["bread","patty"]
+      listMenuTitles: [{title:"bread",cat:4},{title:"patty",cat:1},{title:"addOn",cat:2},{title:"sauce",cat:3},{title:"extras",cat:5},{title:"beverage",cat:6}],
+      currentCategory: 1
     }
   },
   created: function () {
@@ -78,7 +81,9 @@ export default {
   },
   methods: {
     changeCategory: function(cat) {
-      console.log(cat)
+      this.currentCategory = cat;
+      //this.cat
+
     },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
