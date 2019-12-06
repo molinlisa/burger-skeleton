@@ -1,6 +1,14 @@
 <template>
   <div id="ordering">
-    <!-- <img class="example-panel" src="@/assets/exampleImage.jpg"> -->
+    <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
+
+    <div id="menyFlexBox">
+      <MenyButtons v-for="title in listMenuTitles"
+      :title="title"
+      :ui-labels="uiLabels"
+      v-on:selected="changeCategory">
+      </MenyButtons>
+    </div>
 
     <h1>{{ uiLabels.ingredients }}</h1>
 
@@ -39,6 +47,7 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
+import MenyButtons from '@/components/MenyButtons.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -49,7 +58,8 @@ export default {
   name: 'Ordering',
   components: {
     Ingredient,
-    OrderItem
+    OrderItem,
+    MenyButtons
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
@@ -58,6 +68,7 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
+      listMenuTitles: ["bread","patty"]
     }
   },
   created: function () {
@@ -66,6 +77,9 @@ export default {
     }.bind(this));
   },
   methods: {
+    changeCategory: function(cat) {
+      console.log(cat)
+    },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
@@ -108,4 +122,10 @@ export default {
   background-image: url('~@/assets/exampleImage.jpg');
   color: white;
 }
+
+#menyFlexBox{
+  display: flex;
+  flex-direction: row;
+}
+
 </style>
