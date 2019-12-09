@@ -1,12 +1,22 @@
 <template>
   <div id="ordering">
-    <!-- <img class="example-panel" src="@/assets/exampleImage.jpg"> -->
+    <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
+
+    <div id="menyFlexBox">
+      <MenyButtons v-for="cat in listMenuTitles"
+      :title="cat.title"
+      :ui-labels="uiLabels"
+      v-on:selected="changeCategory"
+      :category="cat.cat">
+      </MenyButtons>
+    </div>
 
     <h1>{{ uiLabels.ingredients }}</h1>
 
     <Ingredient
       ref="ingredient"
       v-for="item in ingredients"
+      v-if="item.category===currentCategory"
       v-on:increment="addToOrder(item)"
       :item="item"
       :lang="lang"
@@ -39,6 +49,7 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
+import MenyButtons from '@/components/MenyButtons.vue'
 
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
@@ -49,7 +60,8 @@ export default {
   name: 'Ordering',
   components: {
     Ingredient,
-    OrderItem
+    OrderItem,
+    MenyButtons
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
@@ -58,6 +70,8 @@ export default {
       chosenIngredients: [],
       price: 0,
       orderNumber: "",
+      listMenuTitles: [{title:"bread",cat:4},{title:"patty",cat:1},{title:"addOn",cat:2},{title:"sauce",cat:3},{title:"extras",cat:5},{title:"beverage",cat:6}],
+      currentCategory: 1
     }
   },
   created: function () {
@@ -66,6 +80,11 @@ export default {
     }.bind(this));
   },
   methods: {
+    changeCategory: function(cat) {
+      this.currentCategory = cat;
+      //this.cat
+
+    },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
@@ -108,4 +127,10 @@ export default {
   background-image: url('~@/assets/exampleImage.jpg');
   color: white;
 }
+
+#menyFlexBox{
+  display: flex;
+  flex-direction: row;
+}
+
 </style>
