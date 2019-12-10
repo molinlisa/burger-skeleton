@@ -2,6 +2,7 @@
   <div id="ordering">
     <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
 
+    <!-- Meny knappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
       <MenyButtons v-for="cat in listMenuTitles"
       :title="cat.title"
@@ -13,6 +14,17 @@
 
     <h1>{{ uiLabels.ingredients }}</h1>
 
+    <!-- Checkboxes för matpreferenser -->
+    <div id="foodPref">
+      <label for="lactose">{{ uiLabels.milkFree }}</label>
+      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" v-model="lactose">
+      <label for="vegan">{{ uiLabels.vegan }}</label>
+      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" v-model="vegan">
+      <label for="gluten">{{ uiLabels.gluten }}</label>
+      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" v-model="gluten">
+    </div>
+
+    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till order) -->
     <Ingredient
       ref="ingredient"
       v-for="item in ingredients"

@@ -22,5 +22,8 @@
   "addOn":"Add on",
   "sauce":"Sauce",
   "extras":"Extras",
-  "beverage":"Beverage"
+  "beverage":"Beverage",
+  "milkFree": "Dairy free",
+  "vegan": "Vegan",
+  "gluten": "Gluten free"
 }
