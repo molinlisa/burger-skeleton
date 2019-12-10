@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Ordering from './views/Ordering.vue'
 import Frontpage from './views/Frontpage.vue'
+import Kitchen from './views/Kitchen.vue'
 Vue.use(Router)
 
 let router = new Router({
