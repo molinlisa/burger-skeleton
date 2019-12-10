@@ -16,5 +16,14 @@
   "ingredients" : "Ingredients",
   "ready" : "Done",
   "order" : "My burger",
-  "language" : "Svenska"
+  "language" : "Svenska",
+  "bread":"Bread",
+  "patty": "Patty",
+  "addOn":"Add on",
+  "sauce":"Sauce",
+  "extras":"Extras",
+  "beverage":"Beverage",
+  "milkFree": "Dairy free",
+  "vegan": "Vegan",
+  "gluten": "Gluten free"
 }
