@@ -17,15 +17,15 @@
     <!-- Checkboxes för matpreferenser -->
     <div id="foodPref">
       <label for="lactose">{{ uiLabels.milkFree }}</label>
-      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" :value="true" v-model="lactose">
-      {{lactose}}
+      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree"  v-model="lactose">
       <label for="vegan">{{ uiLabels.vegan }}</label>
-      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" :value="true" v-model="vegan">
+      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan"  v-model="vegan">
       <label for="gluten">{{ uiLabels.gluten }}</label>
-      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="gluten">
+      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten"  v-model="gluten">
     </div>
 
     <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
+    <div id="ingredientBox">
     <Ingredient
       ref="ingredient"
       v-for="item in currentIngredients"
@@ -34,7 +34,7 @@
       :lang="lang"
       :key="item.ingredient_id">
     </Ingredient>
-
+  </div>
     <h1>{{ uiLabels.order }}</h1>
     {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
     <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
@@ -95,17 +95,44 @@ export default {
       for(let a = 0; a < this.ingredients.length; a += 1)
         if (this.ingredients[a].category === this.currentCategory) {
 
-          if(this.lactose) {
+          if(this.lactose && this.gluten && this.vegan) {
+            if(this.ingredients[a].milk_free === 1 && this.ingredients[a].gluten_free === 1 && this.ingredients[a].vegan === 1)
+              ing.push(this.ingredients[a])
+          }
+          else if(this.lactose && this.gluten){
+            if(this.ingredients[a].gluten_free === 1 && this.ingredients[a].milk_free === 1)
+              ing.push(this.ingredients[a])
+          }
+          else if(this.lactose && this.vegan){
+            if(this.ingredients[a].vegan === 1 && this.ingredients[a].milk_free === 1)
+              ing.push(this.ingredients[a])
+          }
+          else if(this.gluten && this.lactose){
+            if(this.ingredients[a].gluten_free === 1 && this.ingredients[a].milk_free === 1)
+              ing.push(this.ingredients[a])
+          }
+          else if(this.gluten && this.vegan){
+            if(this.ingredients[a].gluten_free === 1 && this.ingredients[a].vegan === 1)
+              ing.push(this.ingredients[a])
+          }
+          else if(this.vegan && this.lactose){
+            if(this.ingredients[a].vegan === 1 && this.ingredients[a].milk_free === 1)
+              ing.push(this.ingredients[a])
+          }
+          else if(this.vegan && this.gluten){
+            if(this.ingredients[a].vegan === 1 && this.ingredients[a].gluten === 1)
+              ing.push(this.ingredients[a])
+          }
+          else if(this.lactose){
             if(this.ingredients[a].milk_free === 1)
               ing.push(this.ingredients[a])
           }
-          if(this.gluten){
-            if(this.ingredients[a].gluten_free === 1 && ing[ing.length -1] != ingrediets[a])
+          else if(this.gluten){
+            if(this.ingredients[a].gluten === 1)
               ing.push(this.ingredients[a])
           }
-
-          if(this.vegan){
-            if(this.ingredients[a].vegan === 1 && ing[ing.length -1] != ingrediets[a])
+          else if(this.vegan){
+            if(this.ingredients[a].vegan === 1)
               ing.push(this.ingredients[a])
           }
 
@@ -168,11 +195,23 @@ else{
   padding: 1em;
   background-image: url('~@/assets/exampleImage.jpg');
   color: white;
+  width: 50px;
+  height: 100px;
+  text-overflow: clip;
 }
 
 #menyFlexBox{
   display: flex;
   flex-direction: row;
+}
+#ingredientBox{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 90%;
+	height: 50vh;
+	margin: 1em auto;
+	overflow: scroll;
 }
 
 </style>
