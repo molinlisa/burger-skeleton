@@ -18,18 +18,18 @@
     <!-- Checkboxes för matpreferenser -->
     <div id="foodPref">
       <label for="lactose">{{ uiLabels.milkFree }}</label>
-      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" v-model="lactose">
+      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" :value="true" v-model="iNeedLactoseFree">
+      {{lactose}}
       <label for="vegan">{{ uiLabels.vegan }}</label>
-      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" v-model="vegan">
+      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" :value="true" v-model="iNeedVegan">
       <label for="gluten">{{ uiLabels.gluten }}</label>
-      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" v-model="gluten">
+      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="iNeedGlutenFree">
     </div>
 
-    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till order) -->
+    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
     <Ingredient
       ref="ingredient"
-      v-for="item in ingredients"
-      v-if="item.category===currentCategory"
+      v-for="item in currentIngredients"
       v-on:increment="addToOrder(item)"
       :item="item"
       :lang="lang"
@@ -84,9 +84,34 @@ export default {
       price: 0,
       orderNumber: "",
       listMenuTitles: [{title:"bread",cat:4},{title:"patty",cat:1},{title:"addOn",cat:2},{title:"sauce",cat:3},{title:"extras",cat:5},{title:"beverage",cat:6}],
-      currentCategory: 1
+      currentCategory: 1,
+      iNeedLactoseFree: false,
+      iNeedGlutenFree: false,
+      iNeedVegan: false
     }
   },
+  computed: {
+    currentIngredients: function () {
+      let ing = [];
+      for(let a = 0; a < this.ingredients.length; a += 1) {
+        if (this.ingredients[a].category === this.currentCategory) {
+          preferences: {
+          if(this.iNeedLactoseFree == true && Boolean(this.ingredients[a].milk_free) == false) {
+          break preferences;
+          }
+          if(this.iNeedGlutenFree == true && Boolean(this.ingredients[a].gluten_free) == false){
+          break preferences;
+          }
+          if(this.iNeedVegan == true && Boolean(this.ingredients[a].vegan) == false){
+          break preferences;
+          }
+          ing.push(this.ingredients[a]);
+            }
+          }
+        }
+        return ing;
+      }
+    },
   created: function () {
     this.$store.state.socket.on('orderNumber', function (data) {
       this.orderNumber = data;
@@ -120,6 +145,7 @@ export default {
     }
   }
 }
+
 </script>
 <style scoped>
 /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
