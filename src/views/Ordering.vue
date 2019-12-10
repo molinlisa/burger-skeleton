@@ -29,11 +29,7 @@
     <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
     <Ingredient
       ref="ingredient"
-<<<<<<< HEAD
-      v-for="item in ingredients"
-=======
       v-for="item in currentIngredients"
->>>>>>> f5e98ea5fe54634bbf8f7f70d7883c22a8046eea
       v-on:increment="addToOrder(item)"
       :item="item"
       :lang="lang"
@@ -60,17 +56,14 @@
   </div>
 </template>
 <script>
-
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import MenyButtons from '@/components/MenyButtons.vue'
-
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
-
 /* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
@@ -125,7 +118,6 @@ export default {
     changeCategory: function(cat) {
       this.currentCategory = cat;
       //this.cat
-
     },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
@@ -149,7 +141,6 @@ export default {
     }
   }
 }
-
 </script>
 <style scoped>
 /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
@@ -157,7 +148,6 @@ export default {
   margin:auto;
   width: 40em;
 }
-
 .example-panel {
   position: fixed;
   left:0;
@@ -173,13 +163,8 @@ export default {
   background-position: center;
   color: white;
 }
-<<<<<<< HEAD
-=======
-
 #menyFlexBox{
   display: flex;
   flex-direction: row;
 }
-
->>>>>>> f5e98ea5fe54634bbf8f7f70d7883c22a8046eea
 </style>
