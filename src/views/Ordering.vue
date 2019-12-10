@@ -3,7 +3,7 @@
   <div id="ordering">
     <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
 
-    <!-- Meny knappar högst upp i gränssnittet -->
+    <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
       <MenyButtons v-for="cat in listMenuTitles"
       :title="cat.title"
@@ -56,17 +56,14 @@
   </div>
 </template>
 <script>
-
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import MenyButtons from '@/components/MenyButtons.vue'
-
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
-
 /* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
@@ -90,6 +87,7 @@ export default {
       iNeedVegan: false
     }
   },
+
   computed: {
     currentIngredients: function () {
       let ing = [];
@@ -110,6 +108,18 @@ export default {
           }
         }
         return ing;
+      },
+      changeColor: function() { //här ändrar vi färgen på knappen vi väljer
+        for (var i = 0; i < listMenuTitles.length; i++ ) {
+          //givet att vi får reda på hur man selectar knappen baserat på i så ändrar vi färg
+          // var knappshuno = document.getElementById(id);
+          if (i == currentCategory) {
+            //knappshuno.background = green;
+          }
+          else {
+            //knappshuno.background = grey;
+          }
+        }
       }
     },
   created: function () {
@@ -121,7 +131,6 @@ export default {
     changeCategory: function(cat) {
       this.currentCategory = cat;
       //this.cat
-
     },
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
@@ -145,7 +154,6 @@ export default {
     }
   }
 }
-
 </script>
 <style scoped>
 /* scoped in the style tag means that these rules will only apply to elements, classes and ids in this template and no other templates. */
@@ -153,7 +161,6 @@ export default {
   margin:auto;
   width: 40em;
 }
-
 .example-panel {
   position: fixed;
   left:0;
@@ -169,10 +176,8 @@ export default {
   background-position: center;
   color: white;
 }
-
 #menyFlexBox{
   display: flex;
   flex-direction: row;
 }
-
 </style>

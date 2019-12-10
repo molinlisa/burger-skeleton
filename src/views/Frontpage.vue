@@ -3,7 +3,8 @@
 
   <div id = "header">
   <h1> Welcome </h1>
-  <img id="headerimage" src="src/assets/header.jpg">
+
+<img v-img src="  https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Bean_Burger_%2824501090158%29.jpg/1600px-Bean_Burger_%2824501090158%29.jpg">
 </div>
 
 </template>
