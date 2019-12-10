@@ -1,4 +1,5 @@
 <template>
+
   <div id="ordering">
     <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
 
@@ -163,6 +164,9 @@ export default {
   border: 1px solid #ccd;
   padding: 1em;
   background-image: url('~@/assets/exampleImage.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
   color: white;
 }
 
