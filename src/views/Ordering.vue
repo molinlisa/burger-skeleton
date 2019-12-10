@@ -17,12 +17,12 @@
     <!-- Checkboxes för matpreferenser -->
     <div id="foodPref">
       <label for="lactose">{{ uiLabels.milkFree }}</label>
-      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" :value="true" v-model="lactose">
+      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" :value="true" v-model="iNeedLactoseFree">
       {{lactose}}
       <label for="vegan">{{ uiLabels.vegan }}</label>
-      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" :value="true" v-model="vegan">
+      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" :value="true" v-model="iNeedVegan">
       <label for="gluten">{{ uiLabels.gluten }}</label>
-      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="gluten">
+      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="iNeedGlutenFree">
     </div>
 
     <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
@@ -84,35 +84,31 @@ export default {
       orderNumber: "",
       listMenuTitles: [{title:"bread",cat:4},{title:"patty",cat:1},{title:"addOn",cat:2},{title:"sauce",cat:3},{title:"extras",cat:5},{title:"beverage",cat:6}],
       currentCategory: 1,
-      lactose: false,
-      gluten: false,
-      vegan: false
+      iNeedLactoseFree: false,
+      iNeedGlutenFree: false,
+      iNeedVegan: false
     }
   },
   computed: {
     currentIngredients: function () {
-      let ing = []
-      for(let a = 0; a < this.ingredients.length; a += 1)
+      let ing = [];
+      for(let a = 0; a < this.ingredients.length; a += 1) {
         if (this.ingredients[a].category === this.currentCategory) {
-
-          if(this.lactose) {
-            if(this.ingredients[a].milk_free === 1)
-              ing.push(this.ingredients[a])
+          preferences: {
+          if(this.iNeedLactoseFree == true && Boolean(this.ingredients[a].milk_free) == false) {
+          break preferences;
           }
-          if(this.gluten){
-            if(this.ingredients[a].gluten_free === 1 && ing[ing.length -1] != ingrediets[a])
-              ing.push(this.ingredients[a])
+          if(this.iNeedGlutenFree == true && Boolean(this.ingredients[a].gluten_free) == false){
+          break preferences;
           }
-
-          if(this.vegan){
-            if(this.ingredients[a].vegan === 1 && ing[ing.length -1] != ingrediets[a])
-              ing.push(this.ingredients[a])
+          if(this.iNeedVegan == true && Boolean(this.ingredients[a].vegan) == false){
+          break preferences;
           }
-
-else{
-  ing.push(this.ingredients[a])}
-}
- return ing
+          ing.push(this.ingredients[a]);
+            }
+          }
+        }
+        return ing;
       }
     },
   created: function () {
