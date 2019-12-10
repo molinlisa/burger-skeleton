@@ -2,7 +2,7 @@
   <div id="ordering">
     <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
 
-    <!-- Meny knappar högst upp i gränssnittet -->
+    <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
       <MenyButtons v-for="cat in listMenuTitles"
       :title="cat.title"
