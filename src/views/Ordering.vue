@@ -92,10 +92,6 @@ export default {
   },
 
   computed: {
-    buttonColor: function()
-
-  },
-  computed: {
     currentIngredients: function () {
       let ing = [];
       for(let a = 0; a < this.ingredients.length; a += 1) {
@@ -115,6 +111,18 @@ export default {
           }
         }
         return ing;
+      },
+      changeColor: function() { //här ändrar vi färgen på knappen vi väljer
+        for (var i = 0; i < listMenuTitles.length; i++ ) {
+          //givet att vi får reda på hur man selectar knappen baserat på i så ändrar vi färg
+          // var knappshuno = document.getElementById(id);
+          if (i == currentCategory) {
+            //knappshuno.background = green;
+          }
+          else {
+            //knappshuno.background = grey;
+          }
+        }
       }
     },
   created: function () {
