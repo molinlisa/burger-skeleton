@@ -90,6 +90,11 @@ export default {
       iNeedVegan: false
     }
   },
+
+  computed: {
+    buttonColor: function()
+
+  },
   computed: {
     currentIngredients: function () {
       let ing = [];
