@@ -14,6 +14,7 @@
     </div>
 
     <h1>{{ uiLabels.ingredients }}</h1>
+    <h3> Only show: </h3>
 
     <!-- Checkboxes för matpreferenser -->
     <div id="foodPref">
@@ -109,7 +110,7 @@ export default {
         }
         return ing;
       },
-      changeColor: function() { //här ändrar vi färgen på knappen vi väljer
+      changeColor: function() { //här ändrar vi förhoppningsvis färgen på knappen vi väljer
         for (var i = 0; i < listMenuTitles.length; i++ ) {
           //givet att vi får reda på hur man selectar knappen baserat på i så ändrar vi färg
           // var knappshuno = document.getElementById(id);
