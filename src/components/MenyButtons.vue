@@ -13,7 +13,6 @@ export default {
     lang: String,
     title: String,
     category: Number
-    // category: integer?
   },
 data: function() { //Not that data is a function!
   return {
@@ -21,7 +20,7 @@ data: function() { //Not that data is a function!
 },
  methods: {
 select() {
-    this.$emit("selected", this.category) //this.category?
+    this.$emit("selected", this.category) 
   }
 }
 }

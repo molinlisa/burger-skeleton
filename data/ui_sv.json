@@ -22,5 +22,8 @@
   "addOn":"Pålägg",
   "sauce":"Sås",
   "extras":"Tillbehör",
-  "beverage":"Dryck"
+  "beverage":"Dryck",
+  "milkFree": "Laktosfri",
+  "vegan": "Vegan",
+  "gluten": "Gluten fritt"
 }
