@@ -6,7 +6,7 @@
       v-for="(order, key) in orders"
       v-if="order.status !== 'done'"
       v-on:done="markDone(key)"
-      :order-id="key" daskjkdnak
+      :order-id="key" 
       :order="order"
       :ui-labels="uiLabels"
       :lang="lang"

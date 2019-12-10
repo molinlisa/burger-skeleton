@@ -3,7 +3,7 @@
   <div id="ordering">
     <!-- <img class="example-panel" src="@/assets/exampleImage.jpg">  bakgrundsbilden-->
 
-    <!-- Meny knappar högst upp i gränssnittet -->
+    <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
       <MenyButtons v-for="cat in listMenuTitles"
       :title="cat.title"
@@ -87,6 +87,7 @@ export default {
       iNeedVegan: false
     }
   },
+
   computed: {
     currentIngredients: function () {
       let ing = [];
@@ -107,6 +108,18 @@ export default {
           }
         }
         return ing;
+      },
+      changeColor: function() { //här ändrar vi färgen på knappen vi väljer
+        for (var i = 0; i < listMenuTitles.length; i++ ) {
+          //givet att vi får reda på hur man selectar knappen baserat på i så ändrar vi färg
+          // var knappshuno = document.getElementById(id);
+          if (i == currentCategory) {
+            //knappshuno.background = green;
+          }
+          else {
+            //knappshuno.background = grey;
+          }
+        }
       }
     },
   created: function () {
