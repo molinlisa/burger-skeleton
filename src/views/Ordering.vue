@@ -9,7 +9,8 @@
       :title="cat.title"
       :ui-labels="uiLabels"
       v-on:selected="changeCategory"
-      :category="cat.cat">
+      :category="cat.cat"
+      :currentCategory="currentCategory">
       </MenyButtons>
     </div>
 
@@ -113,18 +114,6 @@ export default {
         }
         return ing;
       },
-      changeColor: function() { //här ändrar vi förhoppningsvis färgen på knappen vi väljer
-        for (var i = 0; i < listMenuTitles.length; i++ ) {
-          //givet att vi får reda på hur man selectar knappen baserat på i så ändrar vi färg
-          // var knappshuno = document.getElementById(id);
-          if (i == currentCategory) {
-            //knappshuno.background = green;
-          }
-          else {
-            //knappshuno.background = grey;
-          }
-        }
-      }
     },
   created: function () {
     this.$store.state.socket.on('orderNumber', function (data) {
@@ -205,5 +194,4 @@ export default {
 button .ingredient{
 
 }
-
 </style>
