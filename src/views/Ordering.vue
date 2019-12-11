@@ -40,7 +40,7 @@
 
   </div>
     <h1>{{ uiLabels.order }}</h1>
-    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
+    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
     <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -172,7 +172,6 @@ export default {
   z-index: -2;
 }
 .ingredient {
-<<<<<<< HEAD
   border: 1px solid #f5f5f28a;
     padding: 1em;
     /* background-image: url(/img/exampleImage.d10ed80b.jpg); */
@@ -183,21 +182,11 @@ export default {
     background-color: green;
     border-radius: 25px;
     margin-bottom: 10px;
-=======
-  border: 1px solid #ccd;
-  padding: 1em;
-  background-image: url('~@/assets/exampleImage.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  color: white;
->>>>>>> e3cbef931adb42d53802fbf7f125f491e99d71c4
 }
 #menyFlexBox{
   display: flex;
   flex-direction: row;
 }
-<<<<<<< HEAD
 #ingredientBox{
   display: -webkit-box;
       display: -ms-flexbox;
@@ -217,6 +206,4 @@ button .ingredient{
 
 }
 
-=======
->>>>>>> e3cbef931adb42d53802fbf7f125f491e99d71c4
 </style>
