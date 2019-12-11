@@ -20,7 +20,6 @@
     <div id="foodPref">
       <label for="lactose">{{ uiLabels.milkFree }}</label>
       <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" :value="true" v-model="iNeedLactoseFree">
-      {{lactose}}
       <label for="vegan">{{ uiLabels.vegan }}</label>
       <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" :value="true" v-model="iNeedVegan">
       <label for="gluten">{{ uiLabels.gluten }}</label>
@@ -28,17 +27,20 @@
     </div>
 
     <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
+    <div id="ingredientBox">
     <Ingredient
       ref="ingredient"
       v-for="item in currentIngredients"
       v-on:increment="addToOrder(item)"
       :item="item"
       :lang="lang"
+      :ui-labels="uiLabels"
       :key="item.ingredient_id">
     </Ingredient>
 
+  </div>
     <h1>{{ uiLabels.order }}</h1>
-    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
+    {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{ uiLabels.sek }}
     <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
     <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -94,6 +96,7 @@ export default {
       let ing = [];
       for(let a = 0; a < this.ingredients.length; a += 1) {
         if (this.ingredients[a].category === this.currentCategory) {
+
           preferences: {
           if(this.iNeedLactoseFree == true && Boolean(this.ingredients[a].milk_free) == false) {
           break preferences;
@@ -169,16 +172,39 @@ export default {
   z-index: -2;
 }
 .ingredient {
-  border: 1px solid #ccd;
+  border: 1px solid #f5f5f28a;
   padding: 1em;
-  background-image: url('~@/assets/exampleImage.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+  /* background-image: url(/img/exampleImage.d10ed80b.jpg); */
   color: white;
+  width: 80px;
+  height: 100px;
+  text-overflow: clip;
+  background-color: green;
+  border-radius: 25px;
+  margin-bottom: 10px;
 }
+
 #menyFlexBox{
   display: flex;
   flex-direction: row;
+}
+
+#ingredientBox{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: 45vh;
+  margin: 1em auto;
+  overflow: scroll;
+  width: 60vh;
+}
+button .ingredient{
+
 }
 </style>

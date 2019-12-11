@@ -25,5 +25,7 @@
   "beverage":"Dryck",
   "milkFree": "Laktosfri",
   "vegan": "Vegan",
-  "gluten": "Glutenfri"
+  "gluten": "Gluten fritt",
+  "pcs": "Styck",
+    "sek": "sek"
 }
