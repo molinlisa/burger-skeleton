@@ -5,13 +5,13 @@
 
     <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
-      <MenyButtons v-for="cat in listMenuTitles"
+      <MenuButtons v-for="cat in listMenuTitles"
       :title="cat.title"
       :ui-labels="uiLabels"
       v-on:selected="changeCategory"
       :category="cat.cat"
       :currentCategory="currentCategory">
-      </MenyButtons>
+    </MenuButtons>
     </div>
 
     <h1>{{ uiLabels.ingredients }}</h1>
@@ -65,7 +65,7 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
-import MenyButtons from '@/components/MenyButtons.vue'
+import MenuButtons from '@/components/MenuButtons.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 /* instead of defining a Vue instance, export default allows the only
@@ -75,7 +75,7 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    MenyButtons
+    MenuButtons
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
