@@ -1,6 +1,6 @@
 <template>
 <div>
-  <button class="MenyButtons" v-on:click="select">{{ uiLabels[title] }} </button>
+  <button :class="['MenyButtons', {'is-green' : currentCategory === category}]" v-on:click="select">{{ uiLabels[title] }} </button>
 </div>
 </template>
 
@@ -12,15 +12,16 @@ export default {
     uiLabels: Object,
     lang: String,
     title: String,
-    category: Number
+    category: Number,
+    currentCategory: Number
   },
-data: function() { //Not that data is a function!
+data: function() { //Note that data is a function!
   return {
   }
 },
  methods: {
 select() {
-    this.$emit("selected", this.category) 
+    this.$emit("selected", this.category)
   }
 }
 }
@@ -28,21 +29,24 @@ select() {
 
 <style scoped>
 
+.MenyButtons{
+  width:100px;
+  height:100px;
+  border-radius: 12px;
+  padding: 14px 28px;
+}
+
 .is-grey{
   background: grey;
+  border-color: black;
+  color: black;
 }
 
 .is-green{
   background: green;
-}
-
-.MenyButtons{
-  width:100px;
-  height:100px;
-}
-
-.MenyButtons:focus{
-  background-color: green;
+  font-weight: bold;
+  color: white;
+  border-color: white;
 }
 
 </style>

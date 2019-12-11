@@ -9,7 +9,8 @@
       :title="cat.title"
       :ui-labels="uiLabels"
       v-on:selected="changeCategory"
-      :category="cat.cat">
+      :category="cat.cat"
+      :currentCategory="currentCategory">
       </MenyButtons>
     </div>
 
@@ -113,18 +114,6 @@ export default {
         }
         return ing;
       },
-      changeColor: function() { //här ändrar vi förhoppningsvis färgen på knappen vi väljer
-        for (var i = 0; i < listMenuTitles.length; i++ ) {
-          //givet att vi får reda på hur man selectar knappen baserat på i så ändrar vi färg
-          // var knappshuno = document.getElementById(id);
-          if (i == currentCategory) {
-            //knappshuno.background = green;
-          }
-          else {
-            //knappshuno.background = grey;
-          }
-        }
-      }
     },
   created: function () {
     this.$store.state.socket.on('orderNumber', function (data) {
@@ -172,7 +161,6 @@ export default {
   z-index: -2;
 }
 .ingredient {
-<<<<<<< HEAD
   border: 1px solid #f5f5f28a;
     padding: 1em;
     /* background-image: url(/img/exampleImage.d10ed80b.jpg); */
@@ -183,21 +171,11 @@ export default {
     background-color: green;
     border-radius: 25px;
     margin-bottom: 10px;
-=======
-  border: 1px solid #ccd;
-  padding: 1em;
-  background-image: url('~@/assets/exampleImage.jpg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  color: white;
->>>>>>> e3cbef931adb42d53802fbf7f125f491e99d71c4
 }
 #menyFlexBox{
   display: flex;
   flex-direction: row;
 }
-<<<<<<< HEAD
 #ingredientBox{
   display: -webkit-box;
       display: -ms-flexbox;
@@ -216,7 +194,4 @@ export default {
 button .ingredient{
 
 }
-
-=======
->>>>>>> e3cbef931adb42d53802fbf7f125f491e99d71c4
 </style>
