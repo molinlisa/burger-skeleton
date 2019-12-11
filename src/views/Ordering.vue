@@ -133,16 +133,6 @@ export default {
       this.currentCategory = cat;
       //this.cat
     },
-    /*
-    showMilkFree: function(item) {
-      item.milk_free===1;
-    },
-    showVegan: function(item) {
-      item.vegan===1;
-    },
-    showGlutenFree: function(item) {
-      item.gluten_free===1;
-    }, */
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
