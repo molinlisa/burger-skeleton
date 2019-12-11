@@ -1,12 +1,12 @@
 <template>
 <div id="orders">
   <h1>{{ uiLabels.ordersInQueue }}</h1>
-  <div>
+  <div id="flexList">
     <OrderItemToPrepare
       v-for="(order, key) in orders"
       v-if="order.status !== 'done'"
       v-on:done="markDone(key)"
-      :order-id="key" daskjkdnak
+      :order-id="key"
       :order="order"
       :ui-labels="uiLabels"
       :lang="lang"
@@ -58,6 +58,10 @@ export default {
 <style scoped>
 	#orders {
     font-size:24pt;
+  }
+  #flexList{
+    display: flex;
+    flex-direction: column;
   }
 
   h1 {

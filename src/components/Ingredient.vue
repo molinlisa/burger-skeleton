@@ -1,9 +1,13 @@
 <template>
-  <div class="ingredient">
-    <label>
-      <button v-on:click="incrementCounter">{{ counter }}</button>
-      {{item["ingredient_"+ lang]}}, {{item.selling_price}}:-, {{item.stock}} pcs
-    </label>
+  <button class="ingredient" v-on:click="incrementCounter" >
+
+    {{item["ingredient_"+ lang]}},
+    {{item.selling_price}}:-,
+    {{item.stock}} {{uiLabels.pcs}} </button>
+    <!-- <button v-on:click="removeIng">X</button>
+    <button v-on:click="incrementCounter">{{ counter }}  </button> -->
+
+    </ul>
   </div>
 </template>
 <script>
@@ -11,7 +15,8 @@ export default {
   name: 'Ingredient',
   props: {
     item: Object,
-    lang: String
+    lang: String,
+    uiLabels: Object
   },
     data: function () {
     return {
@@ -25,6 +30,10 @@ export default {
       // can catch it with v-on:increment in the component declaration
       this.$emit('increment');
     },
+    removeIng: function(){
+
+
+    },
     resetCounter: function () {
       this.counter = 0;
     }
@@ -32,5 +41,5 @@ export default {
 }
 </script>
 <style scoped>
-  
+
 </style>
