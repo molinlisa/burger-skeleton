@@ -17,17 +17,18 @@
     <!-- Checkboxes för matpreferenser -->
     <div id="foodPref">
       <label for="lactose">{{ uiLabels.milkFree }}</label>
-      <input type="checkbox" id="lactose" v-bind:name="uiLabels.milkFree" v-model="lactose">
+      <input type="checkbox" v-model="showMilkFree" v-bind:name="uiLabels.milkFree">
       <label for="vegan">{{ uiLabels.vegan }}</label>
-      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan" v-model="vegan">
+      <input type="checkbox" id="vegan" v-bind:name="uiLabels.vegan">
       <label for="gluten">{{ uiLabels.gluten }}</label>
-      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" v-model="gluten">
+      <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten">
     </div>
 
     <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till order) -->
     <Ingredient
       ref="ingredient"
       v-for="item in ingredients"
+      v-if="showMilkFree" ... item.milk_free===1
       v-if="item.category===currentCategory"
       v-on:increment="addToOrder(item)"
       :item="item"
@@ -84,6 +85,9 @@ export default {
       orderNumber: "",
       listMenuTitles: [{title:"bread",cat:4},{title:"patty",cat:1},{title:"addOn",cat:2},{title:"sauce",cat:3},{title:"extras",cat:5},{title:"beverage",cat:6}],
       currentCategory: 1
+      /* showMilkFree: false,
+      showGlutenFree: false,
+      showVegan: false */
     }
   },
   created: function () {
@@ -94,9 +98,17 @@ export default {
   methods: {
     changeCategory: function(cat) {
       this.currentCategory = cat;
-      //this.cat
-
     },
+    /*
+    showMilkFree: function(item) {
+      item.milk_free===1;
+    },
+    showVegan: function(item) {
+      item.vegan===1;
+    },
+    showGlutenFree: function(item) {
+      item.gluten_free===1;
+    }, */
     addToOrder: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
