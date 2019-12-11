@@ -5,12 +5,13 @@
 
     <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
-      <MenyButtons v-for="cat in listMenuTitles"
+      <MenuButtons v-for="cat in listMenuTitles"
       :title="cat.title"
       :ui-labels="uiLabels"
       v-on:selected="changeCategory"
-      :category="cat.cat">
-      </MenyButtons>
+      :category="cat.cat"
+      :currentCategory="currentCategory">
+    </MenuButtons>
     </div>
 
     <h1>{{ uiLabels.ingredients }}</h1>
@@ -64,7 +65,7 @@
 //components
 import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
-import MenyButtons from '@/components/MenyButtons.vue'
+import MenuButtons from '@/components/MenuButtons.vue'
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/components/sharedVueStuff.js'
 /* instead of defining a Vue instance, export default allows the only
@@ -74,7 +75,7 @@ export default {
   components: {
     Ingredient,
     OrderItem,
-    MenyButtons
+    MenuButtons
   },
   mixins: [sharedVueStuff], // include stuff that is used in both
                             // the ordering system and the kitchen
@@ -113,18 +114,6 @@ export default {
         }
         return ing;
       },
-      changeColor: function() { //här ändrar vi förhoppningsvis färgen på knappen vi väljer
-        for (var i = 0; i < listMenuTitles.length; i++ ) {
-          //givet att vi får reda på hur man selectar knappen baserat på i så ändrar vi färg
-          // var knappshuno = document.getElementById(id);
-          if (i == currentCategory) {
-            //knappshuno.background = green;
-          }
-          else {
-            //knappshuno.background = grey;
-          }
-        }
-      }
     },
   created: function () {
     this.$store.state.socket.on('orderNumber', function (data) {
@@ -173,15 +162,15 @@ export default {
 }
 .ingredient {
   border: 1px solid #f5f5f28a;
-  padding: 1em;
-  /* background-image: url(/img/exampleImage.d10ed80b.jpg); */
-  color: white;
-  width: 80px;
-  height: 100px;
-  text-overflow: clip;
-  background-color: green;
-  border-radius: 25px;
-  margin-bottom: 10px;
+    padding: 1em;
+    /* background-image: url(/img/exampleImage.d10ed80b.jpg); */
+    color: white;
+    width: 80px;
+    height: 100px;
+    text-overflow: clip;
+    background-color: green;
+    border-radius: 25px;
+    margin-bottom: 10px;
 }
 
 #menyFlexBox{
