@@ -1,13 +1,13 @@
 <template>
-  <button class="ingredient" v-on:click="incrementCounter" >
 
-    {{item["ingredient_"+ lang]}},
-    {{item.selling_price}}:-,
-    {{item.stock}} {{uiLabels.pcs}} </button>
+  <div class="ingredient" v-on:click="incrementCounter" >
+
+    <h3>{{item["ingredient_"+ lang]}}</h3>
+    <h3>{{item.selling_price}}:- </h3>
+    <h3>{{item.stock}} {{uiLabels.pcs}} </h3>
     <!-- <button v-on:click="removeIng">X</button>
     <button v-on:click="incrementCounter">{{ counter }}  </button> -->
-
-    </ul>
+  
   </div>
 </template>
 <script>
@@ -41,5 +41,6 @@ export default {
 }
 </script>
 <style scoped>
+
 
 </style>
