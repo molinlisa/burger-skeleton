@@ -1,6 +1,6 @@
 <template>
   <div onclick="window.location.href='#/';" style="cursor:pointer; width:100%; height:100%;">
-    <div id="textpage"> <h2>Goda burgare </h2>
+    <div id="textpage"> <h2>Crafty Burgers </h2>
       <h3> - Klicka för att ta dig till hamburgarhimlen </h3>
 
     </div>
@@ -40,6 +40,8 @@ color: white;
 font-family: Algerian;
 position: absolute;
 text-align: center;
+vertical-align: middle;
+line-height: 90px;
 font-size: 25px;
 height: 100%;
 width: 100%;
