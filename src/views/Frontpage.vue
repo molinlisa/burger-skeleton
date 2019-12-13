@@ -1,5 +1,5 @@
 <template>
-  <div onclick="window.location.href='#/';" style="cursor:pointer; width:100%; height:100%;">
+  <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
     <div id="textpage"> <h2>Crafty Burgers </h2>
       <h3> - Klicka för att ta dig till hamburgarhimlen </h3>
 
@@ -16,21 +16,7 @@ export default {
 </script>
 
 <style scoped>
-#header {
-  border: 1px solid;
-  padding: 1em;
-  color: orange;
-  font-size: 5 rem;
-  font-family: Algerian;
-}
-#headerimage {
 
-  opacity: 0.5;
-  width: 100%;
-  height: auto;
-  margin: auto;
-
-}
 h3{
   color: white;
   font-family: cursive;
@@ -40,7 +26,6 @@ color: white;
 font-family: Algerian;
 position: absolute;
 text-align: center;
-vertical-align: middle;
 line-height: 90px;
 font-size: 25px;
 height: 100%;

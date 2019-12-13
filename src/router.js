@@ -6,7 +6,7 @@ Vue.use(Router)
 let router = new Router({
   routes: [
     {
-      path: '/frontpage',
+      path: '/',
       meta: {
         title: 'FrontPage',
       },
@@ -14,7 +14,7 @@ let router = new Router({
       component: () => import(/* webpackChunkName: "read" */ './views/Frontpage.vue')
     },
     {
-      path: '/',
+      path: '/ordering',
       meta: {
         title: 'Kraft Burgers',
       },
