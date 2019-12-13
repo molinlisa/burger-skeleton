@@ -1,17 +1,17 @@
 <template>
-
-
-  <body onclick="window.location.href='#/';" style="cursor:pointer; width:100%; height:100%;">
+  <div onclick="window.location.href='#/';" style="cursor:pointer; width:100%; height:100%;">
     <div id="textpage"> <h2>Goda burgare </h2>
 
     </div>
 
 
-  </body>
+  </div>
 </template>
 
 <script>
-
+export default {
+  name: 'frontpage',
+}
 </script>
 
 <style scoped>
@@ -43,5 +43,3 @@ padding: 5px;
   background-size: 100vw;
 }
 </style>
-
-/*#header*/
