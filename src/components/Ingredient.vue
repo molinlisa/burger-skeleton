@@ -7,7 +7,7 @@
     <h3>{{item.stock}} {{uiLabels.pcs}} </h3>
     <!-- <button v-on:click="removeIng">X</button>
     <button v-on:click="incrementCounter">{{ counter }}  </button> -->
-  
+
   </div>
 </template>
 <script>
@@ -16,7 +16,7 @@ export default {
   props: {
     item: Object,
     lang: String,
-    uiLabels: Object
+    uiLabels: Object,
   },
     data: function () {
     return {

@@ -45,39 +45,44 @@
 
 <div id="gridContainer" >
 
-  <div id="foodList">
-    <h4>Food-name</h4>
-    <ul v-for="item in chosenIngredients">
-      <li>{{item["ingredient_"+lang]}}</li>
-    </ul>
+  <div id="count">
+    <h4>Antal</h4>
+    <div v-for="item in chosenIngredients" v-on:id="item.ingredient_id" class="countingCol">
+      <button v-on:click="decreaseNumber(item)" class="minusButton">-</Button>
+        <h5 class="countNumb">{{item.number}}</h5>
+        <button v-on:click="addToOrder(item)" class="plusButton">+</button>
+      </div>
+    </div>
+
+    <div id="foodList">
+      <h4>Food-name</h4>
+      <ul v-for="item in chosenIngredients">
+        <li>{{item["ingredient_"+lang]}}</li>
+      </ul>
+    </div>
+
+    <div id="price">
+      <h4>Price </h4>
+      <h4 v-for="item in chosenIngredients">{{item["selling_price"]}}</h4>
+    </div>
+
+
   </div>
+  {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
+  <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
-  <div id="Price">
-    <h4>Price </h4>
-    <h4 v-for="item in chosenIngredients">{{item["selling_price"]}}</h4>
-  </div>
-
-  <div id="minusButton">
-    <h4>Press to remove item</h4>
-    <button v-for="item in chosenIngredients" v-on:id="item.ingredient_id"> </button>
-  </div>
-
-</div>
-{{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
-<button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-
-<h1>{{ uiLabels.ordersInQueue }}</h1>
-<div>
-  <OrderItem
-  v-for="(order, key) in orders"
-  v-if="order.status !== 'done'"
-  :order-id="key"
-  :order="order"
-  :ui-labels="uiLabels"
-  :lang="lang"
-  :key="key">
-</OrderItem>
-<button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+  <h1>{{ uiLabels.ordersInQueue }}</h1>
+  <div>
+    <OrderItem
+    v-for="(order, key) in orders"
+    v-if="order.status !== 'done'"
+    :order-id="key"
+    :order="order"
+    :ui-labels="uiLabels"
+    :lang="lang"
+    :key="key">
+  </OrderItem>
+  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 </div>
 </template>
@@ -107,7 +112,7 @@ export default {
       price: 0,
       orderNumber: "",
       listMenuTitles: [{title:"bread",cat:4},{title:"patty",cat:1},{title:"addOn",cat:2},{title:"sauce",cat:3},{title:"extras",cat:5},{title:"beverage",cat:6}],
-      currentCategory: 1,
+      currentCategory: 4,
       iNeedLactoseFree: false,
       iNeedGlutenFree: false,
       iNeedVegan: false
@@ -148,9 +153,15 @@ export default {
       //this.cat
     },
     addToOrder: function (item) {
+      for (let j = 0; j < this.chosenIngredients.length; j += 1) {
+        if(this.chosenIngredients[j].ingredient_id === item.ingredient_id){
+          item.number +=1;
+          this.price += +item.selling_price;
+          return
+        }
+      }
+      item.number +=1;
       this.chosenIngredients.push(item);
-
-
       this.price += +item.selling_price;
     },
     placeOrder: function () {
@@ -168,6 +179,30 @@ export default {
       }
       this.price = 0;
       this.chosenIngredients = [];
+    },
+    countNumberOfIngredients: function (id) {
+      let counter = 0;
+      for (let j = 0; j < this.chosenIngredients.length; j += 1) {
+        if(this.chosenIngredients[j].ingredient_id === id){
+          counter+= 1
+        }
+      }
+      return counter;
+    },
+    decreaseNumber: function(item){
+      let removeIndex = 0;
+      if(item.number===1){
+        for (let i = 0; i < this.chosenIngredients.length; i += 1 ) {
+          if (this.chosenIngredients[i] === item) {
+            removeIndex = i;
+            break;
+          }
+        }
+        this.chosenIngredients.splice(removeIndex, 1);
+        this.price -= +item.selling_price;
+      }else{
+        item.number -= 1;
+      }
     }
   }
 }
@@ -212,7 +247,7 @@ export default {
   flex-wrap: wrap;
   height: 45vh;
   margin: 1em auto;
-  overflow: scroll;
+  overflow: overlay;
   width: 60vh;
 }
 #gridContainer{
@@ -221,11 +256,34 @@ export default {
 #foodList{
   grid-column: 1;
 }
-#Price{
+#price{
   grid-column: 2;
 }
-#minusButton{
+#count{
   grid-column: 3;
+  grid-row: 1;
+
+}
+.countingCol{
+  display: grid;
+}
+.minusButton{
+  grid-column: 1;
+  width: 0.5vh;
+  border-radius: 50px;
+  background-color: red;
+
+}
+.countNumb{
+  grid-column: 2;
+  margin: 1px;
+}
+.plusButton{
+  grid-column: 3;
+  width: 0.5vh;
+  border-radius: 50px;
+  background-color: lightblue;
+
 
 }
 </style>
