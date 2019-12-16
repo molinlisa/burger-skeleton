@@ -1,6 +1,7 @@
 <template>
 <div id="orders">
   <h1>{{ uiLabels.ordersInQueue }}</h1>
+<<<<<<< HEAD
 
 
   <div class = "wrapper">
@@ -16,6 +17,22 @@
           :key="key">
 
         </OrderItemToPrepare>
+=======
+  <div id="flexList">
+    <OrderItemToPrepare
+      v-for="(order, key) in orders"
+      v-if="order.status !== 'done'"
+      v-on:done="markDone(key)"
+<<<<<<< HEAD
+      :order-id="key"
+=======
+>>>>>>> 4cbd1f8bea6c1bf0e8b8962905f2e1a1c1b114d5
+      :order="order"
+      :ui-labels="uiLabels"
+      :lang="lang"
+      :key="key">
+    </OrderItemToPrepare>
+>>>>>>> 6ef59fd1962c300dfcc1fee7fcef8f0b07892b4b
   </div>
 
   <h1>{{ uiLabels.ordersFinished }}</h1>
@@ -65,6 +82,10 @@ export default {
 <style scoped>
 	#orders {
     font-size:24pt;
+  }
+  #flexList{
+    display: flex;
+    flex-direction: column;
   }
 
   h1 {

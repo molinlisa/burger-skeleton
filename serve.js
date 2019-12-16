@@ -41,6 +41,12 @@ io.on('connection', function (socket) {
                           uiLabels: data.getUILabels(),
                           ingredients: data.getIngredients() });
 
+  socket.on("sendStuff", function() {
+    socket.emit('initialize', { orders: data.getAllOrders(),
+                            uiLabels: data.getUILabels(),
+                            ingredients: data.getIngredients() });
+  });
+
   // When someone orders something
   socket.on('order', function (order) {
     var orderIdAndName = data.addOrder(order);

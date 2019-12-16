@@ -1,27 +1,37 @@
 <template>
+  <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
+    <div id="textpage"> <h2>Crafty Burgers </h2>
+      <h3> Klicka för att ta dig till hamburgarhimlen </h3>
+
+    </div>
 
 
-  <div id = "header">
-  <h1> Welcome </h1>
-
-<img v-img src="  https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Bean_Burger_%2824501090158%29.jpg/1600px-Bean_Burger_%2824501090158%29.jpg">
-</div>
-
+  </div>
 </template>
 
 <script>
-
+export default {
+  name: 'frontpage',
+}
 </script>
 
 <style scoped>
-#header {
-  border: 1px solid ;
-  padding: 1em;
-  width: 100%;
-  height: auto;
 
+h3{
+  color: white;
+  font-family: cursive;
 }
-
-</style scoped>
-
-#header
+#textpage {
+color: white;
+font-family: Algerian;
+position: absolute;
+text-align: center;
+line-height: 90px;
+font-size: 25px;
+height: 100%;
+width: 100%;
+padding: 5px;
+  background: url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg');
+  background-size: 100vw;
+}
+</style>
