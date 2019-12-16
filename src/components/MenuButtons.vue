@@ -30,11 +30,13 @@ select() {
 <style scoped>
 
 .MenuButtons{
-  width:100px;
-  height:100px;
+  width:25vh;
+  height:20vh;
   border-radius: 12px;
   padding: 14px 28px;
   text-align: center;
+  font-size: 17pt;
+  font-weight: bold;
 }
 
 .is-grey{
