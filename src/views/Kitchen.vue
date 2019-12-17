@@ -1,6 +1,23 @@
 <template>
 <div id="orders">
   <h1>{{ uiLabels.ordersInQueue }}</h1>
+<<<<<<< HEAD
+
+
+  <div class = "wrapper">
+
+        <OrderItemToPrepare class = "box ordered"
+          v-for="(order, key) in orders"
+          v-if="order.status !== 'done'"
+          v-on:done="markDone(key)"
+          :order-id="key"
+          :order="order"
+          :ui-labels="uiLabels"
+          :lang="lang"
+          :key="key">
+
+        </OrderItemToPrepare>
+=======
   <div id="flexList">
     <OrderItemToPrepare
       v-for="(order, key) in orders"
@@ -15,19 +32,23 @@
       :lang="lang"
       :key="key">
     </OrderItemToPrepare>
+>>>>>>> 6ef59fd1962c300dfcc1fee7fcef8f0b07892b4b
   </div>
+
   <h1>{{ uiLabels.ordersFinished }}</h1>
-  <div>
-    <OrderItem
-      v-for="(order, key) in orders"
-      v-if="order.status === 'done'"
-      :order-id="key"
-      :order="order"
-      :lang="lang"
-      :ui-labels="uiLabels"
-      :key="key">
-    </OrderItem>
+
+  <div class = "wrapper">
+      <OrderItem class = "box finished"
+       v-for="(order, key) in orders"
+        v-if="order.status === 'done'"
+        :order-id="key"
+        :order="order"
+        :lang="lang"
+        :ui-labels="uiLabels"
+        :key="key">
+      </OrderItem>
   </div>
+</div>
 </div>
 </template>
 <script>
@@ -71,4 +92,33 @@ export default {
     text-transform: uppercase;
     font-size: 1.4em;
   }
+
+  .wrapper {
+    display: grid;
+    grid-gap: 50px;
+    grid-template-columns: repeat(auto-fill, 10em);
+    grid-template-rows: auto;
+    justify-content: center;
+    background-color: bisque;
+    color: black;
+    border: 10px solid black;
+    border-radius: 25px;
+
+  }
+
+  .box {
+    border-radius: 25px;
+    padding: 20px;
+    border: 5px solid black;
+  }
+
+  .ordered {
+    background-color: burlywood;
+  }
+
+  .finished {
+    background-color: goldenrod;
+  }
+
+
 </style>
