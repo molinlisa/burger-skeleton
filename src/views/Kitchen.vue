@@ -15,6 +15,22 @@
           :lang="lang"
           :key="key">
         </OrderItemToPrepare>
+<<<<<<< HEAD
+=======
+
+  <div id="flexList">
+    <OrderItemToPrepare
+      v-for="(order, key) in orders"
+      v-if="order.status !== 'done'"
+      v-on:done="markDone(key)"
+      :order-id="key"
+      :order="order"
+      :ui-labels="uiLabels"
+      :lang="lang"
+      :key="key">
+    </OrderItemToPrepare>
+  </div>
+>>>>>>> 96cca8ae604cdbd36053f665cf8103e394892e4b
 
   <h1>{{ uiLabels.ordersFinished }}</h1>
 
