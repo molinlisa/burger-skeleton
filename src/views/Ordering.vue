@@ -30,7 +30,7 @@
     <Ingredient
     ref="ingredient"
     v-for="item in currentIngredients"
-    v-on:increment="addToOrder(item)"
+    v-on:increment="addToBurger(item)"
     :item="item"
     :lang="lang"
     :ui-labels="uiLabels"
@@ -49,7 +49,7 @@
     <div v-for="item in chosenIngredients" v-on:id="item.ingredient_id" class="countingCol">
       <button v-on:click="decreaseNumber(item)" class="minusButton">-</Button>
         <h5 class="countNumb">{{item.number}}</h5>
-        <button v-on:click="addToOrder(item)" class="plusButton">+</button>
+        <button v-on:click="addToBurger(item)" class="plusButton">+</button>
       </div>
     </div>
 
@@ -68,10 +68,10 @@
       <h4>Remove item</h4>
       <div v-for="item in chosenIngredients" v-on:click="removeItem(item)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
     </kryss>
-
+    
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
-  <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+  <button v-on:click="addToOrder()">Add burger</button>
 
 </div>
 <!-- Header "Orders in queue" -->
@@ -86,11 +86,28 @@
   :lang="lang"
   :key="key">
 </OrderItem>
+
+<div class="footer">
+      <h1>{{ uiLabels.order }}</h1>
+      <div v-for="(burger, key) in currentOrder.burgers" :key="key">
+        {{key}}:
+        <span v-for="(item, key2) in burger.ingredients" :key="key2">
+          {{ item['ingredient_' + lang] }}
+        </span>
+        {{burger.price}}
+      </div>
+      <hr>
+      {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
+      <button v-on:click="addToOrder()">Add burger</button>
+      <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+    </div>
 <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 </div>
 </template>
 <script>
+
+
 
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
@@ -120,7 +137,10 @@ export default {
       currentCategory: 4,
       iNeedLactoseFree: false,
       iNeedGlutenFree: false,
-      iNeedVegan: false
+      iNeedVegan: false,
+      currentOrder: {
+         burgers: []
+       }
     }
   },
 
@@ -156,7 +176,7 @@ export default {
     changeCategory: function(cat) {
       this.currentCategory = cat;
     },
-    addToOrder: function (item) {
+    addToBurger: function (item) {
       for (let j = 0; j < this.chosenIngredients.length; j += 1) {
         if(this.chosenIngredients[j].ingredient_id === item.ingredient_id){
           item.number +=1;
@@ -168,6 +188,7 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
     },
+<<<<<<< HEAD
     placeOrder: function () {
       this.time = new Date();
       var i,
@@ -178,12 +199,27 @@ export default {
       };
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
       this.$store.state.socket.emit('order', {order: order});
+=======
+    addToOrder: function () {
+      // Add the burger to an order array
+        this.currentOrder.burgers.push({
+          ingredients: this.chosenIngredients.splice(0),
+          price: this.price
+        });
+
+>>>>>>> 86d7cdcd6b6d852561c1f3ec03bee3e49c9f5a29
       //set all counters to 0. Notice the use of $refs
-      for (i = 0; i < this.$refs.ingredient.length; i += 1) {
+      for (let i = 0; i < this.$refs.ingredient.length; i += 1) {
         this.$refs.ingredient[i].resetCounter();
       }
-      this.price = 0;
       this.chosenIngredients = [];
+      this.price = 0;
+    },
+    placeOrder: function () {
+      // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+      this.$store.state.socket.emit('order', this.currentOrder);
+      this.currentOrder.burgers = [];
+      this.category = 1;
     },
     countNumberOfIngredients: function (id) {
       let counter = 0;
