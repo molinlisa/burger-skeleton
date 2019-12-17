@@ -162,6 +162,8 @@ export default {
       this.price += +item.selling_price;
     },
     placeOrder: function () {
+      this.time = new Date();
+      console.log(this.time);
       var i,
       //Wrap the order in an object
       order = {

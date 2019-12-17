@@ -2,12 +2,12 @@
 	<div>
 
 
-		<h3 v-if data.lang = "en">
-			order: {{orderId}}
+		<h3>
+			{{time}}	{{uiLabels.headlineOrder}} {{orderId}}
 		</h3>
 
 			<ul v-for="(item,index) in order.ingredients" :key="index">
-				<li> {{item["ingredient_" + lang]}} </li>
+				<li> {{item["number"]}} {{item["ingredient_" + lang]}} </li>
   		</ul>
 
 
@@ -22,14 +22,12 @@ export default {
     uiLabels: Object,
     order: Object,
     orderId: String,
-    lang: String
+    lang: String,
+		time: String
   }
 }
 </script>
 <style scoped>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 6ef59fd1962c300dfcc1fee7fcef8f0b07892b4b
 </style>
