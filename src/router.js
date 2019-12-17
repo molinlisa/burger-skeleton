@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Ordering from './views/Ordering.vue'
-
 import Frontpage from './views/Frontpage.vue'
 import Kitchen from './views/Kitchen.vue'
 
@@ -32,7 +31,7 @@ let router = new Router({
       },
       name: 'kitchen',
       // route level code-splitting
-      // this generates a separate chunk (read.[hash].js) for this route
+      // this genersates a separate chunk (read.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "read" */ './views/Kitchen.vue')
     }
