@@ -1,7 +1,6 @@
 <template>
 
   <div id="ordering">
-
     <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
       <MenuButtons v-for="cat in listMenuTitles"
@@ -14,7 +13,7 @@
   </div>
 
   <!-- Header "Ingredients" -->
-  <h1>{{ uiLabels.ingredients }}</h1>
+  <h1 id="rubrik">{{ uiLabels.ingredients }}</h1>
   <!-- Checkboxes för matpreferenser -->
   <div id="foodPref">
     <label for="lactose">{{ uiLabels.milkFree }}</label>
@@ -36,8 +35,6 @@
     :ui-labels="uiLabels"
     :key="item.ingredient_id">
   </Ingredient>
-
-
 </div>
 
 <!-- Header "My burger" -->
@@ -70,13 +67,14 @@
     </kryss>
 
   </div>
+
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="addToOrder()">Add burger</button>
 
 </div>
 <!-- Header "Orders in queue" -->
-<h1>{{ uiLabels.ordersInQueue }}</h1>
-<div>
+<h1 id="rubrik">{{ uiLabels.ordersInQueue }}</h1>
+<div id="underrubrik">
   <OrderItem
   v-for="(order, key) in orders"
   v-if="order.status !== 'done'"
@@ -149,21 +147,20 @@ export default {
       let ing = [];
       for(let a = 0; a < this.ingredients.length; a += 1) {
         if (this.ingredients[a].category === this.currentCategory) {
-
           preferences: {
-            if(this.iNeedLactoseFree == true && Boolean(this.ingredients[a].milk_free) == false) {
-              break preferences;
+          if(this.iNeedLactoseFree == true && this.ingredients[a].milk_free == 0) {
+          break preferences;
+          }
+          if(this.iNeedGlutenFree == true && this.ingredients[a].gluten_free == 0){
+          break preferences;
+          }
+          if(this.iNeedVegan == true && this.ingredients[a].vegan == 0){
+          break preferences;
+          }
+          ing.push(this.ingredients[a]);
             }
-            if(this.iNeedGlutenFree == true && Boolean(this.ingredients[a].gluten_free) == false){
-              break preferences;
-            }
-            if(this.iNeedVegan == true && Boolean(this.ingredients[a].vegan) == false){
-              break preferences;
-            }
-            ing.push(this.ingredients[a]);
           }
         }
-      }
       return ing;
     },
   },
@@ -272,18 +269,6 @@ background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb
 opacity:0.9;
 color: white;
 }
-
-.ingredient {
-  border: 1px solid #f5f5f28a;
-  padding: 0.8em;
-  width: 23vh;
-  height: 19vh;
-  background-color: green;
-  border-radius: 25px;
-  margin: 10px;
-  text-align: center;
-}
-
 #menyFlexBox{
   display: flex;
   flex-direction: row;
@@ -292,7 +277,17 @@ color: white;
 #orderContainer{
   display:grid;
 }
-
+#foodPref{
+  font-size: 1.5em;
+  text-indent: 2em;
+}
+#underrubrik{
+  text-indent: 2em;
+}
+#rubrik{
+  text-indent: 1.6em;
+  font-family: "Courier New";
+}
 #ingredientBox{
   grid-column: 1;
   display: flex;
@@ -313,7 +308,6 @@ color: white;
 }
 #gridContainer h1{
   grid-area: header;
-
 }
 #foodList{
   grid-area:main;
@@ -329,7 +323,16 @@ color: white;
   grid-area:main;
   grid-column: 1;
   grid-row: 2;
-
+}
+.ingredient {
+  border: 1px solid #f5f5f28a;
+  padding: 0.8em;
+  width: 23vh;
+  height: 19vh;
+  background-color: green;
+  border-radius: 25px;
+  margin: 10px;
+  text-align: center;
 }
 .kryss{
   grid-area:main;
@@ -343,7 +346,6 @@ color: white;
   width: 0.5vh;
   border-radius: 50px;
   background-color: red;
-
 }
 .countNumb{
   grid-column: 2;

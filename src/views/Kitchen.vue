@@ -14,11 +14,15 @@
           :ui-labels="uiLabels"
           :lang="lang"
           :key="key">
+<<<<<<< HEAD
 
 <<<<<<< HEAD
         </OrderItemToPrepare>
 =======
       </OrderItemToPrepare>
+=======
+        </OrderItemToPrepare>
+>>>>>>> 9ecbb1e18cb837e405a6e4f9a0da0e550c45c81d
   </div>
 >>>>>>> d1a42c36616871472c2a772637658a39bacc4c1a
 
@@ -90,7 +94,6 @@ export default {
     color: black;
     border: 10px solid black;
     border-radius: 25px;
-
   }
 
   .box {
