@@ -99,13 +99,13 @@ export default {
         if (this.ingredients[a].category === this.currentCategory) {
 
           preferences: {
-          if(this.iNeedLactoseFree == true && Boolean(this.ingredients[a].milk_free) == false) {
+          if(this.iNeedLactoseFree == true && this.ingredients[a].milk_free == 0) {
           break preferences;
           }
-          if(this.iNeedGlutenFree == true && Boolean(this.ingredients[a].gluten_free) == false){
+          if(this.iNeedGlutenFree == true && this.ingredients[a].gluten_free == 0){
           break preferences;
           }
-          if(this.iNeedVegan == true && Boolean(this.ingredients[a].vegan) == false){
+          if(this.iNeedVegan == true && this.ingredients[a].vegan == 0){
           break preferences;
           }
           ing.push(this.ingredients[a]);
