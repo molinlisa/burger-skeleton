@@ -3,7 +3,7 @@
 
 
 		<h3>
-			{{time}}	{{uiLabels.headlineOrder}} {{orderId}}
+			{{time}} {{uiLabels.headlineOrder}} {{orderId}}
 		</h3>
 
 			<ul v-for="(item,index) in order.ingredients" :key="index">
@@ -23,7 +23,7 @@ export default {
     order: Object,
     orderId: String,
     lang: String,
-		time: String
+		time: String,
   }
 }
 </script>

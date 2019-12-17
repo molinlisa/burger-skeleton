@@ -170,7 +170,6 @@ export default {
     },
     placeOrder: function () {
       this.time = new Date();
-      console.log(this.time);
       var i,
       //Wrap the order in an object
       order = {

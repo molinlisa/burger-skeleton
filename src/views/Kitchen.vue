@@ -14,7 +14,6 @@
           :ui-labels="uiLabels"
           :lang="lang"
           :key="key">
-
       </OrderItemToPrepare>
   </div>
 
@@ -31,7 +30,6 @@
         :key="key">
       </OrderItem>
   </div>
-</div>
 </div>
 </template>
 <script>
