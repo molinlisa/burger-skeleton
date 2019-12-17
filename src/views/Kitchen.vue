@@ -15,7 +15,12 @@
           :lang="lang"
           :key="key">
 
+<<<<<<< HEAD
         </OrderItemToPrepare>
+=======
+      </OrderItemToPrepare>
+  </div>
+>>>>>>> d1a42c36616871472c2a772637658a39bacc4c1a
 
   <h1>{{ uiLabels.ordersFinished }}</h1>
 

@@ -188,6 +188,7 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
     },
+<<<<<<< HEAD
     addToOrder: function () {
       // Add the burger to an order array
         this.currentOrder.burgers.push({
@@ -195,6 +196,19 @@ export default {
           price: this.price
         });
         console.log("hej")
+=======
+    placeOrder: function () {
+      this.time = new Date();
+      console.log(this.time);
+      var i,
+      //Wrap the order in an object
+      order = {
+        ingredients: this.chosenIngredients,
+        price: this.price
+      };
+      // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
+      this.$store.state.socket.emit('order', {order: order});
+>>>>>>> d1a42c36616871472c2a772637658a39bacc4c1a
       //set all counters to 0. Notice the use of $refs
       for (let i = 0; i < this.$refs.ingredient.length; i += 1) {
         this.$refs.ingredient[i].resetCounter();
