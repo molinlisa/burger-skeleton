@@ -123,13 +123,12 @@ export default {
       iNeedVegan: false
     }
   },
-
+  
   computed: {
     currentIngredients: function () {
       let ing = [];
       for(let a = 0; a < this.ingredients.length; a += 1) {
         if (this.ingredients[a].category === this.currentCategory) {
-
           preferences: {
           if(this.iNeedLactoseFree == true && this.ingredients[a].milk_free == 0) {
           break preferences;
@@ -142,13 +141,8 @@ export default {
           }
           ing.push(this.ingredients[a]);
             }
-            if(this.iNeedVegan == true && Boolean(this.ingredients[a].vegan) == false){
-              break preferences;
-            }
-            ing.push(this.ingredients[a]);
           }
         }
-      }
       return ing;
     },
   },
