@@ -25,6 +25,7 @@
     <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="iNeedGlutenFree">
   </div>
   <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
+  <div id="orderContainer">
   <div id="ingredientBox">
     <Ingredient
     ref="ingredient"
@@ -36,12 +37,13 @@
     :key="item.ingredient_id">
   </Ingredient>
 
+
 </div>
 
 <!-- Header "My burger" -->
-<h1>{{ uiLabels.order }}</h1>
-<div id="gridContainer" >
 
+<div id="gridContainer" >
+  <h1>{{ uiLabels.order }}</h1>
   <div id="count">
     <h4>Antal</h4>
     <div v-for="item in chosenIngredients" v-on:id="item.ingredient_id" class="countingCol">
@@ -53,9 +55,7 @@
 
     <div id="foodList">
       <h4>Food-name</h4>
-      <ul v-for="item in chosenIngredients">
-        <li>{{item["ingredient_"+lang]}}</li>
-      </ul>
+      <p v-for="item in chosenIngredients">{{item["ingredient_"+lang]}}</p>
     </div>
 
     <div id="price">
@@ -63,10 +63,17 @@
       <h4 v-for="item in chosenIngredients">{{item["selling_price"]}}</h4>
     </div>
 
+
+    <kryss ref="kryss">
+      <h4>Remove item</h4>
+      <div v-for="item in chosenIngredients" v-on:click="removeItem(item)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
+    </kryss>
+
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
+</div>
 <!-- Header "Orders in queue" -->
 <h1>{{ uiLabels.ordersInQueue }}</h1>
 <div>
@@ -195,11 +202,25 @@ export default {
             break;
           }
         }
+        item.number = 0;
         this.chosenIngredients.splice(removeIndex, 1);
         this.price -= +item.selling_price;
       }else{
         item.number -= 1;
+        this.price -= +item.selling_price;
       }
+    },
+    removeItem: function(item){
+      let removeIndex = 0;
+      for (let i = 0; i < this.chosenIngredients.length; i += 1 ) {
+        if (this.chosenIngredients[i] === item) {
+          removeIndex = i;
+          break;
+        }
+      }
+      this.chosenIngredients.splice(removeIndex, 1);
+      this.price -= +item.selling_price * item.number;
+      item.number = 0;
     }
   }
 }
@@ -230,8 +251,12 @@ color: white;
   flex-direction: row;
   justify-content: center;
 }
+#orderContainer{
+  display:grid;
+}
 
 #ingredientBox{
+  grid-column: 1;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -243,17 +268,34 @@ color: white;
 }
 #gridContainer{
   display: grid;
+  grid-column: 2;
+  grid-template-areas: 'header header header header'
+    'main main main main';
+    grid-template-rows: min-content 1fr;
+}
+#gridContainer h1{
+  grid-area: header;
+
 }
 #foodList{
-  grid-column: 1;
+  grid-area:main;
+  grid-column: 3;
+  grid-row: 2;
 }
 #price{
+  grid-area:main;
   grid-column: 2;
+  grid-row: 2;
 }
 #count{
-  grid-column: 3;
-  grid-row: 1;
+  grid-area:main;
+  grid-column: 1;
+  grid-row: 2;
 
+}
+.kryss{
+  grid-area:main;
+  grid-column: 4;
 }
 .countingCol{
   display: grid;
@@ -274,7 +316,5 @@ color: white;
   width: 0.5vh;
   border-radius: 50px;
   background-color: lightblue;
-
-
 }
 </style>
