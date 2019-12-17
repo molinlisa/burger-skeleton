@@ -17,19 +17,6 @@
 
         </OrderItemToPrepare>
 
-  <div id="flexList">
-    <OrderItemToPrepare
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      v-on:done="markDone(key)"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItemToPrepare>
-  </div>
-
   <h1>{{ uiLabels.ordersFinished }}</h1>
 
   <div class = "wrapper">

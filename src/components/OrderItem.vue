@@ -5,12 +5,10 @@
 		<h3 v-if data.lang = "en">
 			order: {{orderId}}
 		</h3>
-
-			<ul v-for="(item,index) in order.ingredients" :key="index">
-				<li> {{item["ingredient_" + lang]}} </li>
-  		</ul>
-
-
+			{{order.burgers[1]}}
+			<div v-for="(burger,key) in order.burgers" :key="key">
+				{{ burger.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
+  		</div>
 
 		<!-- {{orderId}} {{order.type}} {{uiLabels.ingredients}}: {{ order.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }} -->
 	</div>
