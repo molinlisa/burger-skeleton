@@ -7,8 +7,8 @@
     <!-- <button v-on:click="removeIng">X</button>
     <button v-on:click="incrementCounter">{{ counter }}  </button> -->
 
-    </ul>
-  </div>
+  </ul>
+</div>
 </template>
 <script>
 export default {
@@ -18,7 +18,7 @@ export default {
     lang: String,
     uiLabels: Object
   },
-    data: function () {
+  data: function () {
     return {
       counter: 0
     };
