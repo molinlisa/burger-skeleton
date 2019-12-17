@@ -1,6 +1,7 @@
 <template>
-  <div onclick="window.location.href='#/';" style="cursor:pointer; width:100%; height:100%;">
-    <div id="textpage"> <h2>Goda burgare </h2>
+  <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
+    <div id="textpage"> <h2>Crafty Burgers </h2>
+      <h3> Klicka för att ta dig till hamburgarhimlen </h3>
 
     </div>
 
@@ -15,31 +16,22 @@ export default {
 </script>
 
 <style scoped>
-#header {
-  border: 1px solid;
-  padding: 1em;
-  color: orange;
-  font-size: 5 rem;
-  font-family: Algerian;
-}
-#headerimage {
 
-  opacity: 0.5;
-  width: 100%;
-  height: auto;
-  margin: auto;
-
+h3{
+  color: white;
+  font-family: cursive;
 }
 #textpage {
-color: orange;
+color: white;
 font-family: Algerian;
 position: absolute;
 text-align: center;
+line-height: 90px;
 font-size: 25px;
-height: 80vh;
+height: 100%;
 width: 100%;
 padding: 5px;
-  background: url('https://static.adweek.com/adweek.com-prod/wp-content/uploads/2018/10/Screen-Shot-2018-10-17-at-1.25.22-PM.png');
+  background: url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg');
   background-size: 100vw;
 }
 </style>

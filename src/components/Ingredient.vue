@@ -1,14 +1,9 @@
 <template>
-  <button class="ingredient" v-on:click="incrementCounter" >
 
-    {{item["ingredient_"+ lang]}},
-    {{item.selling_price}}:-,
-    {{item.stock}} {{uiLabels.pcs}} </button>
-    <!-- <button v-on:click="removeIng">X</button>
-    <button v-on:click="incrementCounter">{{ counter }}  </button> -->
-
-  </ul>
-</div>
+  <div class="ingredient" v-on:click="incrementCounter" >
+    <h3>{{item["ingredient_"+ lang]}}</h3>
+    <p>{{item.selling_price}}{{uiLabels.sek}}</p>
+  </div>
 </template>
 <script>
 export default {
@@ -16,7 +11,7 @@ export default {
   props: {
     item: Object,
     lang: String,
-    uiLabels: Object
+    uiLabels: Object,
   },
   data: function () {
     return {
@@ -40,6 +35,11 @@ export default {
   }
 }
 </script>
+
 <style scoped>
+
+h3::first-letter {
+  text-transform: capitalize;
+}
 
 </style>

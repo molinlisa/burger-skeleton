@@ -1,4 +1,0 @@
-
-
-
-<button v-on:click="incrementCounter">{{ArrayMenuButton[n]}}</button>

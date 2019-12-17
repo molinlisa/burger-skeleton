@@ -5,15 +5,15 @@
 </template>
 <script>
 export default {
-  name: 'OrderItem',
-  props: {
-    uiLabels: Object,
-    order: Object,
-    orderId: String,
-    lang: String
-  }
+	name: 'OrderItem',
+	props: {
+		uiLabels: Object,
+		order: Object,
+		orderId: String,
+		lang: String
+	}
 }
 </script>
 <style scoped>
-	
+
 </style>
