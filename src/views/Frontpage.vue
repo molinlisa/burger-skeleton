@@ -21,15 +21,15 @@ h3{
   font-family: cursive;
 }
 #textpage {
-color: white;
-font-family: Algerian;
-position: absolute;
-text-align: center;
-line-height: 90px;
-font-size: 25px;
-height: 100%;
-width: 100%;
-padding: 5px;
+  color: white;
+  font-family: Algerian;
+  position: absolute;
+  text-align: center;
+  line-height: 90px;
+  font-size: 25px;
+  height: 100%;
+  width: 100%;
+  padding: 5px;
   background: url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg');
   background-size: 100vw;
 }

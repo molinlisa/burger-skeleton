@@ -1,7 +1,7 @@
 <template>
   <!-- Note in this component that it is using another component -->
-<div>
-  <OrderItem
+  <div>
+    <OrderItem
     :ui-labels="uiLabels"
     :lang="lang"
     :order-id="orderId"
@@ -24,7 +24,7 @@ export default {
     order: Object,
     orderId: String,
     lang: String,
-    time: String,
+    time: String
   },
   methods: {
     orderDone: function () {

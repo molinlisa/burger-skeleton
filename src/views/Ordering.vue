@@ -15,7 +15,7 @@
   </div>
 
   <!-- Header "Ingredients" -->
-  <h1>{{ uiLabels.ingredients }}</h1>
+  <h1 id="h1">{{ uiLabels.ingredients }}</h1>
   <!-- Checkboxes för matpreferenser -->
   <div id="foodPref">
     <label for="lactose">{{ uiLabels.milkFree }}</label>
@@ -43,7 +43,7 @@
 
 <!-- Header "My burger" -->
 <div id="gridContainer" >
-  <h1>{{ uiLabels.order }}</h1>
+  <h1 id="h1">{{ uiLabels.order }}</h1>
   <div id="count">
     <h4>Antal</h4>
     <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
@@ -63,7 +63,6 @@
       <h4 v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</h4>
     </div>
 
-
     <kryss ref="kryss">
       <h4>Remove item</h4>
       <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
@@ -72,6 +71,7 @@
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="addToOrder()">Add burger</button>
+<<<<<<< HEAD
 </div>
 </div>
 <div v-else>
@@ -107,11 +107,41 @@
   </div>
   </div>
   </div>
+=======
+
+</div><!-- Header "Orders in queue" -->
+<h1 id="h1">{{ uiLabels.ordersInQueue }}</h1>
+<div id="h1">
+  <OrderItem
+  v-for="(order, key) in orders"
+  v-if="order.status !== 'done'"
+  :order-id="key"
+  :order="order"
+  :ui-labels="uiLabels"
+  :lang="lang"
+  :key="key">
+</OrderItem>
+
+<div class="footer">
+      <h1>{{ uiLabels.order }}</h1>
+      <div v-for="(burger, key) in currentOrder.burgers" :key="key">
+        {{key + 1}}:
+        <span v-for="(item, key2) in burger.ingredients" :key="key2">
+          {{ item['ingredient_' + lang] }},
+        </span>
+          {{burger.price}} :-
+      </div>
+      <hr>
+      {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} :-
+      <button v-on:click="addToOrder()">Add burger</button>
+      <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+    </div>
+<button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+</div>
+</div>
+>>>>>>> 748156f2cfbeecf14f4bc52e790645c5ea0ea361
 </template>
 <script>
-
-
-
 //import the components that are used in the template, the name that you
 //use for importing will be used in the template above and also below in
 //components
@@ -157,13 +187,13 @@ export default {
         if (this.ingredients[a].category === this.currentCategory) {
 
           preferences: {
-            if(this.iNeedLactoseFree == true && Boolean(this.ingredients[a].milk_free) == false) {
+            if(this.iNeedLactoseFree == true && this.ingredients[a].milk_free == 0) {
               break preferences;
             }
-            if(this.iNeedGlutenFree == true && Boolean(this.ingredients[a].gluten_free) == false){
+            if(this.iNeedGlutenFree == true && this.ingredients[a].gluten_free == 0){
               break preferences;
             }
-            if(this.iNeedVegan == true && Boolean(this.ingredients[a].vegan) == false){
+            if(this.iNeedVegan == true && this.ingredients[a].vegan == 0){
               break preferences;
             }
             ing.push(this.ingredients[a]);
@@ -187,25 +217,29 @@ export default {
      this.price += +item.selling_price;
     },
     addToOrder: function () {
-      // Add the burger to an order array
+      // Add the burger to an order array;
+      if (this.chosenIngredients.length > 0) {
         this.currentOrder.burgers.push({
           ingredients: this.chosenIngredients.splice(0),
           price: this.price
         });
-        this.$store.state.socket.emit('current', this.currentOrder);
       //set all counters to 0. Notice the use of $refs
       this.finishView = true;
       for (let i = 0; i < this.$refs.ingredient.length; i += 1) {
         this.$refs.ingredient[i].resetCounter();
-      }
+        }
       this.chosenIngredients = [];
       this.price = 0;
-    },
+    }
+  },
     placeOrder: function () {
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-      this.$store.state.socket.emit('order', this.currentOrder);
-      this.currentOrder.burgers = [];
-      this.category = 1;
+      if (this.currentOrder.burgers.length > 0){
+        this.currentOrder.time = Date.now();
+        this.$store.state.socket.emit('order', this.currentOrder);
+        this.currentOrder.burgers = [];
+        this.category = 1;
+      }
     },
     countNumberOfIngredients: function (id) {
       let counter = 0;
@@ -258,18 +292,13 @@ background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb
 opacity:0.9;
 color: white;
 }
-
-.ingredient {
-  border: 1px solid #f5f5f28a;
-  padding: 0.8em;
-  width: 23vh;
-  height: 19vh;
-  background-color: green;
-  border-radius: 25px;
-  margin: 10px;
-  text-align: center;
+#foodPref{
+  font-size: 1.5em;
+  text-indent: 2em;
 }
-
+#h1{
+  text-indent: 2em;
+}
 #menyFlexBox{
   display: flex;
   flex-direction: row;
@@ -278,7 +307,6 @@ color: white;
 #orderContainer{
   display:grid;
 }
-
 #ingredientBox{
   grid-column: 1;
   display: flex;
@@ -294,15 +322,14 @@ color: white;
   display: grid;
   grid-column: 2;
   grid-template-areas: 'header header header header'
-    'main main main main';
-    grid-template-rows: min-content 1fr;
+                       'main main main main';
+  grid-template-rows: min-content 1fr;
 }
 #gridContainer h1{
   grid-area: header;
-
 }
 #foodList{
-  grid-area:main;
+  grid-area: main;
   grid-column: 3;
   grid-row: 2;
 }
@@ -315,7 +342,16 @@ color: white;
   grid-area:main;
   grid-column: 1;
   grid-row: 2;
-
+}
+.ingredient {
+  border: 1px solid #f5f5f28a;
+  padding: 0.8em;
+  width: 23vh;
+  height: 19vh;
+  background-color: green;
+  border-radius: 25px;
+  margin: 10px;
+  text-align: center;
 }
 .kryss{
   grid-area:main;
@@ -329,7 +365,6 @@ color: white;
   width: 0.5vh;
   border-radius: 50px;
   background-color: red;
-
 }
 .countNumb{
   grid-column: 2;
