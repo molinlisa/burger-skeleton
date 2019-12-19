@@ -5,7 +5,8 @@
     :ui-labels="uiLabels"
     :lang="lang"
     :order-id="orderId"
-    :order="order">
+    :order="order"
+    :time="time">
   </OrderItem>
   <button v-on:click="orderDone">
     {{uiLabels.ready}}
