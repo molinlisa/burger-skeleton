@@ -41,7 +41,6 @@
 </div>
 
 <!-- Header "My burger" -->
-
 <div id="gridContainer" >
   <h1>{{ uiLabels.order }}</h1>
   <div id="count">
@@ -68,7 +67,7 @@
       <h4>Remove item</h4>
       <div v-for="item in chosenIngredients" v-on:click="removeItem(item)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
     </kryss>
-    
+
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="addToOrder()">Add burger</button>
@@ -194,7 +193,7 @@ export default {
           ingredients: this.chosenIngredients.splice(0),
           price: this.price
         });
-
+        this.$store.state.socket.emit('current', this.currentOrder);
       //set all counters to 0. Notice the use of $refs
       for (let i = 0; i < this.$refs.ingredient.length; i += 1) {
         this.$refs.ingredient[i].resetCounter();
