@@ -2,7 +2,10 @@
 	<div>
 
 
-		<h3 v-if data.lang = "en">
+
+		<h3>
+			{{time}} {{uiLabels.headlineOrder}} {{orderId}}
+					<h3 v-if data.lang = "en"> </h3>
 			order: {{orderId}}
 		</h3>
 			<div v-for="(burger,key) in order.burgers" :key="key">
@@ -19,6 +22,8 @@ export default {
     uiLabels: Object,
     order: Object,
     orderId: String,
+    lang: String,
+		time: String,
     lang: String
   }
 }

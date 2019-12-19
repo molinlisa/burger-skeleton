@@ -31,7 +31,6 @@
       </OrderItem>
   </div>
 </div>
-</div>
 </template>
 <script>
 import OrderItem from '@/components/OrderItem.vue'
