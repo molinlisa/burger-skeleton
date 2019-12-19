@@ -4,13 +4,11 @@
 			{{uiLabels.headlineOrder}} {{orderId}} <br>
  			{{time}}
 		</h3>
-
 			<ul v-for="(burger,key) in order.burgers" :key="key">
 				<h3>Burger {{key+1}} </h3>
 				<li v-for="(ingredient, key2) in burger.ingredients">
 					{{ingredient["ingredient_"+ lang]}} </li>
 			</ul>
-
 		<!-- {{orderId}} {{order.type}} {{uiLabels.ingredients}}: {{ order.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }} -->
 		</div>
 	</template>

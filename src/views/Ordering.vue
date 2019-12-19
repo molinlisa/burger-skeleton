@@ -71,7 +71,10 @@
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="addToOrder()">Add burger</button>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4ac3ae3c212874c98c357a85d851aeb0e2ab5ccc
 </div>
 </div>
 <div v-else>
@@ -107,39 +110,7 @@
   </div>
   </div>
   </div>
-=======
 
-</div><!-- Header "Orders in queue" -->
-<h1 id="h1">{{ uiLabels.ordersInQueue }}</h1>
-<div id="h1">
-  <OrderItem
-  v-for="(order, key) in orders"
-  v-if="order.status !== 'done'"
-  :order-id="key"
-  :order="order"
-  :ui-labels="uiLabels"
-  :lang="lang"
-  :key="key">
-</OrderItem>
-
-<div class="footer">
-      <h1>{{ uiLabels.order }}</h1>
-      <div v-for="(burger, key) in currentOrder.burgers" :key="key">
-        {{key + 1}}:
-        <span v-for="(item, key2) in burger.ingredients" :key="key2">
-          {{ item['ingredient_' + lang] }},
-        </span>
-          {{burger.price}} :-
-      </div>
-      <hr>
-      {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} :-
-      <button v-on:click="addToOrder()">Add burger</button>
-      <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-    </div>
-<button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-</div>
-</div>
->>>>>>> 748156f2cfbeecf14f4bc52e790645c5ea0ea361
 </template>
 <script>
 //import the components that are used in the template, the name that you
