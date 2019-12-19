@@ -95,8 +95,8 @@
       </div>
       <hr>
       {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} :-
-      <button v-on:click="addToOrder()">Add burger</button>
-      <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+      <button v-on:click="addToOrder()"> <img src="https://toppng.com/public/uploads/preview/cartoon-hamburger-png-cheese-burger-clip-art-11563077541tn0rsqofqo.png" width = 30 height = 40> Add burger</button>
+      <button v-on:click="placeOrder()"> <img src="https://i.pinimg.com/originals/7c/4c/8a/7c4c8abcc5d5ac5c6724cbf0078fc5e2.jpg" width = 30 height = 40> {{ uiLabels.placeOrder }}</button>
     </div>
 <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
