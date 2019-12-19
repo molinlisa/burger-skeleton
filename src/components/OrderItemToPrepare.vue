@@ -24,6 +24,7 @@ export default {
     order: Object,
     orderId: String,
     lang: String,
+    time: String
   },
   methods: {
     orderDone: function () {

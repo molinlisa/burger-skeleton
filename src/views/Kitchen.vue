@@ -1,6 +1,6 @@
 <template>
   <div id="orders">
-    <h1>{{ uiLabels.ordersInQueue }}</h1>
+    <h1>{{ uiLabels.ordersInQueue }} </h1>
 
 
     <div class = "wrapper">
@@ -13,6 +13,7 @@
       :order="order"
       :ui-labels="uiLabels"
       :lang="lang"
+      :time="new Date(order.time).toLocaleTimeString('it-IT')"
       :key="key">
     </OrderItemToPrepare>
   </div>
@@ -27,6 +28,7 @@
     :order="order"
     :lang="lang"
     :ui-labels="uiLabels"
+    :time="new Date(order.time).toLocaleTimeString('it-IT')"
     :key="key">
   </OrderItem>
 </div>
