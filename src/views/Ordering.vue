@@ -71,7 +71,6 @@
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="addToOrder()">Add burger</button>
-<<<<<<< HEAD
 </div>
 </div>
 <div v-else>
