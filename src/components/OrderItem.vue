@@ -9,7 +9,7 @@
 			order: {{orderId}}
 		</h3>
 			<div v-for="(burger,key) in order.burgers" :key="key">
-				{{ burger.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
+			{{"Burger number "}}{{key+1}}:	{{ burger.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }}
   		</div>
 
 		<!-- {{orderId}} {{order.type}} {{uiLabels.ingredients}}: {{ order.ingredients.map(item=>item["ingredient_"+ lang]).join(", ") }} -->

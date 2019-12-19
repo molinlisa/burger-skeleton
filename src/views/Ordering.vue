@@ -2,6 +2,7 @@
 
   <div id="ordering">
 
+    <div id="OrderingShow" v-if="!finishView">
     <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
       <MenuButtons v-for="cat in listMenuTitles"
@@ -45,64 +46,67 @@
   <h1>{{ uiLabels.order }}</h1>
   <div id="count">
     <h4>Antal</h4>
-    <div v-for="item in chosenIngredients" v-on:id="item.ingredient_id" class="countingCol">
-      <button v-on:click="decreaseNumber(item)" class="minusButton">-</Button>
-        <h5 class="countNumb">{{item.number}}</h5>
-        <button v-on:click="addToBurger(item)" class="plusButton">+</button>
+    <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
+      <button v-on:click="removeItem(item.ing)" class="minusButton">-</Button>
+        <h5 class="countNumb">{{item.count}}</h5>
+        <button v-on:click="addToBurger(item.ing)" class="plusButton">+</button>
       </div>
     </div>
 
     <div id="foodList">
       <h4>Food-name</h4>
-      <p v-for="item in chosenIngredients">{{item["ingredient_"+lang]}}</p>
+      <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["ingredient_"+lang]}}</p>
     </div>
 
     <div id="price">
       <h4>Price </h4>
-      <h4 v-for="item in chosenIngredients">{{item["selling_price"]}}</h4>
+      <h4 v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</h4>
     </div>
 
 
     <kryss ref="kryss">
       <h4>Remove item</h4>
-      <div v-for="item in chosenIngredients" v-on:click="removeItem(item)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
+      <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
     </kryss>
 
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="addToOrder()">Add burger</button>
-
 </div>
+</div>
+<div v-else>
 <!-- Header "Orders in queue" -->
-<h1>{{ uiLabels.ordersInQueue }}</h1>
-<div>
-  <OrderItem
-  v-for="(order, key) in orders"
-  v-if="order.status !== 'done'"
-  :order-id="key"
-  :order="order"
-  :ui-labels="uiLabels"
-  :lang="lang"
-  :key="key">
-</OrderItem>
+  <h1>{{ uiLabels.ordersInQueue }}</h1>
+  <div>
+    <OrderItem
+    v-for="(order, key) in orders"
+    v-if="order.status !== 'done'"
+    :order-id="key"
+    :order="order"
+    :ui-labels="uiLabels"
+    :lang="lang"
+    :key="key">
+  </OrderItem>
 
-<div class="footer">
-      <h1>{{ uiLabels.order }}</h1>
-      <div v-for="(burger, key) in currentOrder.burgers" :key="key">
-        {{key}}:
-        <span v-for="(item, key2) in burger.ingredients" :key="key2">
-          {{ item['ingredient_' + lang] }}
-        </span>
-        {{burger.price}}
+  <div class="footer">
+        <h1>{{ uiLabels.order }}</h1>
+          <div v-for="(burger, key) in currentOrder.burgers" :key="key">
+        {{"burger "}}  {{key+1}}:
+          <h4 v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
+            {{item.count}} {{ item.ing['ingredient_' + lang] }}
+          </h4>
+          {{burger.price}}
+        </div>
+        <hr>
+        <button v-on:click="addToOrder()">Add burger</button>
+        <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+        <button v-on:click="addAnotherBurger()">Lägg till ny burgare</button>
       </div>
-      <hr>
-      {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} kr
-      <button v-on:click="addToOrder()">Add burger</button>
-      <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-    </div>
-<button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-</div>
-</div>
+
+  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+  </div>
+  </div>
+  </div>
 </template>
 <script>
 
@@ -115,7 +119,9 @@ import Ingredient from '@/components/Ingredient.vue'
 import OrderItem from '@/components/OrderItem.vue'
 import MenuButtons from '@/components/MenuButtons.vue'
 //import methods and data that are shared between ordering and kitchen views
-import sharedVueStuff from '@/components/sharedVueStuff.js'
+//import methods and data that are shared between ordering and kitchen views
+import sharedVueStuff from '@/mixins/sharedVueStuff.js'
+import utilityMethods from '@/mixins/utilityMethods.js'
 /* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
@@ -125,7 +131,7 @@ export default {
     OrderItem,
     MenuButtons
   },
-  mixins: [sharedVueStuff], // include stuff that is used in both
+  mixins: [sharedVueStuff,utilityMethods], // include stuff that is used in both
   // the ordering system and the kitchen
   data: function() { //Not that data is a function!
     return {
@@ -139,7 +145,8 @@ export default {
       iNeedVegan: false,
       currentOrder: {
          burgers: []
-       }
+       },
+      finishView: false
     }
   },
 
@@ -176,16 +183,8 @@ export default {
       this.currentCategory = cat;
     },
     addToBurger: function (item) {
-      for (let j = 0; j < this.chosenIngredients.length; j += 1) {
-        if(this.chosenIngredients[j].ingredient_id === item.ingredient_id){
-          item.number +=1;
-          this.price += +item.selling_price;
-          return
-        }
-      }
-      item.number +=1;
       this.chosenIngredients.push(item);
-      this.price += +item.selling_price;
+     this.price += +item.selling_price;
     },
     addToOrder: function () {
       // Add the burger to an order array
@@ -195,6 +194,7 @@ export default {
         });
         this.$store.state.socket.emit('current', this.currentOrder);
       //set all counters to 0. Notice the use of $refs
+      this.finishView = true;
       for (let i = 0; i < this.$refs.ingredient.length; i += 1) {
         this.$refs.ingredient[i].resetCounter();
       }
@@ -216,23 +216,6 @@ export default {
       }
       return counter;
     },
-    decreaseNumber: function(item){
-      let removeIndex = 0;
-      if(item.number===1){
-        for (let i = 0; i < this.chosenIngredients.length; i += 1 ) {
-          if (this.chosenIngredients[i] === item) {
-            removeIndex = i;
-            break;
-          }
-        }
-        item.number = 0;
-        this.chosenIngredients.splice(removeIndex, 1);
-        this.price -= +item.selling_price;
-      }else{
-        item.number -= 1;
-        this.price -= +item.selling_price;
-      }
-    },
     removeItem: function(item){
       let removeIndex = 0;
       for (let i = 0; i < this.chosenIngredients.length; i += 1 ) {
@@ -242,10 +225,28 @@ export default {
         }
       }
       this.chosenIngredients.splice(removeIndex, 1);
-      this.price -= +item.selling_price * item.number;
-      item.number = 0;
+      this.price -= +item.selling_price;
+    },
+    addAnotherBurger: function(){
+      this.finishView = false;
+
+    },
+    removeAll: function(item){
+
+      let lengthOfArray = this.chosenIngredients.length;
+
+      let removeIndex = 0;
+
+      for(let i = 0; i < lengthOfArray; i += 1){
+        if(this.chosenIngredients[i] === item) {
+          removeIndex = i;
+          this.chosenIngredients.splice(removeIndex, 1);
+          this.price -= +item.selling_price;
+      }
+
     }
   }
+}
 }
 </script>
 <style scoped>
@@ -339,5 +340,8 @@ color: white;
   width: 0.5vh;
   border-radius: 50px;
   background-color: lightblue;
+}
+.footer{
+  display: grid;
 }
 </style>
