@@ -59,19 +59,14 @@ export default {
   }
 }
 </script>
-<<<<<<< HEAD
-<style scoped>
-
-=======
-
 
 <style scoped>
 h1 {
   text-transform: uppercase;
   font-size: 1.4em;
   color: bisque;
+  text-indent: 2em;
 }
->>>>>>> d430909c1f8948245b5e44e0c580f53da8da9991
 #orders {
   font-size:24pt;
 }
@@ -82,16 +77,12 @@ h1 {
   display: flex;
   flex-direction: column;
 }
-<<<<<<< HEAD
-
 h1 {
   text-transform: uppercase;
   font-size: 1.4em;
   color: bisque;
-}
 
-=======
->>>>>>> d430909c1f8948245b5e44e0c580f53da8da9991
+}
 .wrapper {
   display: grid;
   grid-gap: 50px;
@@ -114,6 +105,4 @@ h1 {
 .finished {
   background-color: goldenrod;
 }
-
-
 </style>

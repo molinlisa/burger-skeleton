@@ -1,7 +1,7 @@
 <template>
 
   <div id="ordering">
-    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> </button>
+    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.cancel}}</button>
     <div id="OrderingShow" v-if="!finishView">
       <!-- Menyknappar högst upp i gränssnittet -->
       <div id="menyFlexBox">
@@ -144,8 +144,8 @@ export default {
       iNeedGlutenFree: false,
       iNeedVegan: false,
       currentOrder: {
-        burgers: []
-      },
+      burgers: []
+       },
       finishView: false
     }
   },
@@ -381,9 +381,11 @@ export default {
   padding-bottom: 14px;
 }
 .Clear{
-  width: 60px;
+  width: 70px;
   height: 60px;
   background-color: red;
+  font-weight: bold;
+  font-size-adjust: auto;
 }
 .minusButton{
   grid-column: 1;
