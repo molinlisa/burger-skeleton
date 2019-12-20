@@ -1,8 +1,7 @@
 <template>
 
   <div id="ordering">
-
-    <button class="Clear" v-on:click="clearOrderAndRedirect()">Cancel </button>
+    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> </button>
     <div id="OrderingShow" v-if="!finishView">
     <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
@@ -236,11 +235,8 @@ export default {
 
     },
     removeAll: function(item){
-
       let lengthOfArray = this.chosenIngredients.length;
-
       let removeIndex = 0;
-
       for(let i = 0; i < lengthOfArray; i += 1){
         if(this.chosenIngredients[i] === item) {
           removeIndex = i;
@@ -254,7 +250,8 @@ export default {
     this.price = 0;
     this.currentOrder.burgers = [];
     this.category = 1;
-    window.location.href='#/';
+    window.location.href = '#/';
+
   }
 }
 }
@@ -320,6 +317,11 @@ color: white;
   grid-column: 1;
   grid-row: 2;
 }
+#hej {
+  grid-area: main;
+  grid-column: 2;
+  grid-row: 3;
+}
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -333,11 +335,6 @@ color: white;
 .kryss{
   grid-area:main;
   grid-column: 4;
-}
-#hej {
-  grid-area: main;
-  grid-column: 2;
-  grid-row: 3;
 }
 .countingCol{
   display: grid;

@@ -1,10 +1,7 @@
 <template>
   <div id="orders">
-    <h1>{{ uiLabels.ordersInQueue }} </h1>
-
-
+    <h1 id>{{ uiLabels.ordersInQueue }} </h1>
     <div class = "wrapper">
-
       <OrderItemToPrepare class = "box ordered"
       v-for="(order, key) in orders"
       v-if="order.status !== 'done'"
@@ -18,7 +15,7 @@
     </OrderItemToPrepare>
   </div>
 
-  <h1>{{ uiLabels.ordersFinished }}</h1>
+  <h1 id>{{ uiLabels.ordersFinished }}</h1>
 
   <div class = "wrapper">
     <OrderItem class = "box finished"
@@ -62,8 +59,19 @@ export default {
   }
 }
 </script>
+<<<<<<< HEAD
 <style scoped>
 
+=======
+
+
+<style scoped>
+h1 {
+  text-transform: uppercase;
+  font-size: 1.4em;
+  color: bisque;
+}
+>>>>>>> d430909c1f8948245b5e44e0c580f53da8da9991
 #orders {
   font-size:24pt;
 }
@@ -74,6 +82,7 @@ export default {
   display: flex;
   flex-direction: column;
 }
+<<<<<<< HEAD
 
 h1 {
   text-transform: uppercase;
@@ -81,6 +90,8 @@ h1 {
   color: bisque;
 }
 
+=======
+>>>>>>> d430909c1f8948245b5e44e0c580f53da8da9991
 .wrapper {
   display: grid;
   grid-gap: 50px;
@@ -91,19 +102,15 @@ h1 {
   color: black;
   border: 10px solid black;
   border-radius: 25px;
-
 }
-
 .box {
   border-radius: 25px;
   padding: 20px;
   border: 5px solid black;
 }
-
 .ordered {
   background-color: burlywood;
 }
-
 .finished {
   background-color: goldenrod;
 }
