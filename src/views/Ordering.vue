@@ -48,7 +48,7 @@
         <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
           <button v-on:click="removeItem(item.ing)" class="minusButton"> - </Button>
-            <h5 class="countNumb">{{item.count}}</h5>
+            <h5 class="countNumb">{{item.count}} </h5>
             <button v-on:click="addToBurger(item.ing)" class="plusButton"> + </button>
           </div>
         </div>
@@ -368,6 +368,8 @@ export default {
   background-color: red;
   font-weight: bold;
   font-size-adjust: auto;
+  border-radius: 12px;
+  text-align: center;
 }
 .minusButton{
   grid-column: 1;

@@ -19,7 +19,6 @@ export default {
 }
 </script>
 <style scoped>
-
 h3{
   color: white;
   font-family: Algerian;
@@ -27,7 +26,6 @@ h3{
 .wrapper {
    position: realtive;
 }
-
 .knappshuno {
    position: absolute;
    bottom: 20px;
