@@ -1,7 +1,7 @@
 <template>
 
   <div id="ordering">
-
+    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.cancel}}</button>
     <div id="OrderingShow" v-if="!finishView">
       <!-- Menyknappar högst upp i gränssnittet -->
       <div id="menyFlexBox">
@@ -44,35 +44,38 @@
     <!-- Header "My burger" -->
     <div id="gridContainer" >
       <h1 id="h1">{{ uiLabels.order }}</h1>
+
       <div id="count">
-        <h4>Antal</h4>
+        <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
-          <button v-on:click="removeItem(item.ing)" class="minusButton">-</Button>
-            <h5 class="countNumb">{{item.count}}</h5>
-            <button v-on:click="addToBurger(item.ing)" class="plusButton">+</button>
+          <img v-on:click="removeItem(item.ing)" class="minusButton" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozMtJvJPf8PPZz4N5OIy9fdiEGIJohGHkp8UrPpSk0U8I4BSAsQ&s">
+            <p class="countNumb">{{item.count}}</p>
+            <img v-on:click="addToBurger(item.ing)" class="plusButton" src="https://cdn4.iconfinder.com/data/icons/ui-3d-01-of-3/100/UI_2-512.png">
           </div>
         </div>
 
         <div id="foodList">
-          <h4>Food-name</h4>
+          <h4>{{ uiLabels.chosenIngredients }}</h4>
           <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["ingredient_"+lang]}}</p>
         </div>
 
         <div id="price">
-          <h4>Price </h4>
-          <h4 v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</h4>
+          <h4>{{ uiLabels.price }}</h4>
+          <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</p>
         </div>
 
-        <kryss ref="kryss">
-          <h4>Remove item</h4>
-          <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
-        </kryss>
-
+        <div id="kryss">
+          <h4>{{ uiLabels.removeItem }}</h4>
+          <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png" width="30"></div>
       </div>
-      {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
-      <button v-on:click="addToOrder()">Add burger</button>
     </div>
+      <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
+      <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
+    </div>
+    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
+
+  <!-- Go to order view -->
   <div v-else>
     <!-- Header "Orders in queue" -->
     <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -89,17 +92,17 @@
 
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
-      <div v-for="(burger, key) in currentOrder.burgers" :key="key">
-        {{"burger "}}  {{key+1}}:
-        <h4 v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
+      <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
+        {{ uiLabels.burger }}  {{key+1}}
+        <img v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
+        <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
           {{item.count}} {{ item.ing['ingredient_' + lang] }}
-        </h4>
-        {{burger.price}}
+        </p>
+        {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
       <hr>
-      <button v-on:click="addToOrder()">Add burger</button>
       <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-      <button v-on:click="addAnotherBurger()">Lägg till ny burgare</button>
+      <button v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
     </div>
 
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -141,8 +144,8 @@ export default {
       iNeedGlutenFree: false,
       iNeedVegan: false,
       currentOrder: {
-        burgers: []
-      },
+      burgers: []
+       },
       finishView: false
     }
   },
@@ -233,16 +236,41 @@ export default {
 
     },
     removeAll: function(item){
-      console.log(item.count)
-      while(item.count > 0){
-        removeItem(item.ing);
+      let lengthOfArray = this.chosenIngredients.length;
+      let removeIndex = 0;
+
+      for(let i = 0; i < lengthOfArray;){
+        if(this.chosenIngredients[i] === item) {
+          removeIndex = i;
+          this.chosenIngredients.splice(removeIndex, 1);
+          this.price -= +item.selling_price;
+        }
+        else {i += 1}
       }
+    },
 
+  editButton: function(burger) {
+    this.chosenIngredients = burger.Ingredients; //för att få valda ingredienser under "my burger" i föregående vy
 
-
-
+    let removeIndex = 0;
+    for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+      if (this.currentOrder.burgers[i] === burger) {
+        removeIndex = i;
+        break;
+      }
     }
+    this.currentOrder.burgers.splice(removeIndex, 1);
+    this.finishView = false;
+  },
+
+  clearOrderAndRedirect: function() {
+    this.chosenIngredients = [];
+    this.price = 0;
+    this.currentOrder.burgers = [];
+    this.category = 1;
+    window.location.href = '#/';
   }
+}
 }
 </script>
 <style scoped>
@@ -250,8 +278,8 @@ export default {
 #ordering {
   height: 100%;
   width: 100%;
-  background-color: white;
-  /*background: url(https://previews.123rf.com/images/solarus/solarus1510/solarus151000011/45890246-tablecloth-background-red-seamless-pattern-vector-illustration-of-traditional-gingham-dining-cloth-w.jpg); */
+  /*background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
+  background: url(https://i.pinimg.com/564x/7a/74/2e/7a742edc9c4820e8871c835b013d93ee.jpg); */
   opacity:0.9;
   color: white;
 }
@@ -287,6 +315,14 @@ export default {
   grid-template-areas: 'header header header header'
   'main main main main';
   grid-template-rows: min-content 1fr;
+  background-color: black;
+  padding: 1em;
+  margin-left: -15px;
+  margin-top: -6px;
+  border-radius: 25px;
+  grid-column-gap: 25px;
+  text-align: center;
+  overflow: hidden;
 }
 #gridContainer h1{
   grid-area: header;
@@ -295,6 +331,9 @@ export default {
   grid-area: main;
   grid-column: 3;
   grid-row: 2;
+}
+#foodList p {
+  text-align: left;
 }
 #price{
   grid-area:main;
@@ -306,6 +345,12 @@ export default {
   grid-column: 1;
   grid-row: 2;
 }
+/* #hej {
+  grid-area: main;
+  grid-column: 2;
+  grid-row: 3;
+}*/
+
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -316,30 +361,54 @@ export default {
   margin: 10px;
   text-align: center;
 }
-.kryss{
+.kryss {
   grid-area:main;
   grid-column: 4;
 }
+#addToOrderButton {
+  grid-area: main;
+  grid-column: 2;
+  grid-row: 3;
+  border-radius: 25px;
+  margin: 4px;
+  align: right;
+  width: 120px;
+  height: 30px;
+}
 .countingCol{
   display: grid;
+  padding-bottom: 14px;
+}
+.Clear{
+  width: 70px;
+  height: 60px;
+  background-color: red;
+  font-weight: bold;
+  font-size-adjust: auto;
 }
 .minusButton{
   grid-column: 1;
-  width: 0.5vh;
   border-radius: 50px;
-  background-color: red;
+  width: 2.6vh;
+}
+.plusButton{
+  grid-column: 3;
+  width: 3vh;
+  border-radius: 50px;
 }
 .countNumb{
   grid-column: 2;
   margin: 1px;
 }
-.plusButton{
-  grid-column: 3;
-  width: 0.5vh;
-  border-radius: 50px;
-  background-color: lightblue;
-}
 .footer{
   display: grid;
+}
+#burgerInOrder {
+  margin-bottom: 1em;
+}
+#burgerInOrder p {
+  text-indent: 2em;
+}
+img {
 }
 </style>

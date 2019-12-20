@@ -34,5 +34,9 @@
   "chosenIngredients":"Chosen ingredients",
   "removeItem":"Remove item",
   "nr":"Nr",
-  "goToOrder":"Go to order"
+  "goToOrder":"Go to order",
+  "totalPrice":"Total price:",
+  "burger":"Burger",
+  "welcomeText": "Click here to get to hamburger heaven",
+  "cancel": "CANCEL!"
 }

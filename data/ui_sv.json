@@ -34,5 +34,9 @@
   "chosenIngredients":"Vald artikel",
   "removeItem":"Ta bort",
   "nr":"Antal",
-  "goToOrder":"Gå till beställning"
+  "goToOrder":"Gå till beställning",
+  "totalPrice":"Summa:",
+  "burger":"Burgare",
+  "welcomeText": "Klicka här för att ta dig till hamburgarhimlen",
+  "cancel": "AVBRYT!"
 }
