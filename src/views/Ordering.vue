@@ -45,37 +45,35 @@
 <div id="gridContainer" >
   <h1 id="h1">{{ uiLabels.order }}</h1>
   <div id="count">
-    <h4>{{ uiLabels.nr }}</h4>
+    <h4>Antal</h4>
     <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
-      <button v-on:click="removeItem(item.ing)" class="minusButton"> - </Button>
+      <button v-on:click="removeItem(item.ing)" class="minusButton">-</Button>
         <h5 class="countNumb">{{item.count}}</h5>
-        <button v-on:click="addToBurger(item.ing)" class="plusButton"> + </button>
+        <button v-on:click="addToBurger(item.ing)" class="plusButton">+</button>
       </div>
     </div>
 
     <div id="foodList">
-      <h4>{{ uiLabels.chosenIngredients }}</h4>
+      <h4>Food-name</h4>
       <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["ingredient_"+lang]}}</p>
     </div>
 
     <div id="price">
-      <h4>{{ uiLabels.price }}</h4>
+      <h4>Price </h4>
       <h4 v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</h4>
     </div>
 
     <kryss ref="kryss">
-      <h4>{{ uiLabels.removeItem }}</h4>
-      <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
+      <h4>Remove item</h4>
+      <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
     </kryss>
 
   </div>
-  <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
-  <button id="hej" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
+  {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
+  <button v-on:click="addToOrder()">Add burger</button>
 </div>
-<button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 <div v-else>
-
 <!-- Header "Orders in queue" -->
   <h1>{{ uiLabels.ordersInQueue }}</h1>
   <div>
@@ -99,8 +97,9 @@
           {{burger.price}}
         </div>
         <hr>
+        <button v-on:click="addToOrder()">Add burger</button>
         <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-        <button v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+        <button v-on:click="addAnotherBurger()">Lägg till ny burgare</button>
       </div>
 
   <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -234,18 +233,14 @@ export default {
 
     },
     removeAll: function(item){
-
-      let lengthOfArray = this.chosenIngredients.length;
-
-      let removeIndex = 0;
-
-      for(let i = 0; i < lengthOfArray; i += 1){
-        if(this.chosenIngredients[i] === item) {
-          removeIndex = i;
-          this.chosenIngredients.splice(removeIndex, 1);
-          this.price -= +item.selling_price;
+      console.log(item.count)
+      while(item.count > 0){
+        removeItem(item.ing);
       }
-    }
+
+
+
+
   }
 }
 }
@@ -283,7 +278,6 @@ color: white;
   margin: 5vh;
   width: 120vh;
   overflow: overlay;
-  scroll-behavior: smooth;
   word-break: break-word;
 }
 #gridContainer{
@@ -292,7 +286,6 @@ color: white;
   grid-template-areas: 'header header header header'
                        'main main main main';
   grid-template-rows: min-content 1fr;
-  background-color: black;
 }
 #gridContainer h1{
   grid-area: header;
@@ -325,11 +318,6 @@ color: white;
 .kryss{
   grid-area:main;
   grid-column: 4;
-}
-#hej {
-  grid-area: main;
-  grid-column: 2;
-  grid-row: 3;
 }
 .countingCol{
   display: grid;
