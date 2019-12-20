@@ -36,5 +36,7 @@
   "nr":"Antal",
   "goToOrder":"Gå till beställning",
   "totalPrice":"Summa:",
-  "burger":"Burgare"
+  "burger":"Burgare",
+  "welcomeText": "Klicka här för att ta dig till hamburgarhimlen",
+  "cancel": "AVBRYT!"
 }
