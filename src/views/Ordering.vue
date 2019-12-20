@@ -50,6 +50,7 @@
       <button v-on:click="removeItem(item.ing)" class="minusButton">-</Button>
         <h5 class="countNumb">{{item.count}}</h5>
         <button v-on:click="addToBurger(item.ing)" class="plusButton">+</button>
+        <br>
       </div>
     </div>
 
@@ -69,7 +70,6 @@
     </kryss>
 
   </div>
-  {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
   <button v-on:click="addToOrder()">Add burger</button>
 </div>
 </div>
@@ -256,6 +256,7 @@ export default {
 height: 100%;
 width: 100%;
 background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
+background-size: contain;
 opacity:0.9;
 color: white;
 }
