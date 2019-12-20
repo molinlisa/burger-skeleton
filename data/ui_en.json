@@ -28,5 +28,11 @@
   "gluten": "Gluten free",
   "pcs": "pcs",
   "sek": ":-",
-  "headlineOrder": "Order"
+  "headlineOrder": "Order",
+  "addNewBurger":"Add new burger",
+  "price":"Price",
+  "chosenIngredients":"Chosen ingredients",
+  "removeItem":"Remove item",
+  "nr":"Nr",
+  "goToOrder":"Go to order"
 }

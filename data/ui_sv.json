@@ -28,5 +28,11 @@
   "gluten": "Gluten fritt",
   "pcs": "Styck",
   "sek": ":-",
-  "headlineOrder": "Beställning"
+  "headlineOrder": "Beställning",
+  "addNewBurger":"Lägg till ny burgare",
+  "price":"Pris",
+  "chosenIngredients":"Vald artikel",
+  "removeItem":"Ta bort",
+  "nr":"Antal",
+  "goToOrder":"Gå till beställning"
 }
