@@ -100,12 +100,13 @@
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
+      </div>
       <hr>
-      <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-      <button v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-    </div>
+      <button class="buttons" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+      <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+  
 
-    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
 </div>
 </div>
@@ -410,6 +411,13 @@ export default {
 #burgerInOrder p {
   text-indent: 2em;
 }
+
+.buttons {
+  width:25vh;
+  height:20vh;
+  border-radius: 12px;
+}
+
 img {
 }
 </style>
