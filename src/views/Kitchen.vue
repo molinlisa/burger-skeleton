@@ -62,7 +62,11 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style>
+
+body {
+  background: white;
+}
 #orders {
   font-size:24pt;
 }
