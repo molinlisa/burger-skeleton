@@ -1,11 +1,7 @@
 <template>
 
   <div id="ordering">
-<<<<<<< HEAD
-    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> Cancel </button>
-=======
     <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.cancel}}</button>
->>>>>>> 708f3f410259e40bc8f25078499e64ff3c5dd5d8
     <div id="OrderingShow" v-if="!finishView">
       <!-- Menyknappar högst upp i gränssnittet -->
       <div id="menyFlexBox">
@@ -372,6 +368,7 @@ export default {
   background-color: red;
   font-weight: bold;
   font-size-adjust: auto;
+  border-radius: 12px;
 }
 .minusButton{
   grid-column: 1;
