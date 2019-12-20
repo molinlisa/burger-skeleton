@@ -29,5 +29,10 @@
   "pcs": "pcs",
   "sek": ":-",
   "headlineOrder": "Order",
-  "number": "Antal"
+  "addNewBurger":"Add new burger",
+  "price":"Price",
+  "chosenIngredients":"Chosen ingredients",
+  "removeItem":"Remove item",
+  "nr":"Nr",
+  "goToOrder":"Go to order"
 }
