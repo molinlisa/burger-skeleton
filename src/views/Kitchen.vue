@@ -66,6 +66,7 @@ h1 {
   text-transform: uppercase;
   font-size: 1.4em;
   color: bisque;
+  text-indent: 2em;
 }
 #orders {
   font-size:24pt;
