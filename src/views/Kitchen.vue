@@ -65,7 +65,7 @@ export default {
 <style>
 
 body {
-  background: white;
+    background: white;
 }
 #orders {
   font-size:24pt;

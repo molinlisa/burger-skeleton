@@ -1,7 +1,6 @@
 <template>
 
   <div id="ordering">
-
     <button class="Clear"  v-on:click="clearOrderAndRedirect()"> </button>
     <div id="OrderingShow" v-if="!finishView">
     <!-- Menyknappar högst upp i gränssnittet -->
