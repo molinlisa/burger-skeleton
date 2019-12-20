@@ -70,11 +70,10 @@
 
   </div>
   {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}}
-  <button v-on:click="addToOrder()">Add burger</button>
-<<<<<<< HEAD
+  <button v-on:click="addToOrder() ">Add burgerssss</button>
 
-=======
->>>>>>> 4ac3ae3c212874c98c357a85d851aeb0e2ab5ccc
+
+
 </div>
 </div>
 <div v-else>
@@ -259,7 +258,6 @@ export default {
 #ordering {
 height: 100%;
 width: 100%;
-background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
 opacity:0.9;
 color: white;
 }
