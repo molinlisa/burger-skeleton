@@ -1,7 +1,7 @@
 <template>
 
   <div id="ordering">
-    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> </button>
+    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> Cancel </button>
     <div id="OrderingShow" v-if="!finishView">
     <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">

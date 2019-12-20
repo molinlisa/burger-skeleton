@@ -59,19 +59,12 @@ export default {
   }
 }
 </script>
-<<<<<<< HEAD
 <style scoped>
 
-=======
-
-
-<style scoped>
-h1 {
-  text-transform: uppercase;
-  font-size: 1.4em;
-  color: bisque;
+body{
+  background: url(https://previews.123rf.com/images/jozefmicic/jozefmicic1512/jozefmicic151200023/49258312-work-hard-motivational-poster-vector-background-with-hand-and-pointing-finger-responsible-job-attitu.jpg);
 }
->>>>>>> d430909c1f8948245b5e44e0c580f53da8da9991
+
 #orders {
   font-size:24pt;
 }
@@ -82,7 +75,6 @@ h1 {
   display: flex;
   flex-direction: column;
 }
-<<<<<<< HEAD
 
 h1 {
   text-transform: uppercase;
@@ -90,8 +82,6 @@ h1 {
   color: bisque;
 }
 
-=======
->>>>>>> d430909c1f8948245b5e44e0c580f53da8da9991
 .wrapper {
   display: grid;
   grid-gap: 50px;
