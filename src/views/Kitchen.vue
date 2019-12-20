@@ -62,13 +62,13 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
 
-body {
-  background: white;
-}
 #orders {
   font-size:24pt;
+}
+#headlines {
+  color: white;
 }
 #flexList{
   display: flex;
@@ -78,6 +78,7 @@ body {
 h1 {
   text-transform: uppercase;
   font-size: 1.4em;
+  color: bisque;
 }
 
 .wrapper {
