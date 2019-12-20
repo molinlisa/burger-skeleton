@@ -1,7 +1,7 @@
 <template>
 
   <div id="ordering">
-
+    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> </button>
     <div id="OrderingShow" v-if="!finishView">
       <!-- Menyknappar högst upp i gränssnittet -->
       <div id="menyFlexBox">
@@ -75,7 +75,7 @@
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
 
-<!-- Go to order view -->
+  <!-- Go to order view -->
   <div v-else>
     <!-- Header "Orders in queue" -->
     <h1>{{ uiLabels.ordersInQueue }}</h1>
@@ -236,7 +236,6 @@ export default {
 
     },
     removeAll: function(item){
-
       let lengthOfArray = this.chosenIngredients.length;
       let removeIndex = 0;
 
@@ -249,20 +248,29 @@ export default {
         else {i += 1}
       }
     },
-    editButton: function(burger) {
-      this.chosenIngredients = burger.Ingredients; //för att få valda ingredienser under "my burger" i föregående vy
+    
+  editButton: function(burger) {
+    this.chosenIngredients = burger.Ingredients; //för att få valda ingredienser under "my burger" i föregående vy
 
-      let removeIndex = 0;
-      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-        if (this.currentOrder.burgers[i] === burger) {
-          removeIndex = i;
-          break;
-        }
+    let removeIndex = 0;
+    for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+      if (this.currentOrder.burgers[i] === burger) {
+        removeIndex = i;
+        break;
       }
-      this.currentOrder.burgers.splice(removeIndex, 1);
-      this.finishView = false;
-      },
+    }
+    this.currentOrder.burgers.splice(removeIndex, 1);
+    this.finishView = false;
+  },
+
+  clearOrderAndRedirect: function() {
+    this.chosenIngredients = [];
+    this.price = 0;
+    this.currentOrder.burgers = [];
+    this.category = 1;
+    window.location.href = '#/';
   }
+}
 }
 </script>
 <style scoped>
@@ -305,7 +313,7 @@ export default {
   display: grid;
   grid-column: 2;
   grid-template-areas: 'header header header header'
-                      'main main main main';
+  'main main main main';
   grid-template-rows: min-content 1fr;
   background-color: black;
 }
@@ -326,6 +334,11 @@ export default {
   grid-area:main;
   grid-column: 1;
   grid-row: 2;
+}
+#hej {
+  grid-area: main;
+  grid-column: 2;
+  grid-row: 3;
 }
 .ingredient {
   border: 1px solid #f5f5f28a;
@@ -348,6 +361,11 @@ export default {
 }
 .countingCol{
   display: grid;
+}
+.Clear{
+  width: 60px;
+  height: 60px;
+  background-color: red;
 }
 .minusButton{
   grid-column: 1;
