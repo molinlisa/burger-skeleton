@@ -2,6 +2,7 @@
 
   <div id="ordering">
 
+    <button class="Clear"  v-on:click="clearOrderAndRedirect()"> </button>
     <div id="OrderingShow" v-if="!finishView">
     <!-- Menyknappar högst upp i gränssnittet -->
     <div id="menyFlexBox">
@@ -103,8 +104,8 @@
         <button v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       </div>
 
+
   <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
-  <button v-on:click="clearOrderAndRedirect()"> Exit </button>
   </div>
   </div>
   </div>
@@ -261,8 +262,6 @@ export default {
 #ordering {
 height: 100%;
 width: 100%;
-background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
-background-size: contain;
 opacity:0.9;
 color: white;
 }
@@ -340,6 +339,11 @@ color: white;
 }
 .countingCol{
   display: grid;
+}
+.Clear{
+  width: 60px;
+  height: 60px;
+  background-color: red;
 }
 .minusButton{
   grid-column: 1;

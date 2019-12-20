@@ -16,5 +16,7 @@ export default {
 </script>
 
 <style>
-
+body {
+  background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
+}
 </style>
