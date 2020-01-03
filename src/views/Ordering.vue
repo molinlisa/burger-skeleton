@@ -271,17 +271,22 @@ export default {
       }
     },
     editButton: function(burger) {
-      this.chosenIngredients = burger.Ingredients; //för att få valda ingredienser under "my burger" i föregående vy
-      let removeIndex = 0;
-      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-        if (this.currentOrder.burgers[i] === burger) {
-          removeIndex = i;
-          break;
-        }
-      }
-      this.currentOrder.burgers.splice(removeIndex, 1);
-      this.finishView = false;
-    },
+  // create copy of ingredients array for chosenIngredients
+  this.chosenIngredients = burger.ingredients.slice(0);
+  // update price. Could as well use for loop instead of reducer
+  this.price = this.chosenIngredients.reduce(function (acc, cur) {
+    return acc + cur.selling_price;
+  }, 0)
+  let removeIndex = 0;
+  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+    if (this.currentOrder.burgers[i] === burger) {
+      removeIndex = i;
+      break;
+    }
+  }
+  this.currentOrder.burgers.splice(removeIndex, 1);
+  this.finishView = false;
+},
     clearOrderAndRedirect: function() {
       this.chosenIngredients = [];
       this.price = 0;
