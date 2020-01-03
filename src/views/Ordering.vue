@@ -100,10 +100,12 @@
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
-      <hr>
-      <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-      <button v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-    </div>
+      </div>
+
+      <button id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+
+
+      <button id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
 
     <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
@@ -410,5 +412,11 @@ export default {
   text-indent: 2em;
 }
 img {
+}
+#addButton{
+
+}
+#placeButton{
+
 }
 </style>
