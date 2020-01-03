@@ -103,6 +103,8 @@
       </div>
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
       </div>
+      <hr>
+      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
     <transition name="modal">
       <div v-if="isOpen">
@@ -115,11 +117,9 @@
         </div>
       </div>
     </transition>
-    <button v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
-      <hr>
-      <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
 
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
@@ -214,14 +214,13 @@ export default {
       }
     },
     addToOrder: function () {
-      // Add the burger to an order array;
+      // Lägg till bugare om vi har någon, skicak till beställning om vi får
       if (this.chosenIngredients.length > 0) {
         this.currentOrder.burgers.push({
           ingredients: this.chosenIngredients.splice(0),
           price: this.price
         });
         //set all counters to 0. Notice the use of $refs
-        this.finishView = true;
         for (let i = 0; i < this.$refs.ingredient.length; i += 1) {
           this.$refs.ingredient[i].resetCounter();
         }
@@ -229,10 +228,13 @@ export default {
         this.price = 0;
       }
       this.totPriceFunc();
+      if(this.currentOrder.burgers.length > 0) {
+        this.finishView = true;
+      }
     },
     placeOrder: function () {
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-      if (this.currentOrder.burgers.length > 0){
+      if (this.currentOrder.burgers.length > 0 || this.currentOrder.length > 0){
         this.currentOrder.time = Date.now();
         this.$store.state.socket.emit('order', this.currentOrder);
         this.currentOrder.burgers = [];
@@ -391,6 +393,16 @@ removeButton: function(burger){
   grid-column: 1;
   grid-row: 2;
 }
+
+#ordinaryButton{
+  width: 200px;
+  height: 40px;
+}
+/* #hej {
+  grid-area: main;
+  grid-column: 2;
+  grid-row: 3;
+}*/
 
 .ingredient {
   border: 1px solid #f5f5f28a;
