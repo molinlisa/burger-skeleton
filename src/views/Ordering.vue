@@ -101,13 +101,20 @@
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
       </div>
+<<<<<<< HEAD
 
       <button id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
 
 
       <button id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+=======
+      <hr>
+      <button class="buttons" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+      <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+  
+>>>>>>> d046f0584b9bba55254bed21f905984cf0ce69e8
 
-    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
 </div>
 </div>
@@ -411,6 +418,13 @@ export default {
 #burgerInOrder p {
   text-indent: 2em;
 }
+
+.buttons {
+  width:25vh;
+  height:20vh;
+  border-radius: 12px;
+}
+
 img {
 }
 #addButton{
