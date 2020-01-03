@@ -101,6 +101,8 @@
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
       </div>
+      <hr>
+      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
     <transition name="modal">
       <div v-if="isOpen">
@@ -113,11 +115,9 @@
         </div>
       </div>
     </transition>
-    <button v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
-      <hr>
-      <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
 
 
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -363,6 +363,11 @@ export default {
   grid-area:main;
   grid-column: 1;
   grid-row: 2;
+}
+
+#ordinaryButton{
+  width: 200px;
+  height: 40px;
 }
 /* #hej {
   grid-area: main;
