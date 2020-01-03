@@ -49,31 +49,31 @@
         <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
           <img v-on:click="removeItem(item.ing)" class="minusButton" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozMtJvJPf8PPZz4N5OIy9fdiEGIJohGHkp8UrPpSk0U8I4BSAsQ&s">
-            <p class="countNumb">{{item.count}}</p>
-            <img v-on:click="addToBurger(item.ing)" class="plusButton" src="https://cdn4.iconfinder.com/data/icons/ui-3d-01-of-3/100/UI_2-512.png">
-          </div>
+          <p class="countNumb">{{item.count}}</p>
+          <img v-on:click="addToBurger(item.ing)" class="plusButton" src="https://cdn4.iconfinder.com/data/icons/ui-3d-01-of-3/100/UI_2-512.png">
         </div>
+      </div>
 
-        <div id="foodList">
-          <h4>{{ uiLabels.chosenIngredients }}</h4>
-          <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["ingredient_"+lang]}}</p>
-        </div>
+      <div id="foodList">
+        <h4>{{ uiLabels.chosenIngredients }}</h4>
+        <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["ingredient_"+lang]}}</p>
+      </div>
 
-        <div id="price">
-          <h4>{{ uiLabels.price }}</h4>
-          <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</p>
-        </div>
+      <div id="price">
+        <h4>{{ uiLabels.price }}</h4>
+        <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</p>
+      </div>
 
-        <div id="kryss">
-          <h4>{{ uiLabels.removeItem }}</h4>
-          <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png" width="30"></div>
+      <div id="kryss">
+        <h4>{{ uiLabels.removeItem }}</h4>
+        <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png" width="30"></div>
       </div>
     </div>
-      <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
-      <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
-    </div>
-    <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
+    <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
   </div>
+  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+</div>
 
   <!-- Go to order view -->
   <div v-else>
@@ -100,6 +100,7 @@
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
+      {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}}
       </div>
       <hr>
       <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
@@ -162,8 +163,9 @@ export default {
       iNeedVegan: false,
       isOpen: false,
       currentOrder: {
-      burgers: []
-       },
+        burgers: [],
+        totPrice: 0
+      },
       finishView: false
     }
   },
@@ -204,6 +206,13 @@ export default {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
     },
+    totPriceFunc: function() {
+      console.log()
+      this.currentOrder.totPrice = 0;
+      for (let j=0; j<this.currentOrder.burgers.length; j+=1) {
+        this.currentOrder.totPrice += this.currentOrder.burgers[j].price;
+      }
+    },
     addToOrder: function () {
       // Add the burger to an order array;
       if (this.chosenIngredients.length > 0) {
@@ -219,6 +228,7 @@ export default {
         this.chosenIngredients = [];
         this.price = 0;
       }
+      this.totPriceFunc();
     },
     placeOrder: function () {
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
@@ -267,28 +277,33 @@ export default {
       }
     },
 
-  editButton: function(burger) {
-    this.chosenIngredients = burger.Ingredients; //för att få valda ingredienser under "my burger" i föregående vy
+    editButton: function(burger) {
+  // create copy of ingredients array for chosenIngredients
+  this.chosenIngredients = burger.ingredients.slice(0);
+  // update price. Could as well use for loop instead of reducer
+  this.price = this.chosenIngredients.reduce(function (acc, cur) {
+    return acc + cur.selling_price;
+  }, 0)
 
-    let removeIndex = 0;
-    for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-      if (this.currentOrder.burgers[i] === burger) {
-        removeIndex = i;
-        break;
-      }
+  let removeIndex = 0;
+  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+    if (this.currentOrder.burgers[i] === burger) {
+      removeIndex = i;
+      break;
     }
-    this.currentOrder.burgers.splice(removeIndex, 1);
-    this.finishView = false;
-  },
-
-  clearOrderAndRedirect: function() {
-    this.chosenIngredients = [];
-    this.price = 0;
-    this.currentOrder.burgers = [];
-    this.category = 1;
-    window.location.href = '#/';
   }
-}
+  this.currentOrder.burgers.splice(removeIndex, 1);
+  this.finishView = false;
+},
+
+    clearOrderAndRedirect: function() {
+      this.chosenIngredients = [];
+      this.price = 0;
+      this.currentOrder.burgers = [];
+      this.category = 1;
+      window.location.href = '#/';
+    }
+  }
 }
 </script>
 <style scoped>
@@ -364,6 +379,7 @@ export default {
   grid-column: 1;
   grid-row: 2;
 }
+<<<<<<< HEAD
 
 #ordinaryButton{
   width: 200px;
@@ -374,6 +390,8 @@ export default {
   grid-column: 2;
   grid-row: 3;
 }*/
+=======
+>>>>>>> f929b7f97aa70523e0adde88e59f4ec2c58a9e0f
 
 .ingredient {
   border: 1px solid #f5f5f28a;
@@ -434,11 +452,18 @@ export default {
 #burgerInOrder p {
   text-indent: 2em;
 }
-
 .buttons {
   width:25vh;
   height:20vh;
   border-radius: 12px;
+}
+#addAnotherBurgerButton{
+
+}
+#placeOrderButton{
+}
+#languageButton{
+
 }
 
 img {
