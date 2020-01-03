@@ -94,13 +94,14 @@
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
         {{ uiLabels.burger }}  {{key+1}}
-        <img v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
+        <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
+        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
         <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
           {{item.count}} {{ item.ing['ingredient_' + lang] }}
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
-      {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}}
+      {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
       </div>
       <div>
     <transition name="modal">
@@ -119,7 +120,6 @@
   </div>
       <hr>
       <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-
 
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
@@ -296,6 +296,18 @@ export default {
   this.finishView = false;
 },
 
+removeButton: function(burger){
+  let removeIndex = 0;
+  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+    if (this.currentOrder.burgers[i] === burger) {
+      removeIndex = i;
+      break;
+    }
+  }
+  this.currentOrder.burgers.splice(removeIndex, 1);
+  this.totPriceFunc();
+},
+
     clearOrderAndRedirect: function() {
       this.chosenIngredients = [];
       this.price = 0;
@@ -445,12 +457,14 @@ export default {
   border-radius: 12px;
 }
 #addAnotherBurgerButton{
-
 }
 #placeOrderButton{
 }
 #languageButton{
+}
 
+#editButton{
+  margin-right: 5px;
 }
 
 img {
