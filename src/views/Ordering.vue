@@ -44,12 +44,13 @@
     <!-- Header "My burger" -->
     <div id="gridContainer" >
       <h1 id="h1">{{ uiLabels.order }}</h1>
+
       <div id="count">
         <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
-          <button v-on:click="removeItem(item.ing)" class="minusButton"> - </Button>
-            <h5 class="countNumb">{{item.count}} </h5>
-            <button v-on:click="addToBurger(item.ing)" class="plusButton"> + </button>
+          <img v-on:click="removeItem(item.ing)" class="minusButton" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQozMtJvJPf8PPZz4N5OIy9fdiEGIJohGHkp8UrPpSk0U8I4BSAsQ&s">
+            <p class="countNumb">{{item.count}}</p>
+            <img v-on:click="addToBurger(item.ing)" class="plusButton" src="https://cdn4.iconfinder.com/data/icons/ui-3d-01-of-3/100/UI_2-512.png">
           </div>
         </div>
 
@@ -63,12 +64,11 @@
           <p v-for="(item,key2 ) in groupIngredients(chosenIngredients)">{{item.ing["selling_price"]*item.count}}</p>
         </div>
 
-        <kryss ref="kryss">
+        <div id="kryss">
           <h4>{{ uiLabels.removeItem }}</h4>
-          <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://fyrhjuling.se/wp-content/uploads/2018/12/dirtbike-cross.jpg" width="20"></div>
-        </kryss>
-
+          <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png" width="30"></div>
       </div>
+    </div>
       <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
       <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
     </div>
@@ -98,7 +98,7 @@
         <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
           {{item.count}} {{ item.ing['ingredient_' + lang] }}
         </p>
-        {{uiLabels.totalPrice}} {{burger.price}}
+        {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
       <hr>
       <button v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
@@ -269,6 +269,10 @@ export default {
     this.currentOrder.burgers = [];
     this.category = 1;
     window.location.href = '#/';
+  },
+
+  popupOrderInfo: function() {
+    //
   }
 }
 }
@@ -278,7 +282,8 @@ export default {
 #ordering {
   height: 100%;
   width: 100%;
-  background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
+  /*background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
+  background: url(https://i.pinimg.com/564x/7a/74/2e/7a742edc9c4820e8871c835b013d93ee.jpg); */
   opacity:0.9;
   color: white;
 }
@@ -316,6 +321,13 @@ export default {
   'main main main main';
   grid-template-rows: min-content 1fr;
   background-color: black;
+  padding: 1em;
+  margin-left: -15px;
+  margin-top: -6px;
+  border-radius: 25px;
+  grid-column-gap: 25px;
+  text-align: center;
+  overflow: hidden;
 }
 #gridContainer h1{
   grid-area: header;
@@ -324,6 +336,9 @@ export default {
   grid-area: main;
   grid-column: 3;
   grid-row: 2;
+}
+#foodList p {
+  text-align: left;
 }
 #price{
   grid-area:main;
@@ -335,11 +350,12 @@ export default {
   grid-column: 1;
   grid-row: 2;
 }
-#hej {
+/* #hej {
   grid-area: main;
   grid-column: 2;
   grid-row: 3;
-}
+}*/
+
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -350,7 +366,7 @@ export default {
   margin: 10px;
   text-align: center;
 }
-.kryss{
+.kryss {
   grid-area:main;
   grid-column: 4;
 }
@@ -358,9 +374,15 @@ export default {
   grid-area: main;
   grid-column: 2;
   grid-row: 3;
+  border-radius: 25px;
+  margin: 4px;
+  align: right;
+  width: 120px;
+  height: 30px;
 }
 .countingCol{
   display: grid;
+  padding-bottom: 14px;
 }
 .Clear{
   width: 70px;
@@ -373,19 +395,17 @@ export default {
 }
 .minusButton{
   grid-column: 1;
-  width: 0.5vh;
   border-radius: 50px;
-  background-color: red;
+  width: 2.6vh;
+}
+.plusButton{
+  grid-column: 3;
+  width: 3vh;
+  border-radius: 50px;
 }
 .countNumb{
   grid-column: 2;
   margin: 1px;
-}
-.plusButton{
-  grid-column: 3;
-  width: 0.5vh;
-  border-radius: 50px;
-  background-color: lightblue;
 }
 .footer{
   display: grid;
