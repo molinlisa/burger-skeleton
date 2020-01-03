@@ -101,10 +101,24 @@
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
       </div>
+      <div>
+    <transition name="modal">
+      <div v-if="isOpen">
+        <div class="overlay">
+          <div class="modal" data-backdrop="static" data-keyboard="false">
+            <h1>{{uiLabels.thankOrder}}</h1>
+            <p>{{uiLabels.byeByeText}} {{orders[0]}}</p>
+            <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.finish}}</button>
+          </div>
+        </div>
+      </div>
+    </transition>
+    <button v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+    </button>
+  </div>
       <hr>
-      <button class="buttons" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
       <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-  
+
 
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
@@ -126,6 +140,8 @@ import utilityMethods from '@/mixins/utilityMethods.js'
 /* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
+
+
   name: 'Ordering',
   components: {
     Ingredient,
@@ -144,6 +160,7 @@ export default {
       iNeedLactoseFree: false,
       iNeedGlutenFree: false,
       iNeedVegan: false,
+      isOpen: false,
       currentOrder: {
       burgers: []
        },
@@ -382,7 +399,7 @@ export default {
   padding-bottom: 14px;
 }
 .Clear{
-  width: 70px;
+  width: 90px;
   height: 60px;
   background-color: red;
   font-weight: bold;
@@ -421,4 +438,51 @@ export default {
 
 img {
 }
+
+.modal {
+  width: 500px;
+  margin: 0px auto;
+  padding: 20px;
+  background-color: black;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px 3px;
+  transition: all 0.2s ease-in;
+  font-family: Helvetica, Arial, sans-serif;
+  color: pink;
+}
+.fadeIn-enter {
+  opacity: 0;
+}
+
+.fadeIn-leave-active {
+  opacity: 0;
+  transition: all 0.2s step-end;
+}
+
+.fadeIn-enter .modal,
+.fadeIn-leave-active.modal {
+  transform: scale(1.1);
+}
+button {
+  padding: 7px;
+  margin-top: 10px;
+  background-color: green;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #00000094;
+  z-index: 999;
+  transition: opacity 0.2s ease;
+}
+
 </style>
