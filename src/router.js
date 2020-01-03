@@ -1,11 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Ordering from './views/Ordering.vue'
-<<<<<<< HEAD
 import Frontpage from './views/Frontpage.vue'
 import Kitchen from './views/Kitchen.vue'
-=======
->>>>>>> 6ef59fd1962c300dfcc1fee7fcef8f0b07892b4b
+
 Vue.use(Router)
 
 let router = new Router({
@@ -13,7 +11,7 @@ let router = new Router({
     {
       path: '/',
       meta: {
-        title: 'FrontPage',
+        title: 'CraftyBurgers',
       },
       name: 'frontpage',
       component: () => import(/* webpackChunkName: "read" */ './views/Frontpage.vue')
