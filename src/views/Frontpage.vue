@@ -1,17 +1,4 @@
 <template>
-
-
-  <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
-
-    <div id="textpage"> <h2>Crafty Burgers </h2>
-      <h3> Klicka för att ta dig till hamburgarhimlen </h3>
-    </div>
-  </div>
-
-</template>
-
-<script>
-
   <div class="wrapper">
         <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
             <div id="textpage"> <h2> Crafty Burgers </h2>
@@ -25,16 +12,12 @@
 <script>
 import sharedVueStuff from '@/mixins/sharedVueStuff.js';
 import Ordering from '@/views/Ordering.vue';
->>>>>>> d046f0584b9bba55254bed21f905984cf0ce69e8
-
 export default {
   name: 'frontpage',
   mixins: [sharedVueStuff, Ordering],
 }
 </script>
 <style scoped>
-
-
 h3{
   color: white;
   font-family: Algerian;
@@ -42,13 +25,11 @@ h3{
 .wrapper {
    position: realtive;
 }
-
 .knappshuno {
    position: absolute;
    bottom: 20px;
    left: 20px
 }
-
 #textpage {
   color: white;
   font-family: Algerian;

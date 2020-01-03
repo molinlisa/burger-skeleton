@@ -1,31 +1,4 @@
 <template>
-
-<div id="orders">
-  <h1>{{ uiLabels.ordersInQueue }}</h1>
-
-  <div class = "wrapper">
-
-        <OrderItemToPrepare class = "box ordered"
-          v-for="(order, key) in orders"
-          v-if="order.status !== 'done'"
-          v-on:done="markDone(key)"
-          :order-id="key"
-          :order="order"
-          :ui-labels="uiLabels"
-          :lang="lang"
-          :key="key">
-
-        </OrderItemToPrepare>
-
-  <div id="flexList">
-    <OrderItemToPrepare
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      v-on:done="markDone(key)"
-
-      :order-id="key"
-
-
   <div id="orders">
     <h1 id>{{ uiLabels.ordersInQueue }} </h1>
     <div class = "wrapper">
@@ -34,14 +7,12 @@
       v-if="order.status !== 'done'"
       v-on:done="markDone(key)"
       :order-id="key"
-
       :order="order"
       :ui-labels="uiLabels"
       :lang="lang"
       :time="new Date(order.time).toLocaleTimeString('it-IT')"
       :key="key">
     </OrderItemToPrepare>
-
   </div>
 
   <h1 id>{{ uiLabels.ordersFinished }}</h1>
@@ -63,10 +34,8 @@
 <script>
 import OrderItem from '@/components/OrderItem.vue'
 import OrderItemToPrepare from '@/components/OrderItemToPrepare.vue'
-
 //import methods and data that are shared between ordering and kitchen views
 import sharedVueStuff from '@/mixins/sharedVueStuff.js'
-
 export default {
   name: 'Ordering',
   components: {
@@ -110,7 +79,6 @@ h1 {
   text-transform: uppercase;
   font-size: 1.4em;
   color: bisque;
-
 }
 .wrapper {
   display: grid;

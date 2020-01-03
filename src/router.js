@@ -11,11 +11,11 @@ let router = new Router({
     {
       path: '/',
       meta: {
-<<<<<<< HEAD
+
         title: 'CraftyBurgers',
-=======
+
         title: 'Welcome to Kraft Burgers',
->>>>>>> d046f0584b9bba55254bed21f905984cf0ce69e8
+
       },
       name: 'frontpage',
       component: () => import(/* webpackChunkName: "read" */ './views/Frontpage.vue')
