@@ -78,7 +78,7 @@
   <!-- Go to order view -->
   <div v-else>
     <!-- Header "Orders in queue" -->
-    <h1>{{ uiLabels.ordersInQueue }}</h1>
+    <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
     <div>
       <OrderItem
       v-for="(order, key) in orders"
@@ -88,7 +88,7 @@
       :ui-labels="uiLabels"
       :lang="lang"
       :key="key">
-    </OrderItem>
+    </OrderItem> -->
 
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
@@ -392,7 +392,7 @@ export default {
   margin: 4px;
   align: right;
   width: 120px;
-  height: 30px;
+  height: 70px;
 }
 .countingCol{
   display: grid;
