@@ -392,7 +392,7 @@ export default {
   margin: 4px;
   align: right;
   width: 120px;
-  height: 30px;
+  height: 70px;
 }
 .countingCol{
   display: grid;
