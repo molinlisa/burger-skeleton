@@ -3,7 +3,6 @@
   <div class="ingredient" v-on:click="incrementCounter" >
     <h3>{{item["ingredient_"+ lang]}}</h3>
     <p>{{item.selling_price}}{{uiLabels.sek}}</p>
-
   </div>
 </template>
 <script>
@@ -14,7 +13,7 @@ export default {
     lang: String,
     uiLabels: Object,
   },
-    data: function () {
+  data: function () {
     return {
       counter: 0
     };

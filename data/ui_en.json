@@ -27,5 +27,16 @@
   "vegan": "Vegan",
   "gluten": "Gluten free",
   "pcs": "pcs",
-  "sek": ":-"
+  "sek": ":-",
+  "headlineOrder": "Order",
+  "addNewBurger":"Add new burger",
+  "price":"Price",
+  "chosenIngredients":"Chosen ingredients",
+  "removeItem":"Remove item",
+  "nr":"Nr",
+  "goToOrder":"Go to order",
+  "totalPrice":"Total price:",
+  "burger":"Burger",
+  "welcomeText": "Click here to get to hamburger heaven",
+  "cancel": "CANCEL!"
 }
