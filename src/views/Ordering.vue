@@ -92,7 +92,7 @@
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
-        {{ uiLabels.burger }}  {{key+1}}
+        {{'Meny'}}  {{key+1}}
         <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
         <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
         <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
