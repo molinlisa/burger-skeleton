@@ -379,11 +379,15 @@ input[type="checkbox"] {
 }
 #foodList p {
   text-align: left;
+  height: 20px;
 }
 #price{
   grid-area:main;
   grid-column: 2;
   grid-row: 2;
+}
+#price p{
+  height: 20px;
 }
 #count{
   grid-area:main;
@@ -428,6 +432,10 @@ input[type="checkbox"] {
   grid-area:main;
   grid-column: 4;
 }
+
+.kryss div{
+  height: 20px
+}
 #addToOrderButton {
   grid-area: main;
   grid-column: 2;
@@ -441,6 +449,7 @@ input[type="checkbox"] {
 .countingCol{
   display: grid;
   padding-bottom: 14px;
+  height: 20px;
 }
 .Clear{
   width: 90px;
