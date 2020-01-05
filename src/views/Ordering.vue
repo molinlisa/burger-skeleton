@@ -1,5 +1,4 @@
 <template>
-
   <div id="ordering">
     <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.cancel}}</button>
     <div id="OrderingShow" v-if="!finishView">
@@ -352,7 +351,7 @@ removeButton: function(burger){
   flex-wrap: wrap;
   height: 45vh;
   margin: 5vh;
-  width: 120vh;
+  width: 100vh;
   overflow: overlay;
   scroll-behavior: smooth;
   word-break: break-word;
@@ -371,6 +370,7 @@ removeButton: function(burger){
   grid-column-gap: 25px;
   text-align: center;
   overflow: hidden;
+  width:500px;
 }
 #gridContainer h1{
   grid-area: header;

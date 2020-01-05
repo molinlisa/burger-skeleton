@@ -1,4 +1,7 @@
 <template>
+  <!-- <head>
+    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
+  </head> -->
   <div class="wrapper">
         <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
             <div id="textpage"> <h2> Crafty Burgers </h2>
@@ -21,7 +24,7 @@ export default {
 <style scoped>
 h3{
   color: white;
-  font-family: Algerian;
+  /* font-family: Algerian; */
 }
 .wrapper {
    position: realtive;
@@ -33,15 +36,31 @@ h3{
 }
 #textpage {
   color: white;
-  font-family: Algerian;
-  position: absolute;
+  /* font-family: Algerian; */
   text-align: center;
   line-height: 90px;
   font-size: 25px;
-  height: 100%;
+  background: url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg); /*
+  url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg)
+  url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg'); */
+
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
   width: 100%;
-  padding: 5px;
-  background: url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg');
-  background-size: 100vw;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
 }
+
+/* @font-face {
+  font-family: myFirstFont;
+  src: url("https://fonts.googleapis.com/css?family=Bangers&display=swap");
+} */
+
 </style>
