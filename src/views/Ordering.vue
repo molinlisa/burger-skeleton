@@ -75,19 +75,6 @@
 
   <!-- Go to order view -->
   <div v-else>
-    <!-- Header "Orders in queue" -->
-    <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-      <OrderItem
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItem> -->
-
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
@@ -99,12 +86,14 @@
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
+      <p>
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
+      </p>
       </div>
       <hr>
       <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-      <div>
 
+  <div>
     <transition name="modal">
       <div v-if="isOpen">
         <div class="overlay">
@@ -174,7 +163,6 @@ export default {
       let ing = [];
       for(let a = 0; a < this.ingredients.length; a += 1) {
         if (this.ingredients[a].category === this.currentCategory) {
-
           preferences: {
             if(this.iNeedLactoseFree == true && this.ingredients[a].milk_free == 0) {
               break preferences;
@@ -335,8 +323,6 @@ export default {
 #ordering {
   height: 100%;
   width: 100%;
-  /*background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
-  background: url(https://i.pinimg.com/564x/7a/74/2e/7a742edc9c4820e8871c835b013d93ee.jpg); */
   opacity:0.9;
   color: white;
 }
@@ -470,6 +456,12 @@ input[type="checkbox"] {
 }
 .footer{
   display: grid;
+  color: orange;
+  background-color: black;
+  text-align: left;
+  width: 30%;
+  margin-left: 35%;
+  text-indent: 10px;
 }
 #burgerInOrder {
   margin-bottom: 1em;
