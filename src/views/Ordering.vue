@@ -451,7 +451,6 @@ input[type="checkbox"] {
   grid-area: main;
   grid-column: 2;
   grid-row: 3;
-  border-radius: 25px;
   margin: 4px;
   align: right;
   width: 120px;
