@@ -18,6 +18,7 @@ export default {
   mixins: [sharedVueStuff, Ordering],
 }
 </script>
+
 <style scoped>
 
 .wrapper {
@@ -34,8 +35,9 @@ button {
   left: 20px;
 }
 #textpage {
-  color: green;
+  color: black;
   /* font-family: Algerian; */
+  font-weight: bold;
   text-align: center;
   line-height: 90px;
   font-size: 25px;
