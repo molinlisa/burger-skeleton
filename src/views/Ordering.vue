@@ -75,63 +75,57 @@
   <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 
-  <!-- Go to order view -->
-  <div v-else>
-    <!-- Header "Orders in queue" -->
-    <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-      <OrderItem
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItem> -->
+<!-- Go to order view -->
+<div v-else>
+  <!-- Header "Orders in queue" -->
+  <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
+  <div>
+  <OrderItem
+  v-for="(order, key) in orders"
+  v-if="order.status !== 'done'"
+  :order-id="key"
+  :order="order"
+  :ui-labels="uiLabels"
+  :lang="lang"
+  :key="key">
+</OrderItem> -->
 
-    <div class="footer">
-      <h1>{{ uiLabels.order }}</h1>
-      <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
-        {{ uiLabels.burger }}  {{key+1}}
-        <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
-        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
-        <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
-          {{item.count}} {{ item.ing['ingredient_' + lang] }}
-        </p>
-        {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
-      </div>
-<<<<<<< HEAD
-      {{this.currentOrder.totPrice}}
-      </div>
-      <hr>
-      <button class="buttons" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-      <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-=======
-      {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
-      </div>
-      <hr>
-      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-      <div>
-    <transition name="modal">
-      <div v-if="isOpen">
-        <div class="overlay">
-          <div class="modal" data-backdrop="static" data-keyboard="false">
-            <h1>{{uiLabels.thankOrder}}</h1>
-            <p>{{uiLabels.byeByeText}} {{orders[0]}}</p>
-            <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.finish}}</button>
-          </div>
+<div class="footer">
+  <h1>{{ uiLabels.order }}</h1>
+  <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
+    {{ uiLabels.burger }}  {{key+1}}
+    <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
+    <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
+    <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
+      {{item.count}} {{ item.ing['ingredient_' + lang] }}
+    </p>
+    {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
+  </div>
+  {{this.currentOrder.totPrice}}
+</div>
+<hr>
+<button class="buttons" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
+<button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+{{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
+</div>
+<hr>
+<button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+<div>
+  <transition name="modal">
+    <div v-if="isOpen">
+      <div class="overlay">
+        <div class="modal" data-backdrop="static" data-keyboard="false">
+          <h1>{{uiLabels.thankOrder}}</h1>
+          <p>{{uiLabels.byeByeText}} {{orders[0]}}</p>
+          <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.finish}}</button>
         </div>
       </div>
-    </transition>
-    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
-    </button>
-  </div>
->>>>>>> bca488a494a0319728a5c3154d861a9c26f390c2
-
-
-  </div>
-  <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    </div>
+  </transition>
+  <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+  </button>
+</div>
+<button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 </div>
 
@@ -172,15 +166,9 @@ export default {
       iNeedVegan: false,
       isOpen: false,
       currentOrder: {
-<<<<<<< HEAD
-      burgers: [],
-      totPrice: 0
-       },
-=======
         burgers: [],
         totPrice: 0
       },
->>>>>>> bca488a494a0319728a5c3154d861a9c26f390c2
       finishView: false
     }
   },
@@ -250,15 +238,12 @@ export default {
         this.chosenIngredients = [];
         this.price = 0;
       }
-<<<<<<< HEAD
       console.log(this.currentOrder.totPrice);
       this.totPriceFunc();
-=======
       this.totPriceFunc();
       if(this.currentOrder.burgers.length > 0) {
         this.finishView = true;
       }
->>>>>>> bca488a494a0319728a5c3154d861a9c26f390c2
     },
     placeOrder: function () {
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
@@ -308,35 +293,35 @@ export default {
     },
 
     editButton: function(burger) {
-  // create copy of ingredients array for chosenIngredients
-  this.chosenIngredients = burger.ingredients.slice(0);
-  // update price. Could as well use for loop instead of reducer
-  this.price = this.chosenIngredients.reduce(function (acc, cur) {
-    return acc + cur.selling_price;
-  }, 0)
+      // create copy of ingredients array for chosenIngredients
+      this.chosenIngredients = burger.ingredients.slice(0);
+      // update price. Could as well use for loop instead of reducer
+      this.price = this.chosenIngredients.reduce(function (acc, cur) {
+        return acc + cur.selling_price;
+      }, 0)
 
-  let removeIndex = 0;
-  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-    if (this.currentOrder.burgers[i] === burger) {
-      removeIndex = i;
-      break;
-    }
-  }
-  this.currentOrder.burgers.splice(removeIndex, 1);
-  this.finishView = false;
-},
+      let removeIndex = 0;
+      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+        if (this.currentOrder.burgers[i] === burger) {
+          removeIndex = i;
+          break;
+        }
+      }
+      this.currentOrder.burgers.splice(removeIndex, 1);
+      this.finishView = false;
+    },
 
-removeButton: function(burger){
-  let removeIndex = 0;
-  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-    if (this.currentOrder.burgers[i] === burger) {
-      removeIndex = i;
-      break;
-    }
-  }
-  this.currentOrder.burgers.splice(removeIndex, 1);
-  this.totPriceFunc();
-},
+    removeButton: function(burger){
+      let removeIndex = 0;
+      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+        if (this.currentOrder.burgers[i] === burger) {
+          removeIndex = i;
+          break;
+        }
+      }
+      this.currentOrder.burgers.splice(removeIndex, 1);
+      this.totPriceFunc();
+    },
 
     clearOrderAndRedirect: function() {
       this.chosenIngredients = [];
@@ -426,9 +411,9 @@ removeButton: function(burger){
   height: 40px;
 }
 /* #hej {
-  grid-area: main;
-  grid-column: 2;
-  grid-row: 3;
+grid-area: main;
+grid-column: 2;
+grid-row: 3;
 }*/
 
 .ingredient {
@@ -508,14 +493,12 @@ removeButton: function(burger){
 
 img {
 }
-<<<<<<< HEAD
 #addButton{
 
 }
 #placeButton{
 
 }
-=======
 
 .modal {
   width: 500px;
@@ -563,5 +546,4 @@ button {
   transition: opacity 0.2s ease;
 }
 
->>>>>>> bca488a494a0319728a5c3154d861a9c26f390c2
 </style>
