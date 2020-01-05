@@ -21,16 +21,13 @@ export default {
   mixins: [sharedVueStuff, Ordering],
 }
 </script>
+
 <style scoped>
-h3 {
-  color: white;
-  /* font-family: Algerian; */
-}
 .wrapper {
    position: realtive;
 }
 button {
-  background-color: green;
+  background-color: black;
   color: white;
   width: 80px;
   height: 40px;
@@ -40,14 +37,13 @@ button {
   left: 20px;
 }
 #textpage {
-  color: white;
+  color: black;
   /* font-family: Algerian; */
+  font-weight: bold;
   text-align: center;
   line-height: 90px;
   font-size: 25px;
-  background: url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg); /*
-  url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg)
-  url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg'); */
+  background: url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg);
 
   /* Set rules to fill background */
   min-height: 100%;
@@ -63,4 +59,8 @@ button {
   left: 0;
 }
 
+@font-face {
+  font-family: Bangers;
+  src: url("https://fonts.googleapis.com/css?family=Bangers&display=swap");
+}
 </style>
