@@ -36,14 +36,11 @@
         :ui-labels="uiLabels"
         :key="item.ingredient_id">
       </Ingredient>
-
-
     </div>
 
     <!-- Header "My burger" -->
     <div id="gridContainer" >
       <h1 id="h1">{{ uiLabels.order }}</h1>
-
       <div id="count">
         <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
@@ -105,6 +102,7 @@
       <hr>
       <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
+
     <transition name="modal">
       <div v-if="isOpen">
         <div class="overlay">
@@ -468,20 +466,11 @@ removeButton: function(burger){
   height:20vh;
   border-radius: 12px;
 }
-#addAnotherBurgerButton{
-}
-#placeOrderButton{
-}
-#languageButton{
-}
-
 #editButton{
   margin-right: 5px;
 }
-
 img {
 }
-
 .modal {
   width: 500px;
   margin: 0px auto;
