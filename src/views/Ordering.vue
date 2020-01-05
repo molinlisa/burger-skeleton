@@ -328,8 +328,15 @@ removeButton: function(burger){
   color: white;
 }
 #foodPref{
-  font-size: 1.5em;
+  font-size: 2em;
   text-indent: 2em;
+  color: orange;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
 }
 #h1{
   text-indent: 2em;
@@ -396,11 +403,6 @@ removeButton: function(burger){
   width: 200px;
   height: 40px;
 }
-/* #hej {
-  grid-area: main;
-  grid-column: 2;
-  grid-row: 3;
-}*/
 
 .ingredient {
   border: 1px solid #f5f5f28a;
