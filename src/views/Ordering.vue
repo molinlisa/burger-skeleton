@@ -1,5 +1,4 @@
 <template>
-
   <div id="ordering">
     <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.cancel}}</button>
     <div id="OrderingShow" v-if="!finishView">
@@ -25,7 +24,7 @@
       <label for="gluten">{{ uiLabels.gluten }}</label>
       <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="iNeedGlutenFree">
     </div>
-    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
+    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) här yalla -->
     <div id="orderContainer">
       <div id="ingredientBox">
         <Ingredient
@@ -37,14 +36,11 @@
         :ui-labels="uiLabels"
         :key="item.ingredient_id">
       </Ingredient>
-
-
     </div>
 
     <!-- Header "My burger" -->
     <div id="gridContainer" >
       <h1 id="h1">{{ uiLabels.order }}</h1>
-
       <div id="count">
         <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
@@ -68,6 +64,8 @@
         <h4>{{ uiLabels.removeItem }}</h4>
         <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png" width="30"></div>
       </div>
+
+      {{uiLabels.totalPrice}} {{this.ingredientsTotPrice}} {{uiLabels.sek}}
     </div>
     <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
     <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
@@ -93,18 +91,20 @@
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
-        {{ uiLabels.burger }}  {{key+1}}
-        <img v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
+        {{'Meny'}}  {{key+1}}
+        <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
+        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
         <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
           {{item.count}} {{ item.ing['ingredient_' + lang] }}
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
-      {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}}
+      {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
       </div>
       <hr>
       <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
+
     <transition name="modal">
       <div v-if="isOpen">
         <div class="overlay">
@@ -119,7 +119,10 @@
     <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ca0e3afffe5209c23313d0f40ebdb202bdff9ef0
 
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
@@ -162,6 +165,7 @@ export default {
       iNeedGlutenFree: false,
       iNeedVegan: false,
       isOpen: false,
+      ingredientsTotPrice: 0,
       currentOrder: {
         burgers: [],
         totPrice: 0
@@ -205,34 +209,46 @@ export default {
     addToBurger: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
+      this.totPriceIngredientsFunc();
     },
     totPriceFunc: function() {
-      console.log()
       this.currentOrder.totPrice = 0;
       for (let j=0; j<this.currentOrder.burgers.length; j+=1) {
         this.currentOrder.totPrice += this.currentOrder.burgers[j].price;
       }
     },
+    totPriceIngredientsFunc: function() {
+      this.ingredientsTotPrice = 0;
+      var ingredients = this.groupIngredients(this.chosenIngredients);
+      for (let j=0; j<ingredients.length; j+=1) {
+        this.ingredientsTotPrice += ingredients[j].ing['selling_price']*ingredients[j].count
+      }
+    },
     addToOrder: function () {
-      // Add the burger to an order array;
+      // Lägg till bugare om vi har någon, skicak till beställning om vi får
       if (this.chosenIngredients.length > 0) {
         this.currentOrder.burgers.push({
           ingredients: this.chosenIngredients.splice(0),
           price: this.price
         });
         //set all counters to 0. Notice the use of $refs
-        this.finishView = true;
         for (let i = 0; i < this.$refs.ingredient.length; i += 1) {
           this.$refs.ingredient[i].resetCounter();
         }
         this.chosenIngredients = [];
         this.price = 0;
       }
+      console.log(this.currentOrder.totPrice);
       this.totPriceFunc();
+      this.totPriceFunc();
+      this.totPriceIngredientsFunc()
+      if(this.currentOrder.burgers.length > 0) {
+        this.finishView = true;
+      }
     },
     placeOrder: function () {
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
-      if (this.currentOrder.burgers.length > 0){
+      if (this.currentOrder.burgers.length > 0 || this.currentOrder.length > 0){
         this.currentOrder.time = Date.now();
         this.$store.state.socket.emit('order', this.currentOrder);
         this.currentOrder.burgers = [];
@@ -278,23 +294,35 @@ export default {
     },
 
     editButton: function(burger) {
-  // create copy of ingredients array for chosenIngredients
-  this.chosenIngredients = burger.ingredients.slice(0);
-  // update price. Could as well use for loop instead of reducer
-  this.price = this.chosenIngredients.reduce(function (acc, cur) {
-    return acc + cur.selling_price;
-  }, 0)
+      // create copy of ingredients array for chosenIngredients
+      this.chosenIngredients = burger.ingredients.slice(0);
+      // update price. Could as well use for loop instead of reducer
+      this.price = this.chosenIngredients.reduce(function (acc, cur) {
+        return acc + cur.selling_price;
+      }, 0)
 
-  let removeIndex = 0;
-  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-    if (this.currentOrder.burgers[i] === burger) {
-      removeIndex = i;
-      break;
-    }
-  }
-  this.currentOrder.burgers.splice(removeIndex, 1);
-  this.finishView = false;
-},
+      let removeIndex = 0;
+      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+        if (this.currentOrder.burgers[i] === burger) {
+          removeIndex = i;
+          break;
+        }
+      }
+      this.currentOrder.burgers.splice(removeIndex, 1);
+      this.finishView = false;
+    },
+
+    removeButton: function(burger){
+      let removeIndex = 0;
+      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+        if (this.currentOrder.burgers[i] === burger) {
+          removeIndex = i;
+          break;
+        }
+      }
+      this.currentOrder.burgers.splice(removeIndex, 1);
+      this.totPriceFunc();
+    },
 
     clearOrderAndRedirect: function() {
       this.chosenIngredients = [];
@@ -338,9 +366,8 @@ export default {
   flex-wrap: wrap;
   height: 45vh;
   margin: 5vh;
-  width: 120vh;
+  width: 100vh;
   overflow: overlay;
-  scroll-behavior: smooth;
   word-break: break-word;
 }
 #gridContainer{
@@ -357,6 +384,7 @@ export default {
   grid-column-gap: 25px;
   text-align: center;
   overflow: hidden;
+  width:500px;
 }
 #gridContainer h1{
   grid-area: header;
@@ -380,11 +408,15 @@ export default {
   grid-row: 2;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> ca0e3afffe5209c23313d0f40ebdb202bdff9ef0
 #ordinaryButton{
   width: 200px;
   height: 40px;
 }
+<<<<<<< HEAD
 /* #hej {
   grid-area: main;
   grid-column: 2;
@@ -393,6 +425,8 @@ export default {
 =======
 >>>>>>> f929b7f97aa70523e0adde88e59f4ec2c58a9e0f
 
+=======
+>>>>>>> ca0e3afffe5209c23313d0f40ebdb202bdff9ef0
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -402,6 +436,10 @@ export default {
   border-radius: 25px;
   margin: 10px;
   text-align: center;
+}
+.ingredient:active {
+  background-color: orange;
+  color: green;
 }
 .kryss {
   grid-area:main;
@@ -458,15 +496,22 @@ export default {
   border-radius: 12px;
 }
 #addAnotherBurgerButton{
-
 }
 #placeOrderButton{
 }
 #languageButton{
-
 }
 
+#editButton{
+  margin-right: 5px;
+}
 img {
+}
+#addButton{
+
+}
+#placeButton{
+
 }
 
 .modal {
