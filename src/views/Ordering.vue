@@ -116,7 +116,7 @@
         </div>
       </div>
     </transition>
-    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+    <button id="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
 <<<<<<< HEAD
@@ -253,6 +253,7 @@ export default {
         this.$store.state.socket.emit('order', this.currentOrder);
         this.currentOrder.burgers = [];
         this.category = 1;
+        this.isOpen = true;
       }
     },
     countNumberOfIngredients: function (id) {
