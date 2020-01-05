@@ -1,4 +1,4 @@
-<template>
+template>
   <div id="orders">
     <h1 id>{{ uiLabels.ordersInQueue }} </h1>
     <div class = "wrapper">

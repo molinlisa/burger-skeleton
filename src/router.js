@@ -11,7 +11,11 @@ let router = new Router({
     {
       path: '/',
       meta: {
-        title: 'Welcome to Kraft Burgers',
+
+        title: 'Crafty Burgers',
+
+        title: 'Crafty Burgers',
+
       },
       name: 'frontpage',
       component: () => import(/* webpackChunkName: "read" */ './views/Frontpage.vue')
@@ -19,7 +23,7 @@ let router = new Router({
     {
       path: '/ordering',
       meta: {
-        title: 'VÄRLDENS BÄSTA',
+        title: 'Crafty Burgers',
       },
       name: 'ordering',
       component: Ordering
