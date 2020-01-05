@@ -24,7 +24,7 @@
       <label for="gluten">{{ uiLabels.gluten }}</label>
       <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="iNeedGlutenFree">
     </div>
-    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
+    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) här yalla -->
     <div id="orderContainer">
       <div id="ingredientBox">
         <Ingredient
@@ -342,8 +342,15 @@ export default {
   color: white;
 }
 #foodPref{
-  font-size: 1.5em;
+  font-size: 2em;
   text-indent: 2em;
+  color: orange;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
 }
 #h1{
   text-indent: 2em;
@@ -404,17 +411,10 @@ export default {
   grid-column: 1;
   grid-row: 2;
 }
-
 #ordinaryButton{
   width: 200px;
   height: 40px;
 }
-/* #hej {
-grid-area: main;
-grid-column: 2;
-grid-row: 3;
-}*/
-
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -424,6 +424,10 @@ grid-row: 3;
   border-radius: 25px;
   margin: 10px;
   text-align: center;
+}
+.ingredient:active {
+  background-color: orange;
+  color: green;
 }
 .kryss {
   grid-area:main;
@@ -489,7 +493,6 @@ grid-row: 3;
 #editButton{
   margin-right: 5px;
 }
-
 img {
 }
 #addButton{
