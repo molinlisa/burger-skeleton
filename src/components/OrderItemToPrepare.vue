@@ -8,7 +8,7 @@
     :order="order"
     :time="time">
   </OrderItem>
-  <button v-on:click="orderDone">
+  <button id="doneButton" v-on:click="orderDone">
     {{uiLabels.ready}}
   </button>
 </div>
@@ -39,5 +39,13 @@ export default {
 }
 </script>
 <style scoped>
+
+#doneButton {
+  background-color: green;
+  font-size: 40px;
+  font-weight: bold;
+  width: 180px;
+  height: 100px;
+}
 
 </style>

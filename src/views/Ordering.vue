@@ -91,7 +91,7 @@
       </p>
       </div>
       <hr>
-      <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <button class="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
 
   <div>
@@ -106,7 +106,7 @@
         </div>
       </div>
     </transition>
-    <button class="ordinaryButton" id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
+    <button class="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -129,8 +129,6 @@ import utilityMethods from '@/mixins/utilityMethods.js'
 /* instead of defining a Vue instance, export default allows the only
 necessary Vue instance (found in main.js) to import your data and methods */
 export default {
-
-
   name: 'Ordering',
   components: {
     Ingredient,
@@ -158,7 +156,6 @@ export default {
       finishView: false
     }
   },
-
   computed: {
     currentIngredients: function () {
       let ing = [];
@@ -263,12 +260,10 @@ export default {
     },
     addAnotherBurger: function(){
       this.finishView = false;
-
     },
     removeAll: function(item){
       let lengthOfArray = this.chosenIngredients.length;
       let removeIndex = 0;
-
       for(let i = 0; i < lengthOfArray;){
         if(this.chosenIngredients[i] === item) {
           removeIndex = i;
@@ -279,7 +274,6 @@ export default {
       }
       this.totPriceIngredientsFunc()
     },
-
     editButton: function(burger) {
       // create copy of ingredients array for chosenIngredients
       this.chosenIngredients = burger.ingredients.slice(0);
@@ -287,7 +281,6 @@ export default {
       this.price = this.chosenIngredients.reduce(function (acc, cur) {
         return acc + cur.selling_price;
       }, 0)
-
       let removeIndex = 0;
       for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
         if (this.currentOrder.burgers[i] === burger) {
@@ -298,7 +291,6 @@ export default {
       this.currentOrder.burgers.splice(removeIndex, 1);
       this.finishView = false;
     },
-
     removeButton: function(burger){
       let removeIndex = 0;
       for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
@@ -310,7 +302,6 @@ export default {
       this.currentOrder.burgers.splice(removeIndex, 1);
       this.totPriceFunc();
     },
-
     clearOrderAndRedirect: function() {
       this.chosenIngredients = [];
       this.price = 0;
@@ -403,10 +394,12 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
-
 .ordinaryButton{
   width: 200px;
   height: 40px;
+  position:relative;
+  top:50%;
+  left:43%;
 }
 .ingredient {
   border: 1px solid #f5f5f28a;
@@ -472,12 +465,16 @@ input[type="checkbox"] {
   color: orange;
   background-color: black;
   text-align: left;
-  width: 30%;
-  margin-left: 35%;
+  width: 15%;
+  margin-left: 40%;
   text-indent: 10px;
+  border-style: solid;
+  border-color: green;
+  border-width: 5px;
 }
 #burgerInOrder {
   margin-bottom: 1em;
+
 }
 #burgerInOrder p {
   text-indent: 2em;
@@ -488,10 +485,15 @@ input[type="checkbox"] {
   margin-left: 4px;
 }
 
+
 .buttons {
   width:25vh;
   height:20vh;
   border-radius: 12px;
+}
+
+#languageButton{
+  background-color: orange;
 }
 
 #languageButton{
@@ -515,12 +517,10 @@ input[type="checkbox"] {
 .fadeIn-enter {
   opacity: 0;
 }
-
 .fadeIn-leave-active {
   opacity: 0;
   transition: all 0.2s step-end;
 }
-
 .fadeIn-enter .modal,
 .fadeIn-leave-active.modal {
   transform: scale(1.1);
@@ -532,7 +532,6 @@ button {
   color: white;
   font-size: 1.1rem;
 }
-
 .overlay {
   position: fixed;
   top: 0;
@@ -546,5 +545,4 @@ button {
   z-index: 999;
   transition: opacity 0.2s ease;
 }
-
 </style>
