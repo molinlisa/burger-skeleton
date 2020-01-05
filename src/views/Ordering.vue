@@ -37,14 +37,11 @@
         :ui-labels="uiLabels"
         :key="item.ingredient_id">
       </Ingredient>
-
-
     </div>
 
     <!-- Header "My burger" -->
     <div id="gridContainer" >
       <h1 id="h1">{{ uiLabels.order }}</h1>
-
       <div id="count">
         <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
@@ -68,6 +65,8 @@
         <h4>{{ uiLabels.removeItem }}</h4>
         <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png" width="30"></div>
       </div>
+
+      {{uiLabels.totalPrice}} {{this.ingredientsTotPrice}} {{uiLabels.sek}}
     </div>
     <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
     <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
@@ -75,57 +74,55 @@
   <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 
-<!-- Go to order view -->
-<div v-else>
-  <!-- Header "Orders in queue" -->
-  <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
-  <div>
-  <OrderItem
-  v-for="(order, key) in orders"
-  v-if="order.status !== 'done'"
-  :order-id="key"
-  :order="order"
-  :ui-labels="uiLabels"
-  :lang="lang"
-  :key="key">
-</OrderItem> -->
+  <!-- Go to order view -->
+  <div v-else>
+    <!-- Header "Orders in queue" -->
+    <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
+    <div>
+      <OrderItem
+      v-for="(order, key) in orders"
+      v-if="order.status !== 'done'"
+      :order-id="key"
+      :order="order"
+      :ui-labels="uiLabels"
+      :lang="lang"
+      :key="key">
+    </OrderItem> -->
 
-<div class="footer">
-  <h1>{{ uiLabels.order }}</h1>
-  <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
-    {{ uiLabels.burger }}  {{key+1}}
-    <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
-    <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
-    <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
-      {{item.count}} {{ item.ing['ingredient_' + lang] }}
-    </p>
-    {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
-  </div>
-  {{this.currentOrder.totPrice}}
-</div>
-<hr>
-<button class="buttons" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-<button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-{{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
-</div>
-<hr>
-<button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-<div>
-  <transition name="modal">
-    <div v-if="isOpen">
-      <div class="overlay">
-        <div class="modal" data-backdrop="static" data-keyboard="false">
-          <h1>{{uiLabels.thankOrder}}</h1>
-          <p>{{uiLabels.byeByeText}} {{orders[0]}}</p>
-          <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.finish}}</button>
+    <div class="footer">
+      <h1>{{ uiLabels.order }}</h1>
+      <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
+        {{ uiLabels.burger }}  {{key+1}}
+        <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
+        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
+        <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
+          {{item.count}} {{ item.ing['ingredient_' + lang] }}
+        </p>
+        {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
+      </div>
+      {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
+      </div>
+      <hr>
+      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <div>
+
+    <transition name="modal">
+      <div v-if="isOpen">
+        <div class="overlay">
+          <div class="modal" data-backdrop="static" data-keyboard="false">
+            <h1>{{uiLabels.thankOrder}}</h1>
+            <p>{{uiLabels.byeByeText}} {{orders[0]}}</p>
+            <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.finish}}</button>
+          </div>
         </div>
       </div>
-    </div>
-  </transition>
-  <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
-  </button>
-</div>
-<button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
+    </transition>
+    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+    </button>
+  </div>
+
+    <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
+  </div>
 </div>
 </div>
 
@@ -165,6 +162,7 @@ export default {
       iNeedGlutenFree: false,
       iNeedVegan: false,
       isOpen: false,
+      ingredientsTotPrice: 0,
       currentOrder: {
         burgers: [],
         totPrice: 0
@@ -202,26 +200,25 @@ export default {
     }.bind(this));
   },
   methods: {
-    totPriceFunc: function(){
-      console.log(this.currentOrder.totPrice);
-      this.currentOrder.totPrice = 0;
-      for (let j = 0; j < this.currentOrder.burgers.length; j += 1){
-        this.currentOrder.totPrice += this.currentOrder.burgers[j].price;
-      }
-      console.log(this.currentOrder.totPrice);
-    },
     changeCategory: function(cat) {
       this.currentCategory = cat;
     },
     addToBurger: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
+      this.totPriceIngredientsFunc();
     },
     totPriceFunc: function() {
-      console.log()
       this.currentOrder.totPrice = 0;
       for (let j=0; j<this.currentOrder.burgers.length; j+=1) {
         this.currentOrder.totPrice += this.currentOrder.burgers[j].price;
+      }
+    },
+    totPriceIngredientsFunc: function() {
+      this.ingredientsTotPrice = 0;
+      var ingredients = this.groupIngredients(this.chosenIngredients);
+      for (let j=0; j<ingredients.length; j+=1) {
+        this.ingredientsTotPrice += ingredients[j].ing['selling_price']*ingredients[j].count
       }
     },
     addToOrder: function () {
@@ -241,6 +238,7 @@ export default {
       console.log(this.currentOrder.totPrice);
       this.totPriceFunc();
       this.totPriceFunc();
+      this.totPriceIngredientsFunc()
       if(this.currentOrder.burgers.length > 0) {
         this.finishView = true;
       }
