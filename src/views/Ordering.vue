@@ -70,41 +70,31 @@
     <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
     <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
   </div>
-  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+  <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 
   <!-- Go to order view -->
   <div v-else>
-    <!-- Header "Orders in queue" -->
-    <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-      <OrderItem
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItem> -->
-
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
         {{'Meny'}}  {{key+1}}
-        <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
-        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
+        <img v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png">
+        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png">
         <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
           {{item.count}} {{ item.ing['ingredient_' + lang] }}
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
+      <p>
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
+      </p>
       </div>
       <hr>
-      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
 
+  <div>
     <transition name="modal">
       <div v-if="isOpen">
         <div class="overlay">
@@ -116,10 +106,9 @@
         </div>
       </div>
     </transition>
-    <button id="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
+    <button class="ordinaryButton" id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
-
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
 </div>
@@ -175,7 +164,6 @@ export default {
       let ing = [];
       for(let a = 0; a < this.ingredients.length; a += 1) {
         if (this.ingredients[a].category === this.currentCategory) {
-
           preferences: {
             if(this.iNeedLactoseFree == true && this.ingredients[a].milk_free == 0) {
               break preferences;
@@ -338,8 +326,6 @@ export default {
 #ordering {
   height: 100%;
   width: 100%;
-  /*background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
-  background: url(https://i.pinimg.com/564x/7a/74/2e/7a742edc9c4820e8871c835b013d93ee.jpg); */
   opacity:0.9;
   color: white;
 }
@@ -417,7 +403,8 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
-#ordinaryButton{
+
+.ordinaryButton{
   width: 200px;
   height: 40px;
 }
@@ -469,11 +456,12 @@ input[type="checkbox"] {
 .minusButton{
   grid-column: 1;
   border-radius: 50px;
-  width: 2.6vh;
+  width: 3vh;
+  margin: auto
 }
 .plusButton{
   grid-column: 3;
-  width: 3vh;
+  width: 3.3vh;
   border-radius: 50px;
 }
 .countNumb{
@@ -482,6 +470,12 @@ input[type="checkbox"] {
 }
 .footer{
   display: grid;
+  color: orange;
+  background-color: black;
+  text-align: left;
+  width: 30%;
+  margin-left: 35%;
+  text-indent: 10px;
 }
 #burgerInOrder {
   margin-bottom: 1em;
@@ -489,30 +483,28 @@ input[type="checkbox"] {
 #burgerInOrder p {
   text-indent: 2em;
 }
+#burgerInOrder img {
+  width: 25px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
 .buttons {
   width:25vh;
   height:20vh;
   border-radius: 12px;
 }
-#addAnotherBurgerButton{
-}
-#placeOrderButton{
-}
+<<<<<<< HEAD
+=======
+
 #languageButton{
+  background-color: orange;
 }
 
+>>>>>>> 3d0ebc392fa13625ff37239573dc88194f0711dc
 #editButton{
   margin-right: 5px;
 }
-img {
-}
-#addButton{
-
-}
-#placeButton{
-
-}
-
 .modal {
   width: 500px;
   margin: 0px auto;
