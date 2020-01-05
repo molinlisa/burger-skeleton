@@ -116,7 +116,7 @@
         </div>
       </div>
     </transition>
-    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+    <button id="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -248,6 +248,7 @@ export default {
         this.$store.state.socket.emit('order', this.currentOrder);
         this.currentOrder.burgers = [];
         this.category = 1;
+        this.isOpen = true;
       }
     },
     countNumberOfIngredients: function (id) {
@@ -340,8 +341,15 @@ export default {
   color: white;
 }
 #foodPref{
-  font-size: 1.5em;
+  font-size: 2em;
   text-indent: 2em;
+  color: orange;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+input[type="checkbox"] {
+  height: 20px;
+  width: 20px;
 }
 #h1{
   text-indent: 2em;
