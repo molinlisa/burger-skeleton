@@ -1,5 +1,4 @@
 <template>
-
   <div id="ordering">
     <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.cancel}}</button>
     <div id="OrderingShow" v-if="!finishView">
@@ -363,7 +362,7 @@ export default {
   flex-wrap: wrap;
   height: 45vh;
   margin: 5vh;
-  width: 120vh;
+  width: 100vh;
   overflow: overlay;
   word-break: break-word;
 }
@@ -381,6 +380,7 @@ export default {
   grid-column-gap: 25px;
   text-align: center;
   overflow: hidden;
+  width:500px;
 }
 #gridContainer h1{
   grid-area: header;
