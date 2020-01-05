@@ -26,7 +26,7 @@ export default {
    position: realtive;
 }
 button {
-  background-color: black;
+  background-color: green;
   color: white;
   width: 80px;
   height: 40px;
@@ -36,7 +36,7 @@ button {
   left: 20px;
 }
 #textpage {
-  color: green;
+  color: black;
   /* font-family: Algerian; */
   font-weight: bold;
   text-align: center;

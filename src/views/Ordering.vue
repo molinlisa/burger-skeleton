@@ -493,14 +493,11 @@ input[type="checkbox"] {
   height:20vh;
   border-radius: 12px;
 }
-<<<<<<< HEAD
-=======
 
 #languageButton{
   background-color: orange;
 }
 
->>>>>>> 3d0ebc392fa13625ff37239573dc88194f0711dc
 #editButton{
   margin-right: 5px;
 }

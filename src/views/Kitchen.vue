@@ -80,7 +80,9 @@ h1 {
 h1 {
   text-transform: uppercase;
   font-size: 1.4em;
-  color: bisque;
+  color: orange;
+  font-weight: bold;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 
 }
 .wrapper {
