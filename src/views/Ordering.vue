@@ -102,7 +102,7 @@
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
       </div>
       <hr>
-      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
 
     <transition name="modal">
@@ -116,14 +116,9 @@
         </div>
       </div>
     </transition>
-    <button id="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
+    <button class="ordinaryButton" id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> ca0e3afffe5209c23313d0f40ebdb202bdff9ef0
-
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
 </div>
@@ -340,8 +335,6 @@ export default {
 #ordering {
   height: 100%;
   width: 100%;
-  /*background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
-  background: url(https://i.pinimg.com/564x/7a/74/2e/7a742edc9c4820e8871c835b013d93ee.jpg); */
   opacity:0.9;
   color: white;
 }
@@ -415,26 +408,23 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-=======
->>>>>>> ca0e3afffe5209c23313d0f40ebdb202bdff9ef0
-#ordinaryButton{
+#addButton {
+  position: absolute;
+  bottom: 290px;
+  right: 650px;
+}
+
+#placeButton {
+  position: absolute;
+  bottom: 290px;
+  right: 450px;
+}
+
+.ordinaryButton{
   width: 200px;
   height: 40px;
 }
-<<<<<<< HEAD
-/* #hej {
-  grid-area: main;
-  grid-column: 2;
-  grid-row: 3;
-}*/
-=======
->>>>>>> f929b7f97aa70523e0adde88e59f4ec2c58a9e0f
-
-=======
->>>>>>> ca0e3afffe5209c23313d0f40ebdb202bdff9ef0
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -491,6 +481,9 @@ input[type="checkbox"] {
 }
 .footer{
   display: grid;
+  color: orange;
+  background-color: black;
+  text-align: center;
 }
 #burgerInOrder {
   margin-bottom: 1em;
@@ -503,25 +496,9 @@ input[type="checkbox"] {
   height:20vh;
   border-radius: 12px;
 }
-#addAnotherBurgerButton{
-}
-#placeOrderButton{
-}
-#languageButton{
-}
-
 #editButton{
   margin-right: 5px;
 }
-img {
-}
-#addButton{
-
-}
-#placeButton{
-
-}
-
 .modal {
   width: 500px;
   margin: 0px auto;
