@@ -25,7 +25,7 @@
       <label for="gluten">{{ uiLabels.gluten }}</label>
       <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="iNeedGlutenFree">
     </div>
-    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
+    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) här yalla -->
     <div id="orderContainer">
       <div id="ingredientBox">
         <Ingredient
