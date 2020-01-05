@@ -464,8 +464,8 @@ input[type="checkbox"] {
   color: orange;
   background-color: black;
   text-align: left;
-  width: 30%;
-  margin-left: 35%;
+  width: 15%;
+  margin-left: 40%;
   text-indent: 10px;
 }
 #burgerInOrder {
