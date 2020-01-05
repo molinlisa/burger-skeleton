@@ -100,22 +100,15 @@
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
+      {{this.currentOrder.totPrice}}
       </div>
-<<<<<<< HEAD
-
-      <button id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
-
-
-      <button id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-=======
       <hr>
       <button class="buttons" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}</button>
       <button class="buttons" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-  
->>>>>>> d046f0584b9bba55254bed21f905984cf0ce69e8
 
-    <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
+
   </div>
+  <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 </div>
 
@@ -153,7 +146,8 @@ export default {
       iNeedGlutenFree: false,
       iNeedVegan: false,
       currentOrder: {
-      burgers: []
+      burgers: [],
+      totPrice: 0
        },
       finishView: false
     }
@@ -188,6 +182,14 @@ export default {
     }.bind(this));
   },
   methods: {
+    totPriceFunc: function(){
+      console.log(this.currentOrder.totPrice);
+      this.currentOrder.totPrice = 0;
+      for (let j = 0; j < this.currentOrder.burgers.length; j += 1){
+        this.currentOrder.totPrice += this.currentOrder.burgers[j].price;
+      }
+      console.log(this.currentOrder.totPrice);
+    },
     changeCategory: function(cat) {
       this.currentCategory = cat;
     },
@@ -210,6 +212,8 @@ export default {
         this.chosenIngredients = [];
         this.price = 0;
       }
+      console.log(this.currentOrder.totPrice);
+      this.totPriceFunc();
     },
     placeOrder: function () {
       // make use of socket.io's magic to send the stuff to the kitchen via the server (app.js)
