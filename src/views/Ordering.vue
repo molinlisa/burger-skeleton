@@ -75,19 +75,6 @@
 
   <!-- Go to order view -->
   <div v-else>
-    <!-- Header "Orders in queue" -->
-    <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-      <OrderItem
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItem> -->
-
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
@@ -99,12 +86,15 @@
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
+      <p>
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
+      </p>
       </div>
       <hr>
       <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
 
+  <div>
     <transition name="modal">
       <div v-if="isOpen">
         <div class="overlay">
@@ -400,6 +390,7 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
+<<<<<<< HEAD
 /*
 #addButton {
   position: absolute;
@@ -412,6 +403,9 @@ input[type="checkbox"] {
   right: 450px;
 }
 */
+=======
+
+>>>>>>> 51a8a29daeb8035ff09894c9b74d86803ebcbcb1
 .ordinaryButton{
   width: 200px;
   height: 40px;
@@ -475,10 +469,17 @@ input[type="checkbox"] {
   display: grid;
   color: orange;
   background-color: black;
-  text-align: center;
+  text-align: left;
+  width: 30%;
+  margin-left: 35%;
+  text-indent: 10px;
+  border-style: solid;
+  border-color: red;
+  border-width: 5px;
 }
 #burgerInOrder {
   margin-bottom: 1em;
+
 }
 #burgerInOrder p {
   text-indent: 2em;
@@ -488,14 +489,27 @@ input[type="checkbox"] {
   margin-right: 4px;
   margin-left: 4px;
 }
+
+
 .buttons {
   width:25vh;
   height:20vh;
   border-radius: 12px;
 }
+<<<<<<< HEAD
 #languageButton{
   background-color: orange;
 }
+=======
+<<<<<<< HEAD
+=======
+
+#languageButton{
+  background-color: orange;
+}
+
+>>>>>>> 3d0ebc392fa13625ff37239573dc88194f0711dc
+>>>>>>> 51a8a29daeb8035ff09894c9b74d86803ebcbcb1
 #editButton{
   margin-right: 5px;
 }
