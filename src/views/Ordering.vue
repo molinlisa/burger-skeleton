@@ -106,7 +106,7 @@
         </div>
       </div>
     </transition>
-    <button class="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
+    <button class="placeOrderButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -394,7 +394,18 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
+.placeOrderButton{
+  background-color: orange;
+  color: green;
+  width: 200px;
+  height: 40px;
+  position:relative;
+  top:50%;
+  left:43%;
+}
 .ordinaryButton{
+  color: orange;
+  background-color: green;
   width: 200px;
   height: 40px;
   position:relative;
@@ -467,7 +478,7 @@ input[type="checkbox"] {
   background-color: black;
   text-align: left;
   width: 15%;
-  margin-left: 40%;
+  margin-left: 41.5%;
   text-indent: 10px;
   border-style: solid;
   border-color: green;
