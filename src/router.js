@@ -12,9 +12,9 @@ let router = new Router({
       path: '/',
       meta: {
 
-        title: 'CraftyBurgers',
+        title: 'Crafty Burgers',
 
-        title: 'Welcome to Kraft Burgers',
+        title: 'Crafty Burgers',
 
       },
       name: 'frontpage',
@@ -23,7 +23,7 @@ let router = new Router({
     {
       path: '/ordering',
       meta: {
-        title: 'VÄRLDENS BÄSTA',
+        title: 'Crafty Burgers',
       },
       name: 'ordering',
       component: Ordering

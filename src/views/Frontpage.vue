@@ -37,10 +37,9 @@ h3{
   text-align: center;
   line-height: 90px;
   font-size: 25px;
-  height: 100%;
-  width: 100%;
-  padding: 5px;
-  background: url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg');
-  background-size: 100vw;
+  min-height: 100%;
+  min-width: 100%;
+  background: url('https://images.fineartamerica.com/images-medium-large-5/pattern-with-fast-food-hand-drawn-colored-icons-doodle-illustrations-of-burger-pizza-slice-ice-cream-vector-background-with-food-illustrations-for-bistro-fast-food-chains-restaurants-snack-bar-annaelesina.jpg');
+
 }
 </style>
