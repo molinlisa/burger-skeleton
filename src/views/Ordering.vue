@@ -1,5 +1,4 @@
 <template>
-
   <div id="ordering">
     <button class="Clear"  v-on:click="clearOrderAndRedirect()"> {{uiLabels.cancel}}</button>
     <div id="OrderingShow" v-if="!finishView">
@@ -37,14 +36,11 @@
         :ui-labels="uiLabels"
         :key="item.ingredient_id">
       </Ingredient>
-
-
     </div>
 
     <!-- Header "My burger" -->
     <div id="gridContainer" >
       <h1 id="h1">{{ uiLabels.order }}</h1>
-
       <div id="count">
         <h4>{{ uiLabels.nr }}</h4>
         <div v-for="(item,key2 ) in groupIngredients(chosenIngredients)" class="countingCol">
@@ -68,6 +64,8 @@
         <h4>{{ uiLabels.removeItem }}</h4>
         <div v-for="(item,key2) in groupIngredients(chosenIngredients)" v-on:click="removeAll(item.ing)"><img src="https://cdn2.iconfinder.com/data/icons/media-and-navigation-buttons-round/512/Button_12-512.png" width="30"></div>
       </div>
+
+      {{uiLabels.totalPrice}} {{this.ingredientsTotPrice}} {{uiLabels.sek}}
     </div>
     <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
     <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
@@ -93,7 +91,7 @@
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
-        {{ uiLabels.burger }}  {{key+1}}
+        {{'Meny'}}  {{key+1}}
         <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
         <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
         <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
@@ -106,6 +104,7 @@
       <hr>
       <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
+
     <transition name="modal">
       <div v-if="isOpen">
         <div class="overlay">
@@ -160,6 +159,7 @@ export default {
       iNeedGlutenFree: false,
       iNeedVegan: false,
       isOpen: false,
+      ingredientsTotPrice: 0,
       currentOrder: {
         burgers: [],
         totPrice: 0
@@ -201,12 +201,19 @@ export default {
     addToBurger: function (item) {
       this.chosenIngredients.push(item);
       this.price += +item.selling_price;
+      this.totPriceIngredientsFunc();
     },
     totPriceFunc: function() {
-      console.log()
       this.currentOrder.totPrice = 0;
       for (let j=0; j<this.currentOrder.burgers.length; j+=1) {
         this.currentOrder.totPrice += this.currentOrder.burgers[j].price;
+      }
+    },
+    totPriceIngredientsFunc: function() {
+      this.ingredientsTotPrice = 0;
+      var ingredients = this.groupIngredients(this.chosenIngredients);
+      for (let j=0; j<ingredients.length; j+=1) {
+        this.ingredientsTotPrice += ingredients[j].ing['selling_price']*ingredients[j].count
       }
     },
     addToOrder: function () {
@@ -223,7 +230,10 @@ export default {
         this.chosenIngredients = [];
         this.price = 0;
       }
+      console.log(this.currentOrder.totPrice);
       this.totPriceFunc();
+      this.totPriceFunc();
+      this.totPriceIngredientsFunc()
       if(this.currentOrder.burgers.length > 0) {
         this.finishView = true;
       }
@@ -273,37 +283,33 @@ export default {
       }
     },
     editButton: function(burger) {
-  // create copy of ingredients array for chosenIngredients
-  this.chosenIngredients = burger.ingredients.slice(0);
-  // update price. Could as well use for loop instead of reducer
-  this.price = this.chosenIngredients.reduce(function (acc, cur) {
-    return acc + cur.selling_price;
-  }, 0)
-  let removeIndex = 0;
-  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-    if (this.currentOrder.burgers[i] === burger) {
-      removeIndex = i;
-      break;
-    }
-  }
-  this.currentOrder.burgers.splice(removeIndex, 1);
-  this.finishView = false;
-},
-
-
-removeButton: function(burger){
-  let removeIndex = 0;
-  for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
-    if (this.currentOrder.burgers[i] === burger) {
-      removeIndex = i;
-      break;
-    }
-  }
-  this.currentOrder.burgers.splice(removeIndex, 1);
-  this.totPriceFunc();
-},
-
-
+      // create copy of ingredients array for chosenIngredients
+      this.chosenIngredients = burger.ingredients.slice(0);
+      // update price. Could as well use for loop instead of reducer
+      this.price = this.chosenIngredients.reduce(function (acc, cur) {
+        return acc + cur.selling_price;
+      }, 0)
+      let removeIndex = 0;
+      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+        if (this.currentOrder.burgers[i] === burger) {
+          removeIndex = i;
+          break;
+        }
+      }
+      this.currentOrder.burgers.splice(removeIndex, 1);
+      this.finishView = false;
+    },
+    removeButton: function(burger){
+      let removeIndex = 0;
+      for (let i = 0; i < this.currentOrder.length; i += 1 ) { //vill ta bort valda ingredienser/tillagd burgare från currentOrder (s a ej dubbelt)
+        if (this.currentOrder.burgers[i] === burger) {
+          removeIndex = i;
+          break;
+        }
+      }
+      this.currentOrder.burgers.splice(removeIndex, 1);
+      this.totPriceFunc();
+    },
     clearOrderAndRedirect: function() {
       this.chosenIngredients = [];
       this.price = 0;
@@ -346,9 +352,8 @@ removeButton: function(burger){
   flex-wrap: wrap;
   height: 45vh;
   margin: 5vh;
-  width: 120vh;
+  width: 100vh;
   overflow: overlay;
-  scroll-behavior: smooth;
   word-break: break-word;
 }
 #gridContainer{
@@ -365,6 +370,7 @@ removeButton: function(burger){
   grid-column-gap: 25px;
   text-align: center;
   overflow: hidden;
+  width:500px;
 }
 #gridContainer h1{
   grid-area: header;
@@ -387,19 +393,15 @@ removeButton: function(burger){
   grid-column: 1;
   grid-row: 2;
 }
-
-
 #ordinaryButton{
   width: 200px;
   height: 40px;
 }
 /* #hej {
-  grid-area: main;
-  grid-column: 2;
-  grid-row: 3;
+grid-area: main;
+grid-column: 2;
+grid-row: 3;
 }*/
-
-
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -469,14 +471,15 @@ removeButton: function(burger){
 #placeOrderButton{
 }
 #languageButton{
-
 }
-
 #editButton{
   margin-right: 5px;
-
 }
 img {
+}
+#addButton{
+}
+#placeButton{
 }
 .modal {
   width: 500px;
