@@ -1,10 +1,8 @@
 <template>
-  <!-- <head>
-    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
-  </head> -->
   <div class="wrapper">
         <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
-            <div id="textpage"> <h2> Crafty Burgers </h2>
+            <div id="textpage">
+                <h2> Crafty Burgers </h2>
                 <h3> {{ uiLabels.welcomeText }} </h3>
             </div>
         </div>
@@ -15,17 +13,13 @@
 <script>
 import sharedVueStuff from '@/mixins/sharedVueStuff.js';
 import Ordering from '@/views/Ordering.vue';
-
 export default {
   name: 'frontpage',
   mixins: [sharedVueStuff, Ordering],
 }
 </script>
 <style scoped>
-h3 {
-  color: white;
-  /* font-family: Algerian; */
-}
+
 .wrapper {
    position: realtive;
 }
@@ -40,14 +34,22 @@ button {
   left: 20px;
 }
 #textpage {
-  color: white;
+  color: green;
   /* font-family: Algerian; */
   text-align: center;
   line-height: 90px;
   font-size: 25px;
+
+  min-height: 100%;
+  min-width: 100%;
+  background: url('https://images.fineartamerica.com/images-medium-large-5/pattern-with-fast-food-hand-drawn-colored-icons-doodle-illustrations-of-burger-pizza-slice-ice-cream-vector-background-with-food-illustrations-for-bistro-fast-food-chains-restaurants-snack-bar-annaelesina.jpg');
+
   background: url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg); /*
   url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg)
   url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg'); */
+
+  background: url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg);
+
 
   /* Set rules to fill background */
   min-height: 100%;
@@ -61,6 +63,6 @@ button {
   position: fixed;
   top: 0;
   left: 0;
-}
 
+}
 </style>
