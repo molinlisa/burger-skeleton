@@ -394,7 +394,7 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
-<<<<<<< HEAD
+
 /*
 #addButton {
   position: absolute;
@@ -409,7 +409,7 @@ input[type="checkbox"] {
 */
 =======
 
->>>>>>> 51a8a29daeb8035ff09894c9b74d86803ebcbcb1
+
 .ordinaryButton{
   width: 200px;
   height: 40px;
@@ -483,7 +483,7 @@ input[type="checkbox"] {
   margin-left: 35%;
   text-indent: 10px;
   border-style: solid;
-  border-color: red;
+  border-color: green;
   border-width: 5px;
 }
 #burgerInOrder {
@@ -505,20 +505,17 @@ input[type="checkbox"] {
   height:20vh;
   border-radius: 12px;
 }
-<<<<<<< HEAD
-#languageButton{
-  background-color: orange;
-}
-=======
-<<<<<<< HEAD
-=======
 
 #languageButton{
   background-color: orange;
 }
 
->>>>>>> 3d0ebc392fa13625ff37239573dc88194f0711dc
->>>>>>> 51a8a29daeb8035ff09894c9b74d86803ebcbcb1
+
+#languageButton{
+  background-color: orange;
+}
+
+
 #editButton{
   margin-right: 5px;
 }
