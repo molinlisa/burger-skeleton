@@ -70,7 +70,7 @@
     <!-- {{ chosenIngredients.map(item => item["ingredient_"+lang]).join(', ') }}, {{ price }} {{uiLabels.sek}} -->
     <button id="addToOrderButton" v-on:click="addToOrder()">{{ uiLabels.goToOrder }}</button>
   </div>
-  <button v-on:click="switchLang()">{{ uiLabels.language }}</button>
+  <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
 </div>
 
   <!-- Go to order view -->
@@ -79,8 +79,8 @@
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
         {{'Meny'}}  {{key+1}}
-        <img id="editButton" v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png" width="20">
-        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png" width="20">
+        <img v-on:click="editButton(burger)" src="http://www.edubizsoft.com/images/icons/Image.png">
+        <img v-on:click="removeButton(burger)" src="https://image.flaticon.com/icons/png/512/458/458594.png">
         <p v-for="(item, key2) in groupIngredients(burger.ingredients)" :key="key2">
           {{item.count}} {{ item.ing['ingredient_' + lang] }}
         </p>
@@ -91,7 +91,8 @@
       </p>
       </div>
       <hr>
-      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <div>
 
   <div>
     <transition name="modal">
@@ -105,7 +106,7 @@
         </div>
       </div>
     </transition>
-    <button id="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
+    <button class="ordinaryButton" id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -258,6 +259,7 @@ export default {
       }
       this.chosenIngredients.splice(removeIndex, 1);
       this.price -= +item.selling_price;
+      this.totPriceIngredientsFunc()
     },
     addAnotherBurger: function(){
       this.finishView = false;
@@ -275,6 +277,7 @@ export default {
         }
         else {i += 1}
       }
+      this.totPriceIngredientsFunc()
     },
 
     editButton: function(burger) {
@@ -396,7 +399,8 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
-#ordinaryButton{
+
+.ordinaryButton{
   width: 200px;
   height: 40px;
 }
@@ -443,11 +447,12 @@ input[type="checkbox"] {
 .minusButton{
   grid-column: 1;
   border-radius: 50px;
-  width: 2.6vh;
+  width: 3vh;
+  margin: auto
 }
 .plusButton{
   grid-column: 3;
-  width: 3vh;
+  width: 3.3vh;
   border-radius: 50px;
 }
 .countNumb{
@@ -469,11 +474,25 @@ input[type="checkbox"] {
 #burgerInOrder p {
   text-indent: 2em;
 }
+#burgerInOrder img {
+  width: 25px;
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
 .buttons {
   width:25vh;
   height:20vh;
   border-radius: 12px;
 }
+<<<<<<< HEAD
+=======
+
+#languageButton{
+  background-color: orange;
+}
+
+>>>>>>> 3d0ebc392fa13625ff37239573dc88194f0711dc
 #editButton{
   margin-right: 5px;
 }

@@ -6,7 +6,7 @@
                 <h3> {{ uiLabels.welcomeText }} </h3>
             </div>
         </div>
-        <button class="knappshuno" @click="switchLang()">{{ uiLabels.language }}</button>
+        <button @click="switchLang()">{{ uiLabels.language }}</button>
     </div>
 </template>
 
@@ -24,10 +24,15 @@ export default {
 .wrapper {
    position: realtive;
 }
-.knappshuno {
-   position: absolute;
-   bottom: 20px;
-   left: 20px
+button {
+  background-color: green;
+  color: white;
+  width: 80px;
+  height: 40px;
+  font-weight: bold;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
 #textpage {
   color: green;
