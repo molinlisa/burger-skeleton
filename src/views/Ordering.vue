@@ -102,7 +102,7 @@
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
       </div>
       <hr>
-      <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <button class="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
 
     <transition name="modal">
@@ -116,7 +116,7 @@
         </div>
       </div>
     </transition>
-    <button class="ordinaryButton" id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
+    <button class="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
@@ -411,23 +411,12 @@ input[type="checkbox"] {
   grid-row: 2;
 }
 
-/*
-#addButton {
-  position: absolute;
-  bottom: 290px;
-  right: 650px;
-}
-
-#placeButton {
-  position: absolute;
-  bottom: 290px;
-  right: 450px;
-}
-*/
-
 .ordinaryButton{
   width: 200px;
   height: 40px;
+  position:relative;
+  top:50%;
+  left:43%;
 }
 .ingredient {
   border: 1px solid #f5f5f28a;
