@@ -24,7 +24,7 @@
       <label for="gluten">{{ uiLabels.gluten }}</label>
       <input type="checkbox" id="gluten" v-bind:name="uiLabels.gluten" :value="true" v-model="iNeedGlutenFree">
     </div>
-    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) här yalla -->
+    <!-- Skriver ut ingredienser och dess "increment" knappar (läggs till sorder) -->
     <div id="orderContainer">
       <div id="ingredientBox">
         <Ingredient
@@ -116,7 +116,7 @@
         </div>
       </div>
     </transition>
-    <button id="ordinaryButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
+    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
 
@@ -245,7 +245,6 @@ export default {
         this.$store.state.socket.emit('order', this.currentOrder);
         this.currentOrder.burgers = [];
         this.category = 1;
-        this.isOpen = true;
       }
     },
     countNumberOfIngredients: function (id) {
@@ -332,15 +331,8 @@ export default {
   color: white;
 }
 #foodPref{
-  font-size: 2em;
+  font-size: 1.5em;
   text-indent: 2em;
-  color: orange;
-  font-weight: bold;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
-input[type="checkbox"] {
-  height: 20px;
-  width: 20px;
 }
 #h1{
   text-indent: 2em;
@@ -405,14 +397,11 @@ input[type="checkbox"] {
   width: 200px;
   height: 40px;
 }
-<<<<<<< HEAD
 /* #hej {
 grid-area: main;
 grid-column: 2;
 grid-row: 3;
 }*/
-=======
->>>>>>> ca0e3afffe5209c23313d0f40ebdb202bdff9ef0
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -422,10 +411,6 @@ grid-row: 3;
   border-radius: 25px;
   margin: 10px;
   text-align: center;
-}
-.ingredient:active {
-  background-color: orange;
-  color: green;
 }
 .kryss {
   grid-area:main;
