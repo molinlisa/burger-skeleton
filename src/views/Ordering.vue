@@ -92,7 +92,7 @@
       </div>
       <hr>
       <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
-      <div>
+    <div>
 
   <div>
     <transition name="modal">
