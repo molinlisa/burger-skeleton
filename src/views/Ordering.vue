@@ -102,7 +102,7 @@
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
       </div>
       <hr>
-      <button id="ordinaryButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
+      <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
 
     <transition name="modal">
@@ -116,10 +116,9 @@
         </div>
       </div>
     </transition>
-    <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
+    <button class="ordinaryButton" id="placeButton" v-on:click="placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
-
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
 </div>
@@ -249,6 +248,7 @@ export default {
         this.$store.state.socket.emit('order', this.currentOrder);
         this.currentOrder.burgers = [];
         this.category = 1;
+        this.isOpen = true;
       }
     },
     countNumberOfIngredients: function (id) {
@@ -270,6 +270,7 @@ export default {
       }
       this.chosenIngredients.splice(removeIndex, 1);
       this.price -= +item.selling_price;
+      this.totPriceIngredientsFunc()
     },
     addAnotherBurger: function(){
       this.finishView = false;
@@ -287,6 +288,7 @@ export default {
         }
         else {i += 1}
       }
+      this.totPriceIngredientsFunc()
     },
 
     editButton: function(burger) {
@@ -335,8 +337,6 @@ export default {
 #ordering {
   height: 100%;
   width: 100%;
-  /*background: url(https://i.pinimg.com/564x/85/25/d2/8525d271aa0e5756acf70ed427ddb35d.jpg);
-  background: url(https://i.pinimg.com/564x/7a/74/2e/7a742edc9c4820e8871c835b013d93ee.jpg); */
   opacity:0.9;
   color: white;
 }
@@ -410,7 +410,20 @@ input[type="checkbox"] {
   grid-column: 1;
   grid-row: 2;
 }
-#ordinaryButton{
+
+#addButton {
+  position: absolute;
+  bottom: 290px;
+  right: 650px;
+}
+
+#placeButton {
+  position: absolute;
+  bottom: 290px;
+  right: 450px;
+}
+
+.ordinaryButton{
   width: 200px;
   height: 40px;
 }
@@ -471,6 +484,9 @@ input[type="checkbox"] {
 }
 .footer{
   display: grid;
+  color: orange;
+  background-color: black;
+  text-align: center;
 }
 #burgerInOrder {
   margin-bottom: 1em;
@@ -497,15 +513,6 @@ input[type="checkbox"] {
 #editButton{
   margin-right: 5px;
 }
-img {
-}
-#addButton{
-
-}
-#placeButton{
-
-}
-
 .modal {
   width: 500px;
   margin: 0px auto;
