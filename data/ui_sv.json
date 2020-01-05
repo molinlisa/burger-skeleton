@@ -38,5 +38,7 @@
   "totalPrice":"Summa:",
   "burger":"Burgare",
   "welcomeText": "Klicka här för att ta dig till hamburgarhimlen",
-  "cancel": "AVBRYT!"
+  "cancel": "AVBRYT!",
+  "byeByeText": "Ha en fortsatt bra da', kisen!",
+  "finish": "Avsluta!"
 }
