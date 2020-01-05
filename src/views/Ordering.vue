@@ -119,7 +119,6 @@
     <button id="ordinaryButton" v-on:click="isOpen = !isOpen; placeOrder()">{{ uiLabels.placeOrder }}
     </button>
   </div>
-
     <button id="languageButton" v-on:click="switchLang()">{{ uiLabels.language }}</button>
   </div>
 </div>
@@ -475,25 +474,9 @@ export default {
   height:20vh;
   border-radius: 12px;
 }
-#addAnotherBurgerButton{
-}
-#placeOrderButton{
-}
-#languageButton{
-}
-
 #editButton{
   margin-right: 5px;
 }
-img {
-}
-#addButton{
-
-}
-#placeButton{
-
-}
-
 .modal {
   width: 500px;
   margin: 0px auto;

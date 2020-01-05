@@ -1,10 +1,8 @@
 <template>
-  <!-- <head>
-    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
-  </head> -->
   <div class="wrapper">
         <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
-            <div id="textpage"> <h2> Crafty Burgers </h2>
+            <div id="textpage">
+                <h2> Crafty Burgers </h2>
                 <h3> {{ uiLabels.welcomeText }} </h3>
             </div>
         </div>
@@ -22,10 +20,7 @@ export default {
 }
 </script>
 <style scoped>
-h3{
-  color: white;
-  /* font-family: Algerian; */
-}
+
 .wrapper {
    position: realtive;
 }
@@ -35,14 +30,12 @@ h3{
    left: 20px
 }
 #textpage {
-  color: white;
+  color: green;
   /* font-family: Algerian; */
   text-align: center;
   line-height: 90px;
   font-size: 25px;
-  background: url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg); /*
-  url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg)
-  url('https://nordicdine.com/wp-content/uploads/2018/09/hamburgare_allt_du_behover_veta.jpg'); */
+  background: url(https://cdn5.vectorstock.com/i/1000x1000/26/39/burger-on-hand-fast-food-vector-22992639.jpg);
 
   /* Set rules to fill background */
   min-height: 100%;
@@ -57,10 +50,4 @@ h3{
   top: 0;
   left: 0;
 }
-
-/* @font-face {
-  font-family: myFirstFont;
-  src: url("https://fonts.googleapis.com/css?family=Bangers&display=swap");
-} */
-
 </style>
