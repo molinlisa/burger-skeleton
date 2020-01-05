@@ -22,7 +22,7 @@ export default {
 }
 </script>
 <style scoped>
-h3{
+h3 {
   color: white;
   /* font-family: Algerian; */
 }
@@ -57,10 +57,5 @@ h3{
   top: 0;
   left: 0;
 }
-
-/* @font-face {
-  font-family: myFirstFont;
-  src: url("https://fonts.googleapis.com/css?family=Bangers&display=swap");
-} */
 
 </style>
