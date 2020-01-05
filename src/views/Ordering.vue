@@ -403,17 +403,10 @@ export default {
   grid-column: 1;
   grid-row: 2;
 }
-
 #ordinaryButton{
   width: 200px;
   height: 40px;
 }
-/* #hej {
-grid-area: main;
-grid-column: 2;
-grid-row: 3;
-}*/
-
 .ingredient {
   border: 1px solid #f5f5f28a;
   padding: 0.8em;
@@ -423,6 +416,10 @@ grid-row: 3;
   border-radius: 25px;
   margin: 10px;
   text-align: center;
+}
+.ingredient:active {
+  background-color: orange;
+  color: green;
 }
 .kryss {
   grid-area:main;
@@ -488,7 +485,6 @@ grid-row: 3;
 #editButton{
   margin-right: 5px;
 }
-
 img {
 }
 #addButton{
