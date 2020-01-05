@@ -1,10 +1,8 @@
 <template>
-  <!-- <head>
-    <link href="https://fonts.googleapis.com/css?family=Bangers&display=swap" rel="stylesheet">
-  </head> -->
   <div class="wrapper">
         <div onclick="window.location.href='#/ordering';" style="cursor:pointer; width:100%; height:100%;">
-            <div id="textpage"> <h2> Crafty Burgers </h2>
+            <div id="textpage">
+                <h2> Crafty Burgers </h2>
                 <h3> {{ uiLabels.welcomeText }} </h3>
             </div>
         </div>
@@ -23,6 +21,7 @@ export default {
 </script>
 
 <style scoped>
+
 .wrapper {
    position: realtive;
 }
@@ -37,7 +36,7 @@ button {
   left: 20px;
 }
 #textpage {
-  color: black;
+  color: green;
   /* font-family: Algerian; */
   font-weight: bold;
   text-align: center;
@@ -57,10 +56,5 @@ button {
   position: fixed;
   top: 0;
   left: 0;
-}
-
-@font-face {
-  font-family: Bangers;
-  src: url("https://fonts.googleapis.com/css?family=Bangers&display=swap");
 }
 </style>

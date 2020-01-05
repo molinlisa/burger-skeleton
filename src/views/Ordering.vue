@@ -75,19 +75,6 @@
 
   <!-- Go to order view -->
   <div v-else>
-    <!-- Header "Orders in queue" -->
-    <!-- <h1>{{ uiLabels.ordersInQueue }}</h1>
-    <div>
-      <OrderItem
-      v-for="(order, key) in orders"
-      v-if="order.status !== 'done'"
-      :order-id="key"
-      :order="order"
-      :ui-labels="uiLabels"
-      :lang="lang"
-      :key="key">
-    </OrderItem> -->
-
     <div class="footer">
       <h1>{{ uiLabels.order }}</h1>
       <div id="burgerInOrder" v-for="(burger, key) in currentOrder.burgers" :key="key">
@@ -99,12 +86,15 @@
         </p>
         {{uiLabels.price}} {{burger.price}} {{uiLabels.sek}}
       </div>
+      <p>
       {{uiLabels.totalPrice}} {{this.currentOrder.totPrice}} {{uiLabels.sek}}
+      </p>
       </div>
       <hr>
       <button class="ordinaryButton" id="addButton" v-on:click="addAnotherBurger()">{{ uiLabels.addNewBurger }}</button>
       <div>
 
+  <div>
     <transition name="modal">
       <div v-if="isOpen">
         <div class="overlay">
@@ -174,7 +164,6 @@ export default {
       let ing = [];
       for(let a = 0; a < this.ingredients.length; a += 1) {
         if (this.ingredients[a].category === this.currentCategory) {
-
           preferences: {
             if(this.iNeedLactoseFree == true && this.ingredients[a].milk_free == 0) {
               break preferences;
@@ -399,31 +388,21 @@ input[type="checkbox"] {
 }
 #foodList p {
   text-align: left;
+  height: 20px;
 }
 #price{
   grid-area:main;
   grid-column: 2;
   grid-row: 2;
 }
+#price p{
+  height: 20px;
+}
 #count{
   grid-area:main;
   grid-column: 1;
   grid-row: 2;
 }
-
-/*
-#addButton {
-  position: absolute;
-  bottom: 290px;
-  right: 650px;
-}
-
-#placeButton {
-  position: absolute;
-  bottom: 290px;
-  right: 450px;
-}
-*/
 
 .ordinaryButton{
   width: 200px;
@@ -447,6 +426,10 @@ input[type="checkbox"] {
   grid-area:main;
   grid-column: 4;
 }
+
+.kryss div{
+  height: 20px
+}
 #addToOrderButton {
   grid-area: main;
   grid-column: 2;
@@ -459,6 +442,7 @@ input[type="checkbox"] {
 .countingCol{
   display: grid;
   padding-bottom: 14px;
+  height: 20px;
 }
 .Clear{
   width: 90px;
@@ -487,7 +471,10 @@ input[type="checkbox"] {
   display: grid;
   color: orange;
   background-color: black;
-  text-align: center;
+  text-align: left;
+  width: 30%;
+  margin-left: 35%;
+  text-indent: 10px;
 }
 #burgerInOrder {
   margin-bottom: 1em;
@@ -506,11 +493,14 @@ input[type="checkbox"] {
   height:20vh;
   border-radius: 12px;
 }
+<<<<<<< HEAD
+=======
 
 #languageButton{
   background-color: orange;
 }
 
+>>>>>>> 3d0ebc392fa13625ff37239573dc88194f0711dc
 #editButton{
   margin-right: 5px;
 }
