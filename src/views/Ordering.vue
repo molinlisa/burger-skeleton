@@ -266,6 +266,7 @@ export default {
       }
       this.chosenIngredients.splice(removeIndex, 1);
       this.price -= +item.selling_price;
+      this.totPriceIngredientsFunc()
     },
     addAnotherBurger: function(){
       this.finishView = false;
@@ -281,6 +282,7 @@ export default {
         }
         else {i += 1}
       }
+      this.totPriceIngredientsFunc()
     },
     editButton: function(burger) {
       // create copy of ingredients array for chosenIngredients
