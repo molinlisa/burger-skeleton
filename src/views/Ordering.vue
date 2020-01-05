@@ -411,6 +411,7 @@ input[type="checkbox"] {
   grid-row: 2;
 }
 
+/*
 #addButton {
   position: absolute;
   bottom: 290px;
@@ -422,6 +423,7 @@ input[type="checkbox"] {
   bottom: 290px;
   right: 450px;
 }
+*/
 
 .ordinaryButton{
   width: 200px;
